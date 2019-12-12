@@ -8,19 +8,53 @@
     android:layout_height="match_parent"
    >
 
- <LinearLayout
+ <RelativeLayout
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:orientation="vertical">
 
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
   <include android:id="@+id/toolbar"
       layout="@layout/menu_toolbar"/>
 
   <include layout="@layout/petrol_bunk_single_list"/>
+       <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+           android:layout_width="match_parent"
+           android:textColor="@color/quantum_black_100"
+           android:textSize="16sp"
+           android:layout_marginTop="20dp"
+           android:gravity="center"
+           android:text="If above petrol bunk is not coorect one please search below and make a payment."
+           android:layout_height="wrap_content"/>
+      <include
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="20dp"
+          layout="@layout/places_find_view"/>
 
 
 
- </LinearLayout>
+  </LinearLayout>
+
+  <include
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_above="@+id/submit"
+      android:layout_marginBottom="10dp"
+      layout="@layout/single_grid_element"/>
+  <Button
+      style="@style/all_button_style"
+      android:id="@+id/submit"
+      android:background="@drawable/light_button_background"
+      android:text="Pay Money"
+      android:layout_marginBottom="10dp"
+      android:layout_alignParentBottom="true"
+      />
+
+ </RelativeLayout>
 
  <com.google.android.material.navigation.NavigationView
      android:id="@+id/navigationView"
@@ -29,6 +63,31 @@
      android:layout_gravity="start"
      android:fitsSystemWindows="true"
      app:headerLayout="@layout/header_layout"
-     app:menu="@menu/drawer_menu" />
+     app:menu="@menu/drawer_menu"
+     android:background="@color/white_color"
+     >
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:orientation="vertical"
+         android:visibility="gone">
+   <ImageView
+       android:layout_width="60dp"
+       android:layout_height="60dp"
+       android:src="@drawable/gofuels"
+       />
+
+  <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="18sp"
+      android:text="gofuels"
+      android:textColor="@color/colorPrimaryDark"
+      android:layout_marginBottom="10dp"
+      android:layout_marginRight="5dp"
+    />
+     </LinearLayout>
+
+ </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

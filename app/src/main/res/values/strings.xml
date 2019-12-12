@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">UserFuelApp</string>
     <string name="todo">TODO</string>
-    <string name="go_fuels">Go Fuels</string>
-    <string name="indian">Indian</string>
-    <string name="adresss">adresss</string>
+    <string name="go_fuels">gofuels</string>
+    <string name="indian">Loading...</string>
+    <string name="adresss">loading...</string>
+    <string name="two_rs">\u20B9 200</string>
+    <string name="two_rs1">\u20B9 500</string>
+    <string name="two_rs2">\u20B9 1000</string>
     <string name="help_string">Got a problem? We\'ll solve it fast. Please let us know below.</string>
 </resources>

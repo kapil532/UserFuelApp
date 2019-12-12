@@ -25,6 +25,7 @@ public class CommonClass
     public static final String VALIDATE_OTP = "/validateOtp";
 
     public static final String GET_PETROL_BUNK_DETAILS="https://maps.googleapis.com/maps/api/place/nearbysearch/";
+    public static final String POST_SUPPORT_SLACK="https://hooks.slack.com/services/TR7F3CV8Q/BQWAYTZEW/";
 
 
 

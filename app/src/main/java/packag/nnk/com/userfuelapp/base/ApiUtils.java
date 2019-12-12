@@ -14,6 +14,12 @@ public class ApiUtils
     {
         return ApiClient.getApiClient(CommonClass.GET_PETROL_BUNK_DETAILS).create(ApiInterface.class);
     }
+
+
+    public static ApiInterface getApiInterfacesForSlack()
+    {
+        return ApiClient.getApiClient(CommonClass.POST_SUPPORT_SLACK).create(ApiInterface.class);
+    }
    /* public static ApiInterface getApiInterfaces1()
     {
         return ApiClient.getApiClient("http://aviation-edge.com").create(ApiInterface.class);

@@ -25,7 +25,7 @@
             <item name="android:textColorHint">@color/b</item>
             <item name="android:alertDialogStyle">@style/CustomAlertDialogStyle</item>
             <item name="android:windowBackground">@android:color/transparent</item>
-            <item name="android:textColorPrimary">@color/b</item>
+            <item name="android:textColorPrimary">@color/colorAccent</item>
             <item name="android:backgroundDimEnabled">true</item>
             <item name="android:textColor">@color/b</item>
             <item name="android:textStyle">bold</item>

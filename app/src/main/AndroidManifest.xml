@@ -30,6 +30,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.MainActivity"></activity>
+        <activity android:name=".transaction.MainActivity"></activity>
+        <activity android:name=".about_us.SuccessScreen"></activity>
         <activity android:name=".about_us.AboutUsScreen"></activity>
         <activity android:name=".about_us.CustomSupportScreenActivity"></activity>
         <activity android:name=".activities.LoginActivity" />

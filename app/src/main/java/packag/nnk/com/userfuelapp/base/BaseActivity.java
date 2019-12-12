@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import java.util.Locale;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import packag.nnk.com.userfuelapp.R;
+import packag.nnk.com.userfuelapp.about_us.SuccessScreen;
 
 public class BaseActivity extends AppCompatActivity
 {
@@ -283,6 +285,12 @@ public class BaseActivity extends AppCompatActivity
         Log.e(TAG,"Symbol " + symbol);
 
         return symbol;
+    }
+
+    protected void showSuccessScreen()
+    {
+        Intent success = new Intent(this, SuccessScreen.class);
+        startActivity(success);
     }
 
     public void printLogs(String TAG, String message)

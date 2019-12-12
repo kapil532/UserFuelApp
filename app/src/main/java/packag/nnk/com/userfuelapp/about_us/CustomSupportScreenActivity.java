@@ -30,7 +30,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import packag.nnk.com.userfuelapp.R;
+import packag.nnk.com.userfuelapp.base.ApiUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
+import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
+import packag.nnk.com.userfuelapp.model.SlackMessage;
+import packag.nnk.com.userfuelapp.petrol_bunk_details.GetList;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by kapil on 6/2/17.
@@ -45,14 +52,14 @@ public class CustomSupportScreenActivity extends BaseActivity {
     private TextView title, callNow,faq_touch;
     private EditText editbox;
     private Button submit_button;
-    private String array[] = {"I'm unable to make =payment", "I'm unable to get message", "I'd like a call back as soon as possible"};
+    private String array[] = {"I'm unable to make payment", "I'm unable to get message", "I'd like a call back as soon as possible"};
     private String text;
-
+ApiInterface getApiInterfacesForSlack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_support);
-
+        getApiInterfacesForSlack = ApiUtils.getApiInterfacesForSlack();
         initViews();
         initListeners();
 
@@ -75,7 +82,6 @@ public class CustomSupportScreenActivity extends BaseActivity {
         });
         callNow.setVisibility(View.GONE);
 
-
         submit_button = (Button) findViewById(R.id.submit_button);
         submit_button.setVisibility(View.GONE);
 
@@ -84,7 +90,7 @@ public class CustomSupportScreenActivity extends BaseActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
 
     }
@@ -228,19 +234,53 @@ public class CustomSupportScreenActivity extends BaseActivity {
 
 
 
-    private void automaticBooking(String message) {
+    private void automaticBooking(String message)
+    {
+
+        showProgressDialog();
+        SlackMessage slac= new SlackMessage();
+        slac.setText(message);
+
+        Call<String> getList = getApiInterfacesForSlack.getSlackResponse(slac);
+        getList.enqueue(new Callback<String>()
+        {
+
+
+            @Override
+            public void onResponse(Call<String> call, Response<String> response)
+            {
+                hideProgressDialog();
+               Log.e("Message","Message"+response.body());
+                message("Someone will be in touch with you shortly!");
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                hideProgressDialog();
+                message("Someone will be in touch with you shortly!");
+
+            }
+        });
+
+
         // TODO: Implement this method to send token to your app server.
-        JSONObject table = new JSONObject();
+       // JSONObject table = new JSONObject();
 
-        try {
 
-            table.put("channel", "#customer_support");
+
+
+
+
+
+      /*  try {
+
+          //  table.put("channel", "#customer_support");
            // table.put("username", "" + network.getUserName());
            // table.put("text", message + "  Phone: " + network.getMobile() + " Email : " + network.getEmail() );
             ///table.put("icon_emoji", ":pray:");
 
         } catch (JSONException e) {
-        }
+        }*/
 
       //  PostData.call(this,table, "https://hooks.slack.com/services/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", bookingAuto);
     }

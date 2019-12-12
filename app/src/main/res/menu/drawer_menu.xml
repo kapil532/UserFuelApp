@@ -24,6 +24,12 @@
             android:icon="@drawable/ic_transaction"
             android:title="Transaction" />
 
+
+        <item
+            android:id="@+id/setting"
+            android:icon="@drawable/ic_setting"
+            android:title="Setting" />
+
     </group>
 
 </menu>
