@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F6BD12</color>
+    <color name="colorPrimaryDark">#FA9700</color>
+    <color name="colorAccent">#E34710</color>
+
+    <color name="contentDividerLine">#e0e0e0</color>
+    <color name="logo_first_col">#E34710</color>
+    <color name="logo_second_col">#FA9700</color>
+    <color name="logo_third_col">#F6BD12</color>
+
+
+
+    <color name="et_textColor">#484849</color>
+    <color name="text_color">#59bcb5</color>
+
+    <color name="light_color">#8E9695</color>
+
+    <color name="u">#ED90B7</color>
+    <color name="n">#A183BC</color>
+    <color name="c">#A183BC</color>
+    <color name="white_color">#FFF</color> <!--#27B7E0-->
+    <color name="b">#5D69A8</color> <!--#F9A356-->
+
+    <color name="text_orange">#F8A256</color>
+    <color name="button_light_orange">#EBD1BB</color>
+    <color name="button_dark_orange">#F8A256</color>
+    <color name="text_blue">#27B6DF</color> <!--#FF872E-->
+
+    <color name="hint_color">#8D8888</color>
+    <color name="disable_color_text">#A29E9E</color>
+
+    <color name="polyLine_1to2_color">#000</color>
+    <color name="polyLine_2to3_color">#142FC4</color>
+    <color name="polyLine_2to4_color">#5FA70C</color>
+
+    <color name="notification_color">#FFF</color>
+    <color name="edit_spinner_stroke_color">#6B6868</color>
+    <color name="light_colorr">#BABABA</color>
+    <color name="white_color_background">#fff</color>
+
+
+    <color name="et_bg_stroke_color">#000</color>
+    <color name="action_bar_color">#796A6A</color>
+
+    <color name="gradient_color_one_dark">#554188</color>
+    <color name="gradient_color_two_dark">#893544</color>
+
+    <color name="gradient_color_one_light">#A79699</color>
+    <color name="gradient_color_two_light">#B9A7AB</color>
+
+</resources>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "933071264562",
+    "firebase_url": "https://gofueluser.firebaseio.com",
+    "project_id": "gofueluser",
+    "storage_bucket": "gofueluser.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933071264562:android:72ab6e784740370424552b",
+        "android_client_info": {
+          "package_name": "packag.nnk.com.userfuelapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933071264562-24bm007hs3834f7bba11f71o33g0lst1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCewtZTYdrInbqbb-wfP-1mlrLkZjwTJRQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933071264562-24bm007hs3834f7bba11f71o33g0lst1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

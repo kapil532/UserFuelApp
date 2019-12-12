@@ -1,0 +1,237 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        &lt;!&ndash; Customize your theme here. &ndash;&gt;
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>-->
+
+        <style name="CustomAlertDialogStyle">
+            <item name="android:bottomBright">@color/b</item>
+            <item name="android:bottomDark">@color/b</item>
+            <item name="android:bottomMedium">@color/b</item>
+            <item name="android:centerBright">@color/b</item>
+            <item name="android:centerDark">@color/b</item>
+            <item name="android:centerMedium">@color/b</item>
+            <item name="android:fullBright">@android:color/transparent</item>
+            <item name="android:fullDark">@android:color/transparent</item>
+            <item name="android:topBright">@android:color/transparent</item>
+            <item name="android:topDark">@android:color/transparent</item>
+        </style>
+
+        <style name="MyProgressDialogTheme" parent="android:Theme.Holo.Dialog">
+            <item name="android:textColorHint">@color/b</item>
+            <item name="android:alertDialogStyle">@style/CustomAlertDialogStyle</item>
+            <item name="android:windowBackground">@android:color/transparent</item>
+            <item name="android:textColorPrimary">@color/b</item>
+            <item name="android:backgroundDimEnabled">true</item>
+            <item name="android:textColor">@color/b</item>
+            <item name="android:textStyle">bold</item>
+            <item name="android:textSize">16sp</item>
+        </style>
+
+
+    <style name="edit_box">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/padding_signup</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/quantum_black_100</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:layout_marginTop">@dimen/margin_top</item>
+    </style>
+
+        <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+            <!-- Customize your theme here. -->
+            <item name="colorPrimary">@color/colorPrimary</item>
+            <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+            <item name="colorAccent">@color/colorAccent</item>
+        </style>
+
+        <style name="TextAppearence.App.TextInputLayout" parent="@android:style/TextAppearance">
+            <item name="android:textColor">@color/white_color</item>
+            <item name="android:textSize">13sp</item>
+            <item name="colorControlNormal">#C5C2C2</item>
+
+        </style>
+
+        <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+        <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+        <style name="MyTheme" parent="@android:style/Theme.Holo.Light">
+            <item name="android:actionBarStyle">@style/MyActionBar</item>
+        </style>
+
+        <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+            <item name="android:background">#FFF</item>
+        </style>
+
+    <style
+        name="all_button_style">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">43dp</item>
+        <item name="android:textColor">@color/white_color</item>
+        <item name="android:background">@drawable/button_shape</item>
+        <item name="android:layout_marginStart">@dimen/dimen_10dp</item>
+        <item name="android:layout_marginEnd">@dimen/dimen_10dp</item>
+        <item name="android:textSize">@dimen/all_buttons_text_size_16sp</item>
+
+    </style>
+
+        <style name="TextLabel">
+
+            <!-- Hint color and label color in FALSE state -->
+            <item name="android:textColorHint">#C5C2C2</item>
+            <item name="android:textSize">13sp</item>
+
+            <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+
+            <item name="colorAccent">#F44336</item>
+            <item name="colorControlNormal">#C5C2C2</item>
+            <item name="colorControlActivated">#C5C2C2</item>
+        </style>
+
+        <!--<style name="add_money_amount_button_style">
+
+            <item name="android:layout_width">match_parent</item>
+            <item name="android:layout_height">45dp</item>
+            <item name="android:layout_gravity">center</item>
+            <item name="android:background">@drawable/button_border</item>
+            <item name="android:textColor">#000</item>
+            <item name="android:textSize">16sp</item>
+
+        </style>-->
+
+        <style name="onBoarding_text_style">
+
+            <item name="android:layout_width">match_parent</item>
+            <item name="android:layout_height">wrap_content</item>
+            <item name="android:gravity">center</item>
+            <item name="android:textStyle">bold</item>
+            <!--<item name="android:font">center</item>-->
+            <item name="android:textColor">#000</item>
+            <item name="android:textSize">19sp</item>
+            <item name="android:layout_marginEnd">20dp</item>
+            <item name="android:layout_marginStart">20dp</item>
+
+        </style>
+
+        <style name="b">
+            <item name="android:textColor">@color/b</item>
+        </style>
+
+        <style name="u">
+            <item name="android:textColor">@color/u</item>
+        </style>
+
+        <style name="n">
+            <item name="android:textColor">@color/n</item>
+        </style>
+
+        <style name="c">
+            <item name="android:textColor">@color/c</item>
+        </style>
+
+        <style name="side_header_text_style">
+
+            <item name="android:layout_width">wrap_content</item>
+            <item name="android:layout_height">wrap_content</item>
+            <item name="android:textColor">@color/c</item>
+            <item name="android:textSize">13sp</item>
+
+        </style>
+
+        <style name="headers_text_style">
+
+            <item name="android:layout_width">0dp</item>
+            <item name="android:layout_height">wrap_content</item>
+            <item name="android:textColor">@color/c</item>
+            <item name="android:textStyle">bold</item>
+            <item name="android:layout_weight">0.5</item>
+            <item name="android:textSize">16sp</item>
+
+        </style>
+
+        <!--<style
+            name="all_button_style">
+
+            <item name="android:layout_width">match_parent</item>
+            <item name="android:layout_height">43dp</item>
+            <item name="android:textColor">@color/white_color</item>
+            <item name="android:background">@drawable/button_shape</item>
+            <item name="android:layout_marginStart">@dimen/dimen_10dp</item>
+            <item name="android:layout_marginEnd">@dimen/dimen_10dp</item>
+            <item name="android:textSize">@dimen/all_buttons_text_size_16sp</item>
+
+        </style>-->
+
+        <!--android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_shape"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:textSize="@dimen/all_buttons_text_size_16sp"
+        android:layout_gravity="bottom|center"
+        android:visibility="visible"
+        android:id="@+id/getOtpButton329"
+        android:textColor="#fff"
+        android:text="Get OTP"
+        android:layout_marginTop="35dp"-->
+
+        <style name="AppTheme.NoActionBar">
+            <item name="windowActionBar">false</item>
+            <item name="windowNoTitle">true</item>
+        </style>
+
+        <style
+            name="seeker_profile_left_text_style">
+
+            <item name="android:layout_width">0dp</item>
+            <item name="android:layout_height">wrap_content</item>
+            <item name="android:textColor">#D1CFCF</item>
+            <item name="android:layout_weight">0.4</item>
+            <item name="android:textSize">14sp</item>
+
+        </style>
+
+        <style
+            name="seeker_profile_right_text_style">
+
+            <item name="android:layout_width">0dp</item>
+            <item name="android:layout_height">wrap_content</item>
+            <item name="android:textColor">#000</item>
+            <item name="android:gravity">end</item>
+            <item name="android:layout_weight">0.6</item>
+            <item name="android:textSize">14sp</item>
+
+        </style>
+
+        <style
+            name="seeker_sign_up_edittext_style">
+
+            <item name="android:layout_width">match_parent</item>
+            <item name="android:layout_height">match_parent</item>
+            <item name="android:inputType">text</item>
+            <item name="android:textColor">@color/et_textColor</item>
+            <item name="android:textSize">14sp</item>
+
+        </style>
+
+        <style
+            name="seeker_sign_up_text_input_layout_style">
+
+            <item name="android:layout_width">match_parent</item>
+            <item name="android:layout_height">wrap_content</item>
+            <item name="android:layout_marginTop">4dp</item>
+            <item name="android:layout_marginEnd">8dp</item>
+            <item name="android:layout_marginBottom">12dp</item>
+
+        </style>
+
+</resources>

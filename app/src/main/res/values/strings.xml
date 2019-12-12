@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">UserFuelApp</string>
+    <string name="todo">TODO</string>
+    <string name="go_fuels">Go Fuels</string>
+    <string name="indian">Indian</string>
+    <string name="adresss">adresss</string>
+    <string name="help_string">Got a problem? We\'ll solve it fast. Please let us know below.</string>
+</resources>

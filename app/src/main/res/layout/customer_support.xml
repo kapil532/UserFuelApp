@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+                android:id="@+id/faq_touch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:text="@string/help_string"
+                android:textColor="@color/quantum_black_100"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/quantum_black_100"
+                    android:text="I'm unable to make payment"
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="16sp" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/quantum_black_100"
+                    android:text="I'm unable to get message"
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="16sp" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/three"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/quantum_black_100"
+                    android:text="I'd like a call back as soon as possible"
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="16sp" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/four"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/quantum_black_100"
+                    android:text="Other (Please explain)"
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edit_box"
+                    style="@style/edit_box"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/rect_select"
+                    android:cursorVisible="true"
+                    android:hint="Other"
+                    android:inputType="textMultiLine"
+                    android:maxLength="500"
+                    android:padding="8dp"
+                    android:textCursorDrawable="@drawable/text_cursor_cyan" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="?attr/colorAccent"
+                android:text="SUBMIT"
+                android:textColor="@color/white_color"
+                android:textSize="16sp" />
+
+            <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+                android:id="@+id/callNow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
