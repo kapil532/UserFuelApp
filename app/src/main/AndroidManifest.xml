@@ -24,12 +24,14 @@
 
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:icon="@drawable/gofuels"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.MainActivity"></activity>
+        <activity android:name=".activities.OtpVerification"></activity>
         <activity android:name=".transaction.MainActivity"></activity>
         <activity android:name=".about_us.SuccessScreen"></activity>
         <activity android:name=".about_us.AboutUsScreen"></activity>

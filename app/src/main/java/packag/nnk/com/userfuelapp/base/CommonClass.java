@@ -2,7 +2,7 @@ package packag.nnk.com.userfuelapp.base;
 
 public class CommonClass
 {
-    public static final String BASE_URL = "http://25f1d10.online-server.cloud:5000";
+    public static final String BASE_URL = "http://driver.gudy.in/api/";
     public static final String SUCCESS_MESSGE = "success";
     public static final String MESSAGE_KEY = "message";
     public static final String MSG_CODE = "msg_code";
@@ -21,8 +21,9 @@ public class CommonClass
 
 
     //-------------------------//
-    public static final String GET_OTP = "/getOtp";
-    public static final String VALIDATE_OTP = "/validateOtp";
+
+    public static final String GET_OTP = "otp/create";
+    public static final String VALIDATE_OTP = "otp/validate";
 
     public static final String GET_PETROL_BUNK_DETAILS="https://maps.googleapis.com/maps/api/place/nearbysearch/";
     public static final String POST_SUPPORT_SLACK="https://hooks.slack.com/services/";

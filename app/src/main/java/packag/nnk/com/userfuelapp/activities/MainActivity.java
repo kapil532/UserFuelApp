@@ -17,9 +17,11 @@ import packag.nnk.com.userfuelapp.about_us.AboutUsScreen;
 import packag.nnk.com.userfuelapp.about_us.CustomSupportScreenActivity;
 import packag.nnk.com.userfuelapp.about_us.SuccessScreen;
 import packag.nnk.com.userfuelapp.base.ApiUtils;
+import packag.nnk.com.userfuelapp.base.AppSharedPreUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
 import packag.nnk.com.userfuelapp.base.CommonClass;
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
+import packag.nnk.com.userfuelapp.model.OtpValidateRes;
 import packag.nnk.com.userfuelapp.petrol_bunk_details.GetList;
 import packag.nnk.com.userfuelapp.services.AutoCompleteAdapter;
 import retrofit2.Call;
@@ -88,6 +90,10 @@ public class MainActivity extends BaseActivity implements
     @BindView(R.id.text_500)
     TextView text_500;
 
+  /*  @BindView(R.id.appCompatTextView)
+    TextView appCompatTextView;*/
+
+
     @BindView(R.id.text_1000)
     TextView text_1000;
 
@@ -114,6 +120,13 @@ public class MainActivity extends BaseActivity implements
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         //Retrofit
+        OtpValidateRes user =   AppSharedPreUtils.getInstance(getApplicationContext()).getDashBoardSectionData();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
+        View hView =  navigationView.getHeaderView(0);
+        TextView nav_user = (TextView)hView.findViewById(R.id.appCompatTextView);
+        nav_user.setText("+91"+user.getGuest().getUsername());
+
+
         mApiService = new ApiUtils().getApiInterfacesForPetrolBunk();
         setupNavigation();
         getPetrolList();

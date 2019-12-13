@@ -152,12 +152,12 @@
                         android:src="@drawable/ic_edit_black_24dp"/>
 
                     <TextView
+                        android:id="@+id/verified"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/verified"
-                        android:visibility="visible"
                         android:layout_gravity="center"
-                        android:background="@drawable/ic_verifed1"/>
+                        android:background="@drawable/ic_verifed1"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
@@ -193,7 +193,7 @@
                     android:orientation="vertical"
                     android:layout_margin="10dp"
                     android:id="@+id/otpLayout329"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:weightSum="1">
 
                     <packag.nnk.com.userfuelapp.ui.OtpEdittextClass
@@ -204,7 +204,7 @@
                         android:cursorVisible="false"
                         android:digits="1234567890"
                         android:inputType="number"
-                        android:maxLength="6"
+                        android:maxLength="4"
                         android:textIsSelectable="false"
                         android:textSize="16sp"/>
 
@@ -218,19 +218,21 @@
                         android:id="@+id/resendOtp329"
                         android:textColor="@color/b"
                         android:text="Re-send OTP"/>
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_shape"
+                        android:visibility="visible"
+                        android:id="@+id/signUpButtonn329"
+                        android:textColor="#fff"
+                        android:text="Sign In"
+                        android:layout_margin="8dp"
+                        android:layout_marginTop="10dp"/>
+
 
                 </LinearLayout>
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_shape"
-                    android:visibility="visible"
-                    android:id="@+id/signUpButtonn329"
-                    android:textColor="#fff"
-                    android:text="Sign In"
-                    android:layout_margin="8dp"
-                    android:layout_marginTop="10dp"/>
+
 
                 <TextView
                     android:layout_width="wrap_content"

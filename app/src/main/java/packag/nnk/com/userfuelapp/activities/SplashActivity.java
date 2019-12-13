@@ -6,8 +6,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import packag.nnk.com.userfuelapp.R;
+import packag.nnk.com.userfuelapp.base.AppSharedPreUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
 import packag.nnk.com.userfuelapp.base.CommonClass;
+import packag.nnk.com.userfuelapp.model.OtpValidateRes;
 
 import android.Manifest;
 import android.app.Dialog;
@@ -600,11 +602,27 @@ public class SplashActivity extends BaseActivity implements LocationListener {
 
     void openNextActivity()
     {
-        Intent loginActivity = new Intent(SplashActivity.this, MainActivity.class);
+
+        OtpValidateRes user =   AppSharedPreUtils.getInstance(getApplicationContext()).getDashBoardSectionData();
+
+        if(user == null)
+        {
+            Intent loginActivity = new Intent(SplashActivity.this, LoginActivity.class);
 //        loginActivity.putExtra("lat", "" + location.getLatitude());
 //        loginActivity.putExtra("lang", "" + location.getLongitude());
-        startActivity(loginActivity);
-        finish();
+            startActivity(loginActivity);
+            finish();
+        }
+        else
+        {
+            Intent loginActivity = new Intent(SplashActivity.this, MainActivity.class);
+//        loginActivity.putExtra("lat", "" + location.getLatitude());
+//        loginActivity.putExtra("lang", "" + location.getLongitude());
+            startActivity(loginActivity);
+            finish();
+        }
+
+
     }
 
 }
