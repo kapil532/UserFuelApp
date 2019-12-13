@@ -120,7 +120,7 @@ public class MainActivity extends BaseActivity implements
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         //Retrofit
-        OtpValidateRes user =   AppSharedPreUtils.getInstance(getApplicationContext()).getDashBoardSectionData();
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
         View hView =  navigationView.getHeaderView(0);
         TextView nav_user = (TextView)hView.findViewById(R.id.appCompatTextView);

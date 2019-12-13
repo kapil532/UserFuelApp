@@ -62,6 +62,8 @@ public class CustomSupportScreenActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_support);
         getApiInterfacesForSlack = new ApiUtils().getApiInterfacesForSlack();
+
+
         initViews();
         initListeners();
 
@@ -240,7 +242,7 @@ public class CustomSupportScreenActivity extends BaseActivity {
         showProgressDialog();
         JsonObject slac = new JsonObject();
         try {
-            slac.addProperty("text",""+message);
+            slac.addProperty("text",user.getGuest().getUsername()+"   "+message);
         }
         catch (Exception e)
         {

@@ -83,7 +83,7 @@ public class OtpVerification extends BaseActivity {
 
     void validateOtp(String otp)
     {
-
+showProgressDialog();
         JsonObject json = new JsonObject();
         try {
             json.addProperty("mobile", "" + number);
@@ -94,7 +94,9 @@ public class OtpVerification extends BaseActivity {
         Call<OtpValidateRes> validation = getApiInterfaces.otpValidate(json);
         validation.enqueue(new Callback<OtpValidateRes>() {
             @Override
-            public void onResponse(Call<OtpValidateRes> call, Response<OtpValidateRes> response) {
+            public void onResponse(Call<OtpValidateRes> call, Response<OtpValidateRes> response)
+            {
+                hideProgressDialog();
                 Log.e("VALIDATION","RESPONSE"+response.body());
                 AppSharedPreUtils.getInstance(getApplicationContext()).saveDashBoardSectionData(response.body());
 
@@ -109,7 +111,7 @@ public class OtpVerification extends BaseActivity {
 
             @Override
             public void onFailure(Call<OtpValidateRes> call, Throwable t) {
-
+hideProgressDialog();
             }
         });
 
