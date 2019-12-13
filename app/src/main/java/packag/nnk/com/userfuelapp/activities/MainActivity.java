@@ -114,7 +114,7 @@ public class MainActivity extends BaseActivity implements
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         //Retrofit
-        mApiService = ApiUtils.getApiInterfacesForPetrolBunk();
+        mApiService = new ApiUtils().getApiInterfacesForPetrolBunk();
         setupNavigation();
         getPetrolList();
         moneySelection();

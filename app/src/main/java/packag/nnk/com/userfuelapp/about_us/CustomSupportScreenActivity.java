@@ -24,6 +24,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.android.volley.VolleyError;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.JsonObject;
 
 
 import org.json.JSONException;
@@ -33,6 +34,7 @@ import packag.nnk.com.userfuelapp.R;
 import packag.nnk.com.userfuelapp.base.ApiUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
+import packag.nnk.com.userfuelapp.interfaces.IRetrofit;
 import packag.nnk.com.userfuelapp.model.SlackMessage;
 import packag.nnk.com.userfuelapp.petrol_bunk_details.GetList;
 import retrofit2.Call;
@@ -49,17 +51,18 @@ public class CustomSupportScreenActivity extends BaseActivity {
     private final int REQUEST_PHONE_CALL = 1001;
     private CheckBox one, two, three, four;
     private Toolbar mToolbar;
-    private TextView title, callNow,faq_touch;
+    private TextView title, callNow, faq_touch;
     private EditText editbox;
     private Button submit_button;
     private String array[] = {"I'm unable to make payment", "I'm unable to get message", "I'd like a call back as soon as possible"};
     private String text;
-ApiInterface getApiInterfacesForSlack;
+    IRetrofit getApiInterfacesForSlack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_support);
-        getApiInterfacesForSlack = ApiUtils.getApiInterfacesForSlack();
+        getApiInterfacesForSlack = new ApiUtils().getApiInterfacesForSlack();
         initViews();
         initListeners();
 
@@ -216,41 +219,44 @@ ApiInterface getApiInterfacesForSlack;
 
     private void checkAndCallHelpline() {
 
-            callNow.setVisibility(View.VISIBLE);
-            callNow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (ActivityCompat.checkSelfPermission(CustomSupportScreenActivity.this, Manifest.permission.CALL_PHONE)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        // CALL_PHONE permission has not been granted.
-                        requestPhoneCallPermission();
-                    } else {
-                        callHelpline();
-                    }
+        callNow.setVisibility(View.VISIBLE);
+        callNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ActivityCompat.checkSelfPermission(CustomSupportScreenActivity.this, Manifest.permission.CALL_PHONE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    // CALL_PHONE permission has not been granted.
+                    requestPhoneCallPermission();
+                } else {
+                    callHelpline();
                 }
-            });
+            }
+        });
 
     }
 
 
-
-    private void automaticBooking(String message)
-    {
+    private void automaticBooking(String message) {
 
         showProgressDialog();
-        SlackMessage slac= new SlackMessage();
-        slac.setText(message);
-
-        Call<String> getList = getApiInterfacesForSlack.getSlackResponse(slac);
-        getList.enqueue(new Callback<String>()
+        JsonObject slac = new JsonObject();
+        try {
+            slac.addProperty("text",""+message);
+        }
+        catch (Exception e)
         {
+
+        }
+
+        Log.e("Message", "Message-->" + slac.toString());
+        Call<String> getList = getApiInterfacesForSlack.postRawJSON(slac);
+        getList.enqueue(new Callback<String>() {
 
 
             @Override
-            public void onResponse(Call<String> call, Response<String> response)
-            {
+            public void onResponse(Call<String> call, Response<String> response) {
                 hideProgressDialog();
-               Log.e("Message","Message"+response.body());
+                Log.e("Message", "Message--->" + response.body());
                 message("Someone will be in touch with you shortly!");
             }
 
@@ -264,7 +270,7 @@ ApiInterface getApiInterfacesForSlack;
 
 
         // TODO: Implement this method to send token to your app server.
-       // JSONObject table = new JSONObject();
+        // JSONObject table = new JSONObject();
 
 
 
@@ -282,7 +288,7 @@ ApiInterface getApiInterfacesForSlack;
         } catch (JSONException e) {
         }*/
 
-      //  PostData.call(this,table, "https://hooks.slack.com/services/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", bookingAuto);
+        //  PostData.call(this,table, "https://hooks.slack.com/services/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", bookingAuto);
     }
 
     public static String messageToShow = "";
@@ -390,7 +396,7 @@ ApiInterface getApiInterfacesForSlack;
                 callHelpline();
             } else {
                 Log.i(TAG, "PHONE_CALL permission was NOT granted.");
-                Snackbar.make(editbox,"Permission done",
+                Snackbar.make(editbox, "Permission done",
                         Snackbar.LENGTH_SHORT).show();
             }
         } else {
@@ -399,8 +405,7 @@ ApiInterface getApiInterfacesForSlack;
     }
 
     @SuppressLint("MissingPermission")
-    private void callHelpline()
-    {
+    private void callHelpline() {
 
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:+919886129128"));

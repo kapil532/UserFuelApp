@@ -11,9 +11,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient
 {
-    private static Retrofit retrofit;
+    private  Retrofit retrofit;
 
-    public static Retrofit getApiClient(String BaseUrl)
+    public  Retrofit getApiClient(String BaseUrl)
     {
         OkHttpClient.Builder okhttpBuilder = new OkHttpClient.Builder();
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();

@@ -1,24 +1,25 @@
 package packag.nnk.com.userfuelapp.base;
 
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
+import packag.nnk.com.userfuelapp.interfaces.IRetrofit;
 
 public class ApiUtils
 {
-    public static ApiInterface getApiInterfaces()
+    public  ApiInterface getApiInterfaces()
     {
-        return ApiClient.getApiClient(CommonClass.BASE_URL).create(ApiInterface.class);
+        return  new ApiClient().getApiClient(CommonClass.BASE_URL).create(ApiInterface.class);
     }
 
 
-    public static ApiInterface getApiInterfacesForPetrolBunk()
+    public  ApiInterface getApiInterfacesForPetrolBunk()
     {
-        return ApiClient.getApiClient(CommonClass.GET_PETROL_BUNK_DETAILS).create(ApiInterface.class);
+        return  new ApiClient().getApiClient(CommonClass.GET_PETROL_BUNK_DETAILS).create(ApiInterface.class);
     }
 
 
-    public static ApiInterface getApiInterfacesForSlack()
+    public  IRetrofit getApiInterfacesForSlack()
     {
-        return ApiClient.getApiClient(CommonClass.POST_SUPPORT_SLACK).create(ApiInterface.class);
+        return new ApiClient().getApiClient(CommonClass.POST_SUPPORT_SLACK).create(IRetrofit.class);
     }
    /* public static ApiInterface getApiInterfaces1()
     {

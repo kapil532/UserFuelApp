@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">UserFuelApp</string>
+    <string name="app_name">goFuels</string>
     <string name="todo">TODO</string>
-    <string name="go_fuels">gofuels</string>
+    <string name="go_fuels">goFuels</string>
     <string name="indian">Loading...</string>
     <string name="adresss">loading...</string>
     <string name="two_rs">\u20B9 200</string>
