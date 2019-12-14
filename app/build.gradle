@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "packag.nnk.com.userfuelapp"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -55,6 +55,7 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.google.android.libraries.places:places:1.0.0'
+    implementation 'me.aflak.libraries:fingerprint:2.5.3'
 
     def nav_version = "1.0.0-alpha06"
 

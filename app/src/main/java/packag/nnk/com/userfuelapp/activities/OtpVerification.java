@@ -42,7 +42,6 @@ public class OtpVerification extends BaseActivity {
     TextView resendOtp329;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,41 +66,36 @@ public class OtpVerification extends BaseActivity {
         signUpButtonn329.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-           if(et_otp.getText().toString().length()==4)
-           {
-           validateOtp(et_otp.getText().toString());
-           }
-           else
-           {
-               Toast.makeText(getApplicationContext(),"Please enter 4 digit!",Toast.LENGTH_LONG).show();
-           }
+                if (et_otp.getText().toString().length() == 4) {
+                    validateOtp(et_otp.getText().toString());
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please enter 4 digit!", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
     }
 
 
-    void validateOtp(String otp)
-    {
-showProgressDialog();
+    void validateOtp(String otp) {
+        showProgressDialog();
         JsonObject json = new JsonObject();
         try {
             json.addProperty("mobile", "" + number);
-            json.addProperty("otp",""+otp);
+            json.addProperty("otp", "" + otp);
         } catch (Exception e) {
 
         }
         Call<OtpValidateRes> validation = getApiInterfaces.otpValidate(json);
         validation.enqueue(new Callback<OtpValidateRes>() {
             @Override
-            public void onResponse(Call<OtpValidateRes> call, Response<OtpValidateRes> response)
-            {
+            public void onResponse(Call<OtpValidateRes> call, Response<OtpValidateRes> response) {
                 hideProgressDialog();
-                Log.e("VALIDATION","RESPONSE"+response.body());
+                Log.e("VALIDATION", "RESPONSE" + response.body());
                 AppSharedPreUtils.getInstance(getApplicationContext()).saveDashBoardSectionData(response.body());
 
 //                OtpValidateRes  user =   AppSharedPreUtils.getInstance(getApplicationContext()).getDashBoardSectionData();
-                Intent myAct = new Intent(getApplicationContext(),MainActivity.class);
+                Intent myAct = new Intent(getApplicationContext(), MainActivity.class);
                 myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(myAct);
                 finish();
@@ -111,11 +105,9 @@ showProgressDialog();
 
             @Override
             public void onFailure(Call<OtpValidateRes> call, Throwable t) {
-hideProgressDialog();
+                hideProgressDialog();
             }
         });
-
-
 
 
     }
@@ -137,8 +129,7 @@ hideProgressDialog();
                 hideProgressDialog();
                 Log.e("OTP POJO", "RES-->  " + response.body().getStatus());
 
-               Toast.makeText(getApplicationContext(),"Otp sent to registered number!",Toast.LENGTH_LONG).show();
-
+                Toast.makeText(getApplicationContext(), "Otp sent to registered number!", Toast.LENGTH_LONG).show();
 
 
             }

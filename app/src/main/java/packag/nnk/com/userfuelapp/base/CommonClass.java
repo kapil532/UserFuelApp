@@ -1,5 +1,10 @@
 package packag.nnk.com.userfuelapp.base;
 
+import android.content.Context;
+
+import java.io.IOException;
+import java.io.InputStream;
+
 public class CommonClass
 {
     public static final String BASE_URL = "http://driver.gudy.in/api/";
@@ -29,5 +34,22 @@ public class CommonClass
     public static final String POST_SUPPORT_SLACK="https://hooks.slack.com/services/";
 
 //    https://hooks.slack.com/services/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
+
+
+    public static String getAssetJsonData(Context context, String fileName) {
+        String json;
+        try {
+            InputStream is = context.getAssets().open(fileName);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
 
 }

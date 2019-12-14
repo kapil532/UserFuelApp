@@ -12,6 +12,11 @@ import androidx.navigation.ui.NavigationUI;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.aflak.libraries.callback.FingerprintDialogSecureCallback;
+import me.aflak.libraries.callback.PasswordCallback;
+import me.aflak.libraries.dialog.FingerprintDialog;
+import me.aflak.libraries.dialog.PasswordDialog;
+import me.aflak.libraries.utils.FingerprintToken;
 import packag.nnk.com.userfuelapp.R;
 import packag.nnk.com.userfuelapp.about_us.AboutUsScreen;
 import packag.nnk.com.userfuelapp.about_us.CustomSupportScreenActivity;
@@ -61,8 +66,12 @@ import com.squareup.picasso.Picasso;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends BaseActivity implements
-        NavigationView.OnNavigationItemSelectedListener {
+ public class MainActivity extends BaseActivity implements
+        NavigationView.OnNavigationItemSelectedListener ,
+         View.OnClickListener,
+         FingerprintDialogSecureCallback,
+         PasswordCallback
+{
     private String TAG = MainActivity.class.getSimpleName();
     private ApiInterface mApiService;
 
@@ -158,10 +167,14 @@ public class MainActivity extends BaseActivity implements
         navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
-        submit.setOnClickListener(new View.OnClickListener() {
+        submit.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
-                if(paymentPrice == 0)
+
+
+                callDilouge();
+               /* if(paymentPrice == 0)
                 {
                   Toast.makeText(MainActivity.this,"Please select payment amount",Toast.LENGTH_LONG).show();
                 }
@@ -169,12 +182,22 @@ public class MainActivity extends BaseActivity implements
                 {
                     showAlertBox("Hi you want to pay "+paymentPrice+" Rs. " +"to "+petrolBunkName +" .");
                 }
-
+*/
             }
         });
 
     }
 
+    void callDilouge()
+    {
+        if(FingerprintDialog.isAvailable(this)) {
+            FingerprintDialog.initialize(this)
+                    .title(R.string.fingerprint_title)
+                    .message(R.string.fingerprint_message)
+                    .callback(this, "password")
+                    .show();
+        }
+    }
 
     void showAlertBox(String message)
     {
@@ -426,4 +449,45 @@ public class MainActivity extends BaseActivity implements
         }
     };
 
+    @Override
+    public void onAuthenticationSucceeded() {
+
+    }
+
+    @Override
+    public void onAuthenticationCancel() {
+
+    }
+
+    @Override
+    public void onNewFingerprintEnrolled(FingerprintToken token) {
+        PasswordDialog.initialize(this, token)
+                .title(R.string.password_title)
+                .message(R.string.password_message)
+                .callback(this)
+                .passwordType(PasswordDialog.PASSWORD_TYPE_TEXT)
+                .show();
+    }
+
+    @Override
+    public void onPasswordSucceeded() {
+
+    }
+
+    @Override
+    public boolean onPasswordCheck(String password) {
+
+        return password.equals("password");
+
+    }
+
+    @Override
+    public void onPasswordCancel() {
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
 }

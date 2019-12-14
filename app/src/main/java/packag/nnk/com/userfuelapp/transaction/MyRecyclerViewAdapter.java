@@ -21,11 +21,11 @@ import packag.nnk.com.userfuelapp.R;
  */
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.CustomViewHolder> {
-    private List<FeedItem> feedItemList;
+    private List<Transaction> feedItemList;
     private Context mContext;
     private OnItemClickListener onItemClickListener;
 
-    public MyRecyclerViewAdapter(Context context, List<FeedItem> feedItemList) {
+    public MyRecyclerViewAdapter(Context context, List<Transaction> feedItemList) {
         this.feedItemList = feedItemList;
         this.mContext = context;
     }
@@ -39,10 +39,15 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(CustomViewHolder customViewHolder, int i) {
-        final FeedItem feedItem = feedItemList.get(i);
+        final Transaction feedItem = feedItemList.get(i);
+
+        customViewHolder.title.setText(Html.fromHtml(feedItem.getPetrolBunkName()));
+        customViewHolder.time.setText(Html.fromHtml(feedItem.getTransactionTime()));
+        customViewHolder.address.setText(Html.fromHtml(feedItem.getPetrolBunkAddress()));
+        customViewHolder.rupees.setText(Html.fromHtml("Paid Amount : "+feedItem.getTransactionAmount()));
 
         //Download image using picasso library
-        if (!TextUtils.isEmpty(feedItem.getThumbnail())) {
+       /* if (!TextUtils.isEmpty(feedItem.getThumbnail())) {
             Picasso.with(mContext).load(feedItem.getThumbnail())
                     .error(R.drawable.placeholder)
                     .placeholder(R.drawable.placeholder)
@@ -60,7 +65,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             }
         };
         customViewHolder.imageView.setOnClickListener(listener);
-        customViewHolder.textView.setOnClickListener(listener);
+        customViewHolder.textView.setOnClickListener(listener);*/
     }
 
     @Override
@@ -70,13 +75,19 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
 
     class CustomViewHolder extends RecyclerView.ViewHolder {
-        protected ImageView imageView;
-        protected TextView textView;
+        protected ImageView thumbnail;
+        protected TextView title;
+        protected TextView address;
+        protected TextView time;
+        protected TextView rupees;
 
         public CustomViewHolder(View view) {
             super(view);
-            this.imageView = (ImageView) view.findViewById(R.id.thumbnail);
-            this.textView = (TextView) view.findViewById(R.id.title);
+            this.thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
+            this.title = (TextView) view.findViewById(R.id.title);
+            this.address = (TextView) view.findViewById(R.id.address);
+            this.time = (TextView) view.findViewById(R.id.time);
+            this.rupees = (TextView) view.findViewById(R.id.rupees);
         }
     }
 

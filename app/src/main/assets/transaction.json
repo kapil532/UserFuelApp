@@ -1,0 +1,26 @@
+{
+  "transaction": [
+   
+         {
+         "petrolBunkName" :"Indian petrol bunk",
+         "petrolBunkAddress":"hsr layout 560065",
+         "petrolBunkLatLang":"-75.89009,88.989389",
+         "driverAggregator":"ola",
+          "petrolBunkIcon":"https://icon.com.in.png",
+          "transactionTime":"8:10pm : 20/02/2019",
+          "transactionAmount":"200 Rs."
+         },
+         {
+         "petrolBunkName" :"Hp petrol bunk",
+         "petrolBunkAddress":"Kormangla layout 560065",
+         "petrolBunkLatLang":"-75.89009,88.989389",
+         "driverAggregator":"uber",
+          "petrolBunkIcon":"https://icon.com.in.png",
+          "transactionTime":"8:10pm : 20/03/2019",
+          "transactionAmount":"500 Rs."
+         }
+         
+   
+   
+  ]
+}
