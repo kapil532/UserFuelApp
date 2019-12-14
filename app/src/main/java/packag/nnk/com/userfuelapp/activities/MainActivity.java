@@ -2,13 +2,10 @@ package packag.nnk.com.userfuelapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,13 +19,12 @@ import packag.nnk.com.userfuelapp.about_us.AboutUsScreen;
 import packag.nnk.com.userfuelapp.about_us.CustomSupportScreenActivity;
 import packag.nnk.com.userfuelapp.about_us.SuccessScreen;
 import packag.nnk.com.userfuelapp.base.ApiUtils;
-import packag.nnk.com.userfuelapp.base.AppSharedPreUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
 import packag.nnk.com.userfuelapp.base.CommonClass;
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
-import packag.nnk.com.userfuelapp.model.OtpValidateRes;
 import packag.nnk.com.userfuelapp.petrol_bunk_details.GetList;
 import packag.nnk.com.userfuelapp.services.AutoCompleteAdapter;
+import packag.nnk.com.userfuelapp.transaction.TransactionActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,7 +42,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -176,7 +171,7 @@ import java.util.List;
                 callDilouge();
                /* if(paymentPrice == 0)
                 {
-                  Toast.makeText(MainActivity.this,"Please select payment amount",Toast.LENGTH_LONG).show();
+                  Toast.makeText(TransactionActivity.this,"Please select payment amount",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -287,7 +282,7 @@ import java.util.List;
                         // Log and toast
                         //String msg = getString(R.string.msg_token_fmt, token);
                         //Log.d(TAG, msg);
-                        //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(TransactionActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -328,10 +323,15 @@ import java.util.List;
             case R.id.fourt:
                 //navController.navigate(R.id.thirdFragment);
 
-                Intent trans = new Intent(this, packag.nnk.com.userfuelapp.transaction.MainActivity.class);
+                Intent trans = new Intent(this, TransactionActivity.class);
                 startActivity(trans);
                 break;
+            case R.id.setting:
+                //navController.navigate(R.id.thirdFragment);
 
+                Intent set = new Intent(this, SettingActivity.class);
+                startActivity(set);
+                break;
 
         }
         return true;

@@ -13,4 +13,8 @@
 
     <string name="password_title">Password</string>
     <string name="password_message">You need to enter your password because a new fingerprint was added</string>
+    <string name="s">Switch</string>
+    <string name="logout">logout</string>
+    <string name="notification_off">Notification Off</string>
+    <string name="version_1_0_1">version 1.0.1</string>
 </resources>

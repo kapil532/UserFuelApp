@@ -1,9 +1,9 @@
 package packag.nnk.com.userfuelapp.transaction;
 
 /**
- * Created by Nilanchala Panigrahy on 10/25/16.
+ * Created by KapilS
  */
 
 public interface OnItemClickListener {
-    void onItemClick(FeedItem item);
+    void onItemClick(Transaction item);
 }

@@ -28,6 +28,7 @@ public class CommonClass
     //-------------------------//
 
     public static final String GET_OTP = "otp/create";
+    public static final String GET_WALLET_BALANCE = "/balance";
     public static final String GET_TRANSACTION = "/transaction_list";
     public static final String VALIDATE_OTP = "otp/validate";
 

@@ -1,34 +1,16 @@
 package packag.nnk.com.userfuelapp.transaction;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends BaseActivity {
+public class TransactionActivity extends BaseActivity {
     private static final String TAG = "RecyclerViewExample";
 
     private List<Transaction> feedsList;
@@ -61,7 +43,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.transaction_list);
         ButterKnife.bind(this);
 
-        getApiInterfaces = new ApiUtils().getApiInterfaces();
+       // getApiInterfaces = new ApiUtils().getApiInterfaces();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         feedsList = readJsonData().getTransaction();
        // fetchTransactionDetailsOverNetwork();
@@ -129,15 +111,8 @@ public class MainActivity extends BaseActivity {
     }
 
     void setAdapter() {
-        adapter = new MyRecyclerViewAdapter(MainActivity.this, feedsList);
+        adapter = new MyRecyclerViewAdapter(TransactionActivity.this, feedsList);
         mRecyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(FeedItem item) {
-                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
-
-            }
-        });
 
     }
 
