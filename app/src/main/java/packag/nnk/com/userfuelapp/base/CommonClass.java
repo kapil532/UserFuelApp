@@ -28,6 +28,7 @@ public class CommonClass
     //-------------------------//
 
     public static final String GET_OTP = "otp/create";
+    public static final String GET_TRANSACTION = "/transaction_list";
     public static final String VALIDATE_OTP = "otp/validate";
 
     public static final String GET_PETROL_BUNK_DETAILS="https://maps.googleapis.com/maps/api/place/nearbysearch/";

@@ -17,7 +17,7 @@ import java.util.List;
 import packag.nnk.com.userfuelapp.R;
 
 /**
- * Created by Nilanchala Panigrahy on 10/25/16.
+ * Created byKapil Katiyar on.
  */
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.CustomViewHolder> {
@@ -38,7 +38,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     }
 
     @Override
-    public void onBindViewHolder(CustomViewHolder customViewHolder, int i) {
+    public void onBindViewHolder(CustomViewHolder customViewHolder, int i)
+    {
         final Transaction feedItem = feedItemList.get(i);
 
         customViewHolder.title.setText(Html.fromHtml(feedItem.getPetrolBunkName()));
@@ -46,26 +47,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         customViewHolder.address.setText(Html.fromHtml(feedItem.getPetrolBunkAddress()));
         customViewHolder.rupees.setText(Html.fromHtml("Paid Amount : "+feedItem.getTransactionAmount()));
 
-        //Download image using picasso library
-       /* if (!TextUtils.isEmpty(feedItem.getThumbnail())) {
-            Picasso.with(mContext).load(feedItem.getThumbnail())
-                    .error(R.drawable.placeholder)
-                    .placeholder(R.drawable.placeholder)
-                    .into(customViewHolder.imageView);
-        }
-
-        //Setting text view title
-        customViewHolder.textView.setText(Html.fromHtml(feedItem.getTitle()));
-
-
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onItemClickListener.onItemClick(feedItem);
-            }
-        };
-        customViewHolder.imageView.setOnClickListener(listener);
-        customViewHolder.textView.setOnClickListener(listener);*/
     }
 
     @Override

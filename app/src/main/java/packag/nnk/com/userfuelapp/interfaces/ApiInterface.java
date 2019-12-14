@@ -8,6 +8,8 @@ import packag.nnk.com.userfuelapp.model.OtpValidateRes;
 import packag.nnk.com.userfuelapp.model.Post;
 import packag.nnk.com.userfuelapp.model.SlackMessage;
 import packag.nnk.com.userfuelapp.petrol_bunk_details.GetList;
+import packag.nnk.com.userfuelapp.transaction.Transaction;
+import packag.nnk.com.userfuelapp.transaction.TransactionPojo;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -28,6 +30,8 @@ public interface ApiInterface
     @POST(CommonClass.GET_OTP)
     Call<OtpRes> getOtp(@Body JsonObject json);
 
+    @POST(CommonClass.GET_TRANSACTION)
+    Call<TransactionPojo> getTransactionList(@Body JsonObject json);
 
 
     @POST(CommonClass.VALIDATE_OTP)
