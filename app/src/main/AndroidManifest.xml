@@ -32,6 +32,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.MainActivity"></activity>
+        <activity android:name=".activities.UserCreateActivity"></activity>
         <activity android:name=".activities.SettingActivity"></activity>
         <activity android:name=".activities.OtpVerification"></activity>
         <activity android:name=".transaction.TransactionActivity"></activity>

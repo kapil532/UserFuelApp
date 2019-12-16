@@ -28,9 +28,16 @@ public class CommonClass
     //-------------------------//
 
     public static final String GET_OTP = "otp/create";
-    public static final String GET_WALLET_BALANCE = "/balance";
     public static final String GET_TRANSACTION = "/transaction_list";
     public static final String VALIDATE_OTP = "otp/validate";
+    public static final String CHECK_BALANCE = "driver/checkBalance/";
+    public static final String AUTH_REGISTER = "auth/register/";
+    public static final String RANGE_TRANSACTION = "driver/rangeTransaction/";
+    public static final String DRIVER_PAYMENT = " driver/bunkPayment/";
+
+//    driver/bunkPayment/625ea288-c31c-4e21-ab5d-6d88af2a01fe
+
+//    api/driver/rangeTransaction/627a72e0-baf4-4eb2-9d07-afd15c30717e/30
 
     public static final String GET_PETROL_BUNK_DETAILS="https://maps.googleapis.com/maps/api/place/nearbysearch/";
     public static final String POST_SUPPORT_SLACK="https://hooks.slack.com/services/";

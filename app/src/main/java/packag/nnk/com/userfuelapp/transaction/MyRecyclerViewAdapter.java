@@ -15,17 +15,18 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import packag.nnk.com.userfuelapp.R;
+import packag.nnk.com.userfuelapp.model.RangeTransaction;
 
 /**
  * Created byKapil Katiyar on.
  */
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.CustomViewHolder> {
-    private List<Transaction> feedItemList;
+    private List<RangeTransaction> feedItemList;
     private Context mContext;
     private OnItemClickListener onItemClickListener;
 
-    public MyRecyclerViewAdapter(Context context, List<Transaction> feedItemList) {
+    public MyRecyclerViewAdapter(Context context, List<RangeTransaction> feedItemList) {
         this.feedItemList = feedItemList;
         this.mContext = context;
     }
@@ -40,12 +41,12 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     @Override
     public void onBindViewHolder(CustomViewHolder customViewHolder, int i)
     {
-        final Transaction feedItem = feedItemList.get(i);
+        final RangeTransaction feedItem = feedItemList.get(i);
 
-        customViewHolder.title.setText(Html.fromHtml(feedItem.getPetrolBunkName()));
-        customViewHolder.time.setText(Html.fromHtml(feedItem.getTransactionTime()));
-        customViewHolder.address.setText(Html.fromHtml(feedItem.getPetrolBunkAddress()));
-        customViewHolder.rupees.setText(Html.fromHtml("Paid Amount : "+feedItem.getTransactionAmount()));
+        customViewHolder.title.setText(Html.fromHtml(feedItem.getPetrolBunkDetail().getPetrolBunkName()));
+        customViewHolder.time.setText(Html.fromHtml(feedItem.getPaymentDate()));
+        customViewHolder.address.setText(Html.fromHtml(feedItem.getPetrolBunkDetail().getPetrolBunkAddress()));
+        customViewHolder.rupees.setText(Html.fromHtml("Paid Amount : "+feedItem.getAmount()));
 
     }
 

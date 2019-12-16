@@ -615,7 +615,7 @@ public class SplashActivity extends BaseActivity implements LocationListener {
         }
         else
         {
-            Intent loginActivity = new Intent(SplashActivity.this, MainActivity.class);
+            Intent loginActivity = new Intent(SplashActivity.this, UserCreateActivity.class);
 //        loginActivity.putExtra("lat", "" + location.getLatitude());
 //        loginActivity.putExtra("lang", "" + location.getLongitude());
             startActivity(loginActivity);

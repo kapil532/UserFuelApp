@@ -4,4 +4,12 @@
         <attr name="checkView_strokeWidth" format="dimension"/>
         <attr name="checkView_strokeColor" format="color"/>
     </declare-styleable>
+
+
+    <string-array name="aggregator">
+        <item>Ola</item>
+        <item>Uber</item>
+        <item>Others</item>
+
+    </string-array>
 </resources>

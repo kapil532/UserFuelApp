@@ -53,7 +53,7 @@ public class SettingActivity extends BaseActivity {
 
     private void setupNavigation() {
 
-        toolbar.setTitle("Transaction");
+        toolbar.setTitle("Setting");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

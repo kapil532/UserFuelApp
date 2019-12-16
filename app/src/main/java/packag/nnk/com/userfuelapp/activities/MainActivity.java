@@ -22,6 +22,10 @@ import packag.nnk.com.userfuelapp.base.ApiUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
 import packag.nnk.com.userfuelapp.base.CommonClass;
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
+import packag.nnk.com.userfuelapp.model.Balance;
+import packag.nnk.com.userfuelapp.model.Payment;
+import packag.nnk.com.userfuelapp.model.RangeTransaction;
+import packag.nnk.com.userfuelapp.model.UserDetails;
 import packag.nnk.com.userfuelapp.petrol_bunk_details.GetList;
 import packag.nnk.com.userfuelapp.services.AutoCompleteAdapter;
 import packag.nnk.com.userfuelapp.transaction.TransactionActivity;
@@ -56,6 +60,7 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
@@ -69,6 +74,7 @@ import java.util.List;
 {
     private String TAG = MainActivity.class.getSimpleName();
     private ApiInterface mApiService;
+    private ApiInterface mApiService_;
 
     public Toolbar toolbar;
 
@@ -132,6 +138,11 @@ import java.util.List;
 
 
         mApiService = new ApiUtils().getApiInterfacesForPetrolBunk();
+        mApiService_ = new ApiUtils().getApiInterfaces();
+
+
+
+        //getBalance();
         setupNavigation();
         getPetrolList();
         moneySelection();
@@ -490,4 +501,59 @@ import java.util.List;
     public void onClick(View view) {
 
     }
+
+  void getBalance()
+  {
+      Call<Balance> balance = mApiService_.getBalance(user.getGuest().getGuestId());
+      balance.enqueue(new Callback<Balance>() {
+          @Override
+          public void onResponse(Call<Balance> call, Response<Balance> response) {
+             Log.e("USER BALANCE","bal--> "+response.body().getStatus());
+          }
+
+          @Override
+          public void onFailure(Call<Balance> call, Throwable t) {
+
+          }
+      });
+
+  }
+
+
+
+
+
+
+
+    void doPayment(String price,String petrolID)
+    {
+        JsonObject json = new JsonObject();
+        try {
+            json.addProperty("driverId",""+user.getGuest().getGuestId());
+            json.addProperty("amount",""+price);
+            json.addProperty("petrolBunkId",""+petrolID);
+        }
+        catch (Exception e)
+        {
+
+        }
+
+        Call<Payment> payment = mApiService_.doPayment(json);
+        payment.enqueue(new Callback<Payment>() {
+            @Override
+            public void onResponse(Call<Payment> call, Response<Payment> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Payment> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+
 }
+

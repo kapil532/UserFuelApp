@@ -1,26 +1,17 @@
-{
-  "transaction": [
-   
-         {
-         "petrolBunkName" :"Indian petrol bunk",
-         "petrolBunkAddress":"hsr layout 560065",
-         "petrolBunkLatLang":"-75.89009,88.989389",
-         "driverAggregator":"ola",
-          "petrolBunkIcon":"https://icon.com.in.png",
-          "transactionTime":"8:10pm : 20/02/2019",
-          "transactionAmount":"200 Rs."
-         },
-         {
-         "petrolBunkName" :"Hp petrol bunk",
-         "petrolBunkAddress":"Kormangla layout 560065",
-         "petrolBunkLatLang":"-75.89009,88.989389",
-         "driverAggregator":"uber",
-          "petrolBunkIcon":"https://icon.com.in.png",
-          "transactionTime":"8:10pm : 20/03/2019",
-          "transactionAmount":"500 Rs."
-         }
-         
-   
-   
-  ]
-}
+[
+  {
+    "id": "7f15ef11-95a9-4ab6-af2a-778dfc35ec1f",
+    "driverId": "625ea288-c31c-4e21-ab5d-6d88af2a01fe",
+    "petrolBunkId": "19f55b6f-dbf9-4c4e-91cb-db5e828d3669",
+    "amount": "500.00",
+    "paymentDate": "2019-12-15T10:25:36.184Z",
+    "petrolBunkDetail": {
+      "petrolBunkName": "Vinayaka",
+      "petrolBunkAddress": "9th Main Road, Garden Layout, Sector 2, HSR Layout, Bengaluru",
+      "petrolBunkLatLang": "12.9072699,77.6448199",
+      "compoundCode": "HSR Layout, Bengaluru",
+      "bunkType": "gas_station",
+      "iconId": "hp"
+    }
+  }
+]

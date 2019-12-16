@@ -1,6 +1,7 @@
 package packag.nnk.com.userfuelapp.transaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.widget.Toolbar;
@@ -19,6 +20,7 @@ import packag.nnk.com.userfuelapp.base.ApiUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
 import packag.nnk.com.userfuelapp.base.CommonClass;
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
+import packag.nnk.com.userfuelapp.model.RangeTransaction;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,6 +29,7 @@ public class TransactionActivity extends BaseActivity {
     private static final String TAG = "RecyclerViewExample";
 
     private List<Transaction> feedsList;
+    private List<RangeTransaction> feedsList_tran;
     private MyRecyclerViewAdapter adapter;
 
     @BindView(R.id.recycler_view)
@@ -45,12 +48,30 @@ public class TransactionActivity extends BaseActivity {
 
        // getApiInterfaces = new ApiUtils().getApiInterfaces();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        feedsList = readJsonData().getTransaction();
+        feedsList_tran = (List<RangeTransaction>) readJsonData();
        // fetchTransactionDetailsOverNetwork();
         setAdapter();
         setupNavigation();
     }
 
+    void getRangeTransaction()
+    {
+        Call<RangeTransaction> balance = getApiInterfaces.getRangeTransaction(user.getGuest().getGuestId());
+        balance.enqueue(new Callback<RangeTransaction>() {
+            @Override
+            public void onResponse(Call<RangeTransaction> call, Response<RangeTransaction> response) {
+                Log.e("USER BALANCE","bal--> "+response.body());
+                feedsList_tran = (List<RangeTransaction>) response.body();
+
+            }
+
+            @Override
+            public void onFailure(Call<RangeTransaction> call, Throwable t) {
+
+            }
+        });
+
+    }
 
     void fetchTransactionDetailsOverNetwork() {
         showProgressDialog();
@@ -111,7 +132,7 @@ public class TransactionActivity extends BaseActivity {
     }
 
     void setAdapter() {
-        adapter = new MyRecyclerViewAdapter(TransactionActivity.this, feedsList);
+        adapter = new MyRecyclerViewAdapter(TransactionActivity.this, feedsList_tran);
         mRecyclerView.setAdapter(adapter);
 
     }
