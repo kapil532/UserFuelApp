@@ -8,6 +8,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 
 import packag.nnk.com.userfuelapp.model.OtpValidateRes;
+import packag.nnk.com.userfuelapp.model.User;
 
 public class AppSharedPreUtils {
 
@@ -41,6 +42,41 @@ public class AppSharedPreUtils {
 
         return gson.fromJson(json, OtpValidateRes.class);
     }
+
+
+    public void saveUserDetails(User dataModel){
+        Gson gson = new Gson();
+        String json = gson.toJson(dataModel);
+        editor.putString("USERDETAIL", json);
+        editor.commit();
+    }
+
+    public User getUserDetails(){
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("USERDETAIL", "");
+        Log.e("SHARED", "OtpValidateRes Image -> " + json);
+
+
+        return gson.fromJson(json, User.class);
+    }
+
+
+    public void saveUserOtpDetails(packag.nnk.com.userfuelapp.model.otp_val.User dataModel){
+        Gson gson = new Gson();
+        String json = gson.toJson(dataModel);
+        editor.putString("USERDETAIL", json);
+        editor.commit();
+    }
+
+    public packag.nnk.com.userfuelapp.model.otp_val.User getUserOtpDetails(){
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("USERDETAIL", "");
+        Log.e("SHARED", "OtpValidateRes Image -> " + json);
+
+
+        return gson.fromJson(json, packag.nnk.com.userfuelapp.model.otp_val.User.class);
+    }
+
 
     public void saveStringValues(String valuesKey, String values){
         editor.putString(valuesKey, values);

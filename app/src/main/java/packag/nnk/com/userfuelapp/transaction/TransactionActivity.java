@@ -3,6 +3,7 @@ package packag.nnk.com.userfuelapp.transaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,6 +36,9 @@ public class TransactionActivity extends BaseActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
+    @BindView(R.id.no_text)
+    TextView no_text;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -46,66 +50,47 @@ public class TransactionActivity extends BaseActivity {
         setContentView(R.layout.transaction_list);
         ButterKnife.bind(this);
 
-       // getApiInterfaces = new ApiUtils().getApiInterfaces();
+        getApiInterfaces = new ApiUtils().getApiInterfaces();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        feedsList_tran = (List<RangeTransaction>) readJsonData();
-       // fetchTransactionDetailsOverNetwork();
-        setAdapter();
+     //   feedsList_tran = (List<RangeTransaction>) readJsonData();
+        getRangeTransaction();
+
         setupNavigation();
     }
 
     void getRangeTransaction()
     {
-        Call<RangeTransaction> balance = getApiInterfaces.getRangeTransaction(user.getGuest().getGuestId());
+        showProgressDialog();
+        Call<RangeTransaction> balance = getApiInterfaces.getRangeTransaction(user.getUserId());
         balance.enqueue(new Callback<RangeTransaction>() {
             @Override
             public void onResponse(Call<RangeTransaction> call, Response<RangeTransaction> response) {
                 Log.e("USER BALANCE","bal--> "+response.body());
-                feedsList_tran = (List<RangeTransaction>) response.body();
+
+                RangeTransaction tran = response.body();
+                if(tran != null)
+                {
+                    feedsList_tran = (List<RangeTransaction>) response.body();
+                    setAdapter();
+                    no_text.setVisibility(View.GONE);
+                }
+                else
+                {
+                   no_text.setVisibility(View.VISIBLE);
+                }
+                hideProgressDialog();
+
 
             }
 
             @Override
             public void onFailure(Call<RangeTransaction> call, Throwable t) {
-
-            }
-        });
-
-    }
-
-    void fetchTransactionDetailsOverNetwork() {
-        showProgressDialog();
-        JsonObject json = new JsonObject();
-        try {
-            json.addProperty("user", "" + user.getGuest().getGuestId());
-        } catch (Exception e) {
-
-
-        }
-
-
-        Call<TransactionPojo> call = getApiInterfaces.getTransactionList(json);
-        call.enqueue(new Callback<TransactionPojo>() {
-            @Override
-            public void onResponse(Call<TransactionPojo> call, Response<TransactionPojo> response) {
-                feedsList=   response.body().getTransaction();
-                if(feedsList != null)
-                {
-                    setAdapter();
-                }
-
-
-
-
-            }
-
-            @Override
-            public void onFailure(Call<TransactionPojo> call, Throwable t) {
                 hideProgressDialog();
             }
         });
 
     }
+
 
 
     private void setupNavigation() {

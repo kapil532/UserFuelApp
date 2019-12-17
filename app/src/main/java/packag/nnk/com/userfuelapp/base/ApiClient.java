@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient
 {
-    private  Retrofit retrofit;
+    public   Retrofit retrofit;
 
     public  Retrofit getApiClient(String BaseUrl)
     {

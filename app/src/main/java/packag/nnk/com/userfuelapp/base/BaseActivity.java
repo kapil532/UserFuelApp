@@ -27,6 +27,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import packag.nnk.com.userfuelapp.R;
 import packag.nnk.com.userfuelapp.about_us.SuccessScreen;
 import packag.nnk.com.userfuelapp.model.OtpValidateRes;
+import packag.nnk.com.userfuelapp.model.otp_val.User;
 
 public class BaseActivity extends AppCompatActivity
 {
@@ -34,12 +35,15 @@ public class BaseActivity extends AppCompatActivity
     private AlertDialog alert;
     private Dialog dialog;
     private AnimationDrawable animationDrawable;
-   public OtpValidateRes user;
+   public User user;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-         user =   AppSharedPreUtils.getInstance(getApplicationContext()).getDashBoardSectionData();
+         user =   AppSharedPreUtils.getInstance(getApplicationContext()).getUserOtpDetails();
 
     }
 

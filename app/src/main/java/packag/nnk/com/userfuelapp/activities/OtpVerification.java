@@ -20,6 +20,8 @@ import packag.nnk.com.userfuelapp.base.BaseActivity;
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
 import packag.nnk.com.userfuelapp.model.OtpRes;
 import packag.nnk.com.userfuelapp.model.OtpValidateRes;
+import packag.nnk.com.userfuelapp.model.otp_val.User;
+import packag.nnk.com.userfuelapp.model.otp_val.UserVal;
 import packag.nnk.com.userfuelapp.ui.OtpEdittextClass;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -86,25 +88,35 @@ public class OtpVerification extends BaseActivity {
         } catch (Exception e) {
 
         }
-        Call<OtpValidateRes> validation = getApiInterfaces.otpValidate(json);
-        validation.enqueue(new Callback<OtpValidateRes>() {
+        Call<UserVal> validation = getApiInterfaces.otpValidate(json);
+        validation.enqueue(new Callback<UserVal>() {
             @Override
-            public void onResponse(Call<OtpValidateRes> call, Response<OtpValidateRes> response) {
+            public void onResponse(Call<UserVal> call, Response<UserVal> response) {
                 hideProgressDialog();
-                Log.e("VALIDATION", "RESPONSE" + response.body());
-                AppSharedPreUtils.getInstance(getApplicationContext()).saveDashBoardSectionData(response.body());
+               // Log.e("VALIDATION", "RESPONSE" + response.body());
+                AppSharedPreUtils.getInstance(getApplicationContext()).saveUserOtpDetails(response.body().getUser());
 
-//                OtpValidateRes  user =   AppSharedPreUtils.getInstance(getApplicationContext()).getDashBoardSectionData();
-                Intent myAct = new Intent(getApplicationContext(), MainActivity.class);
-                myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(myAct);
-                finish();
+                User userVal = response.body().getUser();
+                if(userVal != null)
+                {
+
+
+                    Intent myAct = new Intent(getApplicationContext(), UserCreateActivity.class);
+                    myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    myAct.putExtra("number", "" + number);
+                    startActivity(myAct);
+                    finish();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"Please try again!",Toast.LENGTH_LONG).show();
+                }
 
 
             }
 
             @Override
-            public void onFailure(Call<OtpValidateRes> call, Throwable t) {
+            public void onFailure(Call<UserVal> call, Throwable t) {
                 hideProgressDialog();
             }
         });

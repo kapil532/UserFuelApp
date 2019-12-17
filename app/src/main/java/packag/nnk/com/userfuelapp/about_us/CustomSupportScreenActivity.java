@@ -242,7 +242,7 @@ public class CustomSupportScreenActivity extends BaseActivity {
         showProgressDialog();
         JsonObject slac = new JsonObject();
         try {
-            slac.addProperty("text",user.getGuest().getUsername()+"   "+message);
+            slac.addProperty("text",user.getUsername()+"   "+message);
         }
         catch (Exception e)
         {

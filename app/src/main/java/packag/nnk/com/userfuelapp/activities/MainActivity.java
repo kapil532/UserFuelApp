@@ -134,7 +134,7 @@ import java.util.List;
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
         View hView =  navigationView.getHeaderView(0);
         TextView nav_user = (TextView)hView.findViewById(R.id.appCompatTextView);
-        nav_user.setText("+91"+user.getGuest().getUsername());
+        nav_user.setText(user.getUsername());
 
 
         mApiService = new ApiUtils().getApiInterfacesForPetrolBunk();
@@ -504,7 +504,7 @@ import java.util.List;
 
   void getBalance()
   {
-      Call<Balance> balance = mApiService_.getBalance(user.getGuest().getGuestId());
+      Call<Balance> balance = mApiService_.getBalance(user.getUserId());
       balance.enqueue(new Callback<Balance>() {
           @Override
           public void onResponse(Call<Balance> call, Response<Balance> response) {
@@ -529,7 +529,7 @@ import java.util.List;
     {
         JsonObject json = new JsonObject();
         try {
-            json.addProperty("driverId",""+user.getGuest().getGuestId());
+            json.addProperty("driverId",""+user.getUserId());
             json.addProperty("amount",""+price);
             json.addProperty("petrolBunkId",""+petrolID);
         }

@@ -28,10 +28,10 @@ public class CommonClass
     //-------------------------//
 
     public static final String GET_OTP = "otp/create";
-    public static final String GET_TRANSACTION = "/transaction_list";
+//    public static final String GET_TRANSACTION = "/transaction_list";
     public static final String VALIDATE_OTP = "otp/validate";
     public static final String CHECK_BALANCE = "driver/checkBalance/";
-    public static final String AUTH_REGISTER = "auth/register/";
+    public static final String AUTH_REGISTER = "auth/register";
     public static final String RANGE_TRANSACTION = "driver/rangeTransaction/";
     public static final String DRIVER_PAYMENT = " driver/bunkPayment/";
 

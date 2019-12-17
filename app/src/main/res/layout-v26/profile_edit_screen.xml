@@ -21,19 +21,14 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <ImageView
+
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profileIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.096"
-        app:srcCompat="@drawable/iconsman"
-        android:contentDescription="@string/todo" />
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/iconsman"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"/>
 
     <EditText
         android:id="@+id/editText"

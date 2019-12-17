@@ -1,8 +1,10 @@
 package packag.nnk.com.userfuelapp.interfaces;
 
 import com.google.gson.JsonObject;
+import com.google.gson.annotations.SerializedName;
 
 import packag.nnk.com.userfuelapp.base.CommonClass;
+import packag.nnk.com.userfuelapp.model.ApiError;
 import packag.nnk.com.userfuelapp.model.Balance;
 import packag.nnk.com.userfuelapp.model.OtpRes;
 import packag.nnk.com.userfuelapp.model.OtpValidateRes;
@@ -11,6 +13,7 @@ import packag.nnk.com.userfuelapp.model.Post;
 import packag.nnk.com.userfuelapp.model.RangeTransaction;
 import packag.nnk.com.userfuelapp.model.SlackMessage;
 import packag.nnk.com.userfuelapp.model.UserDetails;
+import packag.nnk.com.userfuelapp.model.otp_val.UserVal;
 import packag.nnk.com.userfuelapp.petrol_bunk_details.GetList;
 import packag.nnk.com.userfuelapp.transaction.Transaction;
 import packag.nnk.com.userfuelapp.transaction.TransactionPojo;
@@ -48,19 +51,21 @@ public interface ApiInterface
     Call<Payment> doPayment(@Body JsonObject json);
 
 //    {"email": "sam@m.com", "password":"sam3", "role":"driver","driverAggregator":"ola","mobile":"9686391100"}
-    @POST(CommonClass.AUTH_REGISTER+"{userId}")
-    Call<UserDetails> createUser(@Body JsonObject json, @Path("userId") String userId);
+    @POST(CommonClass.AUTH_REGISTER)
+    Call<UserDetails> createUser(@Body JsonObject json);
 
 
 
     @POST(CommonClass.GET_OTP)
     Call<OtpRes> getOtp(@Body JsonObject json);
 
-    @POST(CommonClass.GET_TRANSACTION)
+    @POST(CommonClass.RANGE_TRANSACTION)
     Call<TransactionPojo> getTransactionList(@Body JsonObject json);
 
 
     @POST(CommonClass.VALIDATE_OTP)
-    Call<OtpValidateRes> otpValidate(@Body JsonObject json);
+    Call<UserVal> otpValidate(@Body JsonObject json);
+
+
 
 }

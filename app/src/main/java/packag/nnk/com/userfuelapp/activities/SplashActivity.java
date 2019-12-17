@@ -10,6 +10,7 @@ import packag.nnk.com.userfuelapp.base.AppSharedPreUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
 import packag.nnk.com.userfuelapp.base.CommonClass;
 import packag.nnk.com.userfuelapp.model.OtpValidateRes;
+import packag.nnk.com.userfuelapp.model.otp_val.User;
 
 import android.Manifest;
 import android.app.Dialog;
@@ -603,7 +604,9 @@ public class SplashActivity extends BaseActivity implements LocationListener {
     void openNextActivity()
     {
 
-        OtpValidateRes user =   AppSharedPreUtils.getInstance(getApplicationContext()).getDashBoardSectionData();
+        //User user =   AppSharedPreUtils.getInstance(getApplicationContext()).getUserDetails();
+
+        User user =   AppSharedPreUtils.getInstance(getApplicationContext()).getUserOtpDetails();
 
         if(user == null)
         {
@@ -615,7 +618,7 @@ public class SplashActivity extends BaseActivity implements LocationListener {
         }
         else
         {
-            Intent loginActivity = new Intent(SplashActivity.this, UserCreateActivity.class);
+            Intent loginActivity = new Intent(SplashActivity.this, MainActivity.class);
 //        loginActivity.putExtra("lat", "" + location.getLatitude());
 //        loginActivity.putExtra("lang", "" + location.getLongitude());
             startActivity(loginActivity);
