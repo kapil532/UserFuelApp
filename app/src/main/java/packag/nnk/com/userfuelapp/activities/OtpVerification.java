@@ -19,9 +19,8 @@ import packag.nnk.com.userfuelapp.base.AppSharedPreUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
 import packag.nnk.com.userfuelapp.model.OtpRes;
-import packag.nnk.com.userfuelapp.model.OtpValidateRes;
-import packag.nnk.com.userfuelapp.model.otp_val.User;
-import packag.nnk.com.userfuelapp.model.otp_val.UserVal;
+import packag.nnk.com.userfuelapp.model.User;
+import packag.nnk.com.userfuelapp.model.UserDetails;
 import packag.nnk.com.userfuelapp.ui.OtpEdittextClass;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -88,13 +87,13 @@ public class OtpVerification extends BaseActivity {
         } catch (Exception e) {
 
         }
-        Call<UserVal> validation = getApiInterfaces.otpValidate(json);
-        validation.enqueue(new Callback<UserVal>() {
+        Call<UserDetails> validation = getApiInterfaces.otpValidate(json);
+        validation.enqueue(new Callback<UserDetails>() {
             @Override
-            public void onResponse(Call<UserVal> call, Response<UserVal> response) {
+            public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
                 hideProgressDialog();
                // Log.e("VALIDATION", "RESPONSE" + response.body());
-                AppSharedPreUtils.getInstance(getApplicationContext()).saveUserOtpDetails(response.body().getUser());
+                AppSharedPreUtils.getInstance(getApplicationContext()).saveUserDetails(response.body().getUser());
 
                 User userVal = response.body().getUser();
                 if(userVal != null)
@@ -116,7 +115,7 @@ public class OtpVerification extends BaseActivity {
             }
 
             @Override
-            public void onFailure(Call<UserVal> call, Throwable t) {
+            public void onFailure(Call<UserDetails> call, Throwable t) {
                 hideProgressDialog();
             }
         });
@@ -125,7 +124,8 @@ public class OtpVerification extends BaseActivity {
     }
 
 
-    void getOtp(String mobile) {
+    void getOtp(String mobile)
+    {
         showProgressDialog();
         JsonObject json = new JsonObject();
         try {

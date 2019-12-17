@@ -11,6 +11,18 @@
          notification message. See README(https://goo.gl/6BKBk7) for more.
     -->
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -32,6 +44,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.MainActivity"></activity>
+        <activity android:name=".activities.DummyActivity"></activity>
         <activity android:name=".activities.UserCreateActivity"></activity>
         <activity android:name=".activities.SettingActivity"></activity>
         <activity android:name=".activities.OtpVerification"></activity>

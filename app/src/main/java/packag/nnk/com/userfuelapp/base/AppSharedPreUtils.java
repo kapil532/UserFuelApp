@@ -61,22 +61,6 @@ public class AppSharedPreUtils {
     }
 
 
-    public void saveUserOtpDetails(packag.nnk.com.userfuelapp.model.otp_val.User dataModel){
-        Gson gson = new Gson();
-        String json = gson.toJson(dataModel);
-        editor.putString("USERDETAIL", json);
-        editor.commit();
-    }
-
-    public packag.nnk.com.userfuelapp.model.otp_val.User getUserOtpDetails(){
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("USERDETAIL", "");
-        Log.e("SHARED", "OtpValidateRes Image -> " + json);
-
-
-        return gson.fromJson(json, packag.nnk.com.userfuelapp.model.otp_val.User.class);
-    }
-
 
     public void saveStringValues(String valuesKey, String values){
         editor.putString(valuesKey, values);

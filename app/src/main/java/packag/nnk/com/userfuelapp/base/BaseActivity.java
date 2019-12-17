@@ -27,7 +27,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import packag.nnk.com.userfuelapp.R;
 import packag.nnk.com.userfuelapp.about_us.SuccessScreen;
 import packag.nnk.com.userfuelapp.model.OtpValidateRes;
-import packag.nnk.com.userfuelapp.model.otp_val.User;
+import packag.nnk.com.userfuelapp.model.User;
 
 public class BaseActivity extends AppCompatActivity
 {
@@ -43,7 +43,7 @@ public class BaseActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-         user =   AppSharedPreUtils.getInstance(getApplicationContext()).getUserOtpDetails();
+         user =   AppSharedPreUtils.getInstance(getApplicationContext()).getUserDetails();
 
     }
 

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -46,6 +47,8 @@ public class UserCreateActivity extends BaseActivity {
     @BindView(R.id.editText2)
     EditText driverId;
 
+    @BindView(R.id.skip)
+    TextView skip;
 
     @BindView(R.id.spinner)
     Spinner spinner;
@@ -54,7 +57,8 @@ public class UserCreateActivity extends BaseActivity {
     Button submitDetails;
     private ApiInterface mApiService_;
 
-String number;
+    String number;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,12 +77,26 @@ String number;
 
                 validateFields();
 
-
             }
         });
-
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myAct = new Intent(getApplicationContext(), MainActivity.class);
+                myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(myAct);
+                finish();
+            }
+        });
+        setTheValues();
     }
 
+
+    void setTheValues() {
+//        user
+        name.setText(user.getUsername());
+        email_optional.setText(user.getEmail());
+    }
 
     void createUser(String pin, String driverAgra, String email) {
         showProgressDialog();
@@ -88,7 +106,7 @@ String number;
             json.addProperty("password", "" + pin);
             json.addProperty("role", "driver");
             json.addProperty("driverAggregator", "" + driverAgra);
-            json.addProperty("mobile", ""+number);
+            json.addProperty("mobile", "" + number);
         } catch (Exception e) {
 
         }
@@ -100,60 +118,57 @@ String number;
                 hideProgressDialog();
 
 
-            try {
-
-
-                AppSharedPreUtils
-                        .getInstance(getApplicationContext()).saveUserDetails(response.body().getUser());
-                User user = response.body().getUser();
-                if (user != null) {
-                    Intent myAct = new Intent(getApplicationContext(), MainActivity.class);
-                    myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(myAct);
-                    finish();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Please try again!", Toast.LENGTH_LONG).show();
-                }
-            }
-            catch (Exception e)
-            {
-
-                BufferedReader reader = null;
-                StringBuilder sb = new StringBuilder();
                 try {
-                    reader = new BufferedReader(new InputStreamReader(response.errorBody().byteStream()));
-                    String line;
+
+
+                    AppSharedPreUtils
+                            .getInstance(getApplicationContext()).saveUserDetails(response.body().getUser());
+                    User user = response.body().getUser();
+                    if (user != null) {
+                        Intent myAct = new Intent(getApplicationContext(), MainActivity.class);
+                        myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(myAct);
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Please try again!", Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+
+                    BufferedReader reader = null;
+                    StringBuilder sb = new StringBuilder();
                     try {
-                        while ((line = reader.readLine()) != null) {
-                            sb.append(line);
+                        reader = new BufferedReader(new InputStreamReader(response.errorBody().byteStream()));
+                        String line;
+                        try {
+                            while ((line = reader.readLine()) != null) {
+                                sb.append(line);
+                            }
+                        } catch (IOException ea) {
+                            e.printStackTrace();
                         }
-                    } catch (IOException ea) {
+                    } catch (Exception eaa) {
                         e.printStackTrace();
                     }
-                } catch (Exception eaa) {
-                    e.printStackTrace();
+                    String finallyError = sb.toString();
+                    showMessage(finallyError);
                 }
-                String finallyError = sb.toString();
-                showMessage(finallyError);
-            }
             }
 
             @Override
             public void onFailure(Call<UserDetails> call, Throwable t) {
                 hideProgressDialog();
-                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
 
     }
 
-    void showMessage(String message)
-    {
+    void showMessage(String message) {
         Gson gson = new GsonBuilder().create();
-        ApiError mverror = new    ApiError();
+        ApiError mverror = new ApiError();
         mverror = gson.fromJson(message, ApiError.class);
-        Toast.makeText(getApplicationContext(),mverror.getError().toString(),Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), mverror.getError().toString(), Toast.LENGTH_LONG).show();
     }
 
     void validateFields() {

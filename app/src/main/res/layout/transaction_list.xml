@@ -14,11 +14,20 @@
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
+    <fragment
+        android:id="@+id/fragment_wallet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/toolbar"
+        android:name="packag.nnk.com.userfuelapp.fragment_view.WalletFragment"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar" />
+        android:layout_below="@+id/fragment_wallet" />
 
     <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
         android:id="@+id/no_text"

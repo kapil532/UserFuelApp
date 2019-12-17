@@ -143,7 +143,7 @@ public class MainActivity extends BaseActivity implements
         mApiService_ = new ApiUtils().getApiInterfaces();
 
 
-        getBalance();
+        //getBalance();
         setupNavigation();
         getPetrolList();
         moneySelection();
@@ -347,7 +347,7 @@ public class MainActivity extends BaseActivity implements
 
             case R.id.second:
                 // navController.navigate(R.id.secondFragment);
-                Intent su = new Intent(this, SuccessScreen.class);
+                Intent su = new Intent(this, DummyActivity.class);
                 startActivity(su);
                 break;
 
@@ -540,21 +540,7 @@ public class MainActivity extends BaseActivity implements
 
     }
 
-    void getBalance() {
-        Call<Balance> balance = mApiService_.getBalance(user.getUserId());
-        balance.enqueue(new Callback<Balance>() {
-            @Override
-            public void onResponse(Call<Balance> call, Response<Balance> response) {
-                Log.e("USER BALANCE", "bal--> " + response.body());
-            }
 
-            @Override
-            public void onFailure(Call<Balance> call, Throwable t) {
-
-            }
-        });
-
-    }
 
 
     void setThePin() {
@@ -608,7 +594,6 @@ public class MainActivity extends BaseActivity implements
 
             }
         });
-
 
     }
 

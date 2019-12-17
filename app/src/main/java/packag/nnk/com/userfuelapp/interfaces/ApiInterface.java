@@ -13,7 +13,6 @@ import packag.nnk.com.userfuelapp.model.Post;
 import packag.nnk.com.userfuelapp.model.RangeTransaction;
 import packag.nnk.com.userfuelapp.model.SlackMessage;
 import packag.nnk.com.userfuelapp.model.UserDetails;
-import packag.nnk.com.userfuelapp.model.otp_val.UserVal;
 import packag.nnk.com.userfuelapp.petrol_bunk_details.GetList;
 import packag.nnk.com.userfuelapp.transaction.Transaction;
 import packag.nnk.com.userfuelapp.transaction.TransactionPojo;
@@ -66,7 +65,7 @@ public interface ApiInterface
 
 
     @POST(CommonClass.VALIDATE_OTP)
-    Call<UserVal> otpValidate(@Body JsonObject json);
+    Call<UserDetails> otpValidate(@Body JsonObject json);
 
 
 

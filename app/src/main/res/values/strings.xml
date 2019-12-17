@@ -6,6 +6,7 @@
     <string name="adresss">loading...</string>
     <string name="two_rs">\u20B9 200</string>
     <string name="two_rs1">\u20B9 500</string>
+    <string name="symbol_rs">\u20B9</string>
     <string name="two_rs2">\u20B9 1000</string>
     <string name="help_string">Got a problem? We\'ll solve it fast. Please let us know below.</string>
     <string name="fingerprint_title">goFuels Authentication</string>
@@ -21,5 +22,6 @@
     <string name="todow">TODO</string>
     <string name="email_id_optional">Email id(Optional)</string>
     <string name="set_pin">Set Pin</string>
+    <string name="Skip"><u>skip</u></string>
     <string name="or">------OR------</string>
 </resources>

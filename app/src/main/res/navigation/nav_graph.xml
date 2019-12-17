@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/firstFragment"
-        android:name="packag.nnk.com.userfuelapp.fragment_view.FirstFragment"
+        android:name="packag.nnk.com.userfuelapp.fragment_view.WalletFragment"
         android:label="First Fragment"
-        tools:layout="@layout/first_fragment" />
+        tools:layout="@layout/wallet_fragment" />
     <fragment
         android:id="@+id/secondFragment"
         android:name="packag.nnk.com.userfuelapp.fragment_view.SecondFragment"

@@ -10,7 +10,7 @@ import packag.nnk.com.userfuelapp.base.AppSharedPreUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
 import packag.nnk.com.userfuelapp.base.CommonClass;
 import packag.nnk.com.userfuelapp.model.OtpValidateRes;
-import packag.nnk.com.userfuelapp.model.otp_val.User;
+import packag.nnk.com.userfuelapp.model.User;
 
 import android.Manifest;
 import android.app.Dialog;
@@ -604,9 +604,7 @@ public class SplashActivity extends BaseActivity implements LocationListener {
     void openNextActivity()
     {
 
-        //User user =   AppSharedPreUtils.getInstance(getApplicationContext()).getUserDetails();
-
-        User user =   AppSharedPreUtils.getInstance(getApplicationContext()).getUserOtpDetails();
+        User user =   AppSharedPreUtils.getInstance(getApplicationContext()).getUserDetails();
 
         if(user == null)
         {
