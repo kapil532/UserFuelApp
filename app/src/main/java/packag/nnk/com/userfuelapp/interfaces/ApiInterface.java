@@ -34,7 +34,6 @@ public interface ApiInterface
     @GET("json?location=12.91304959,77.6421376&radius=1500&type=gas_station&key=AIzaSyBDCa_MSc0rmkV-IDo4CiOZRywm8jvG_2c")
     Call<GetList> getPetrolList();
 
-//    api/driver/checkBalance/625ea288-c31c-4e21-ab5d-6d88af2a01fe
 
     @GET(CommonClass.CHECK_BALANCE+"{userId}")
     Call<Balance> getBalance(@Path("userId") String userId);
@@ -42,15 +41,18 @@ public interface ApiInterface
     @GET(CommonClass.RANGE_TRANSACTION+"{userId}")
     Call<RangeTransaction> getRangeTransaction(@Path("userId") String userId);
 
-//    {
-//        "driverId":"625ea288-c31c-4e21-ab5d-6d88af2a01fe",
-//            "amount":"500",
-//            "petrolBunkId":"19f55b6f-dbf9-4c4e-91cb-db5e828d3669"
-//    }
-    @POST(CommonClass.DRIVER_PAYMENT)
-    Call<Payment> doPayment(@Body JsonObject json);
 
-//    {"email": "sam@m.com", "password":"sam3", "role":"driver","driverAggregator":"ola","mobile":"9686391100"}
+    @POST(CommonClass.UPDATE_PROFILE)
+    Call<String> updatePin(@Body JsonObject json);
+
+
+    @POST(CommonClass.VALIDATE_PIN)
+    Call<String> validatePin(@Body JsonObject json);
+
+
+    @POST(CommonClass.DRIVER_PAYMENT+"{userId}")
+    Call<Payment> doPayment(@Body JsonObject json,@Path("userId") String userId);
+
     @POST(CommonClass.AUTH_REGISTER)
     Call<UserDetails> createUser(@Body JsonObject json);
 

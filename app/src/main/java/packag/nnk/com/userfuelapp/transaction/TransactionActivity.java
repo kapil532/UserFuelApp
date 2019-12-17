@@ -86,6 +86,7 @@ public class TransactionActivity extends BaseActivity {
             @Override
             public void onFailure(Call<RangeTransaction> call, Throwable t) {
                 hideProgressDialog();
+                no_text.setVisibility(View.VISIBLE);
             }
         });
 

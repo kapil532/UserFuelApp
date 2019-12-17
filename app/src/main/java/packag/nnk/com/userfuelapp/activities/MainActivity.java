@@ -37,6 +37,8 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,6 +48,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -66,12 +69,11 @@ import com.squareup.picasso.Picasso;
 import java.util.Arrays;
 import java.util.List;
 
- public class MainActivity extends BaseActivity implements
-        NavigationView.OnNavigationItemSelectedListener ,
-         View.OnClickListener,
-         FingerprintDialogSecureCallback,
-         PasswordCallback
-{
+public class MainActivity extends BaseActivity implements
+        NavigationView.OnNavigationItemSelectedListener,
+        View.OnClickListener,
+        FingerprintDialogSecureCallback,
+        PasswordCallback {
     private String TAG = MainActivity.class.getSimpleName();
     private ApiInterface mApiService;
     private ApiInterface mApiService_;
@@ -119,9 +121,9 @@ import java.util.List;
     PlacesClient placesClient;
 
 
-    int paymentPrice=0;
-    String petrolBunkName="";
-    String petrolID="";
+    Double paymentPrice = 0.0;
+    String petrolBunkName = "";
+    String petrolID = "";
 
 
     @Override
@@ -132,8 +134,8 @@ import java.util.List;
         //Retrofit
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
-        View hView =  navigationView.getHeaderView(0);
-        TextView nav_user = (TextView)hView.findViewById(R.id.appCompatTextView);
+        View hView = navigationView.getHeaderView(0);
+        TextView nav_user = (TextView) hView.findViewById(R.id.appCompatTextView);
         nav_user.setText(user.getUsername());
 
 
@@ -141,8 +143,7 @@ import java.util.List;
         mApiService_ = new ApiUtils().getApiInterfaces();
 
 
-
-        //getBalance();
+        getBalance();
         setupNavigation();
         getPetrolList();
         moneySelection();
@@ -154,6 +155,37 @@ import java.util.List;
 
         placesClient = Places.createClient(this);
         initAutoCompleteTextView();
+
+        setThePin();
+
+
+        other_money.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+                makeUnselect();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable)
+            {
+                try {
+                    Log.e("EDIT","editable"+ Double.parseDouble(other_money.getText().toString()));
+                    paymentPrice = Double.parseDouble(other_money.getText().toString());
+                }
+                catch (Exception e)
+                {
+                    paymentPrice=0.0;
+                }
+
+            }
+        });
+
     }
 
     // Setting Up One Time Navigation
@@ -173,30 +205,28 @@ import java.util.List;
         navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
-        submit.setOnClickListener(new View.OnClickListener()
-        {
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                callDilouge();
-               /* if(paymentPrice == 0)
+               // callDilouge();
+              if(paymentPrice == 0)
                 {
-                  Toast.makeText(TransactionActivity.this,"Please select payment amount",Toast.LENGTH_LONG).show();
+                  Toast.makeText(MainActivity.this,"Please select payment amount",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
                     showAlertBox("Hi you want to pay "+paymentPrice+" Rs. " +"to "+petrolBunkName +" .");
                 }
-*/
+
             }
         });
 
     }
 
-    void callDilouge()
-    {
-        if(FingerprintDialog.isAvailable(this)) {
+    void callDilouge() {
+        if (FingerprintDialog.isAvailable(this)) {
             FingerprintDialog.initialize(this)
                     .title(R.string.fingerprint_title)
                     .message(R.string.fingerprint_message)
@@ -205,8 +235,7 @@ import java.util.List;
         }
     }
 
-    void showAlertBox(String message)
-    {
+    void showAlertBox(String message) {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
         builder1.setMessage(message);
         builder1.setCancelable(true);
@@ -216,7 +245,8 @@ import java.util.List;
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
-                        showSuccessScreen();
+                        doPayment("200",petrolID);
+
                     }
                 });
 
@@ -233,29 +263,26 @@ import java.util.List;
     }
 
 
-
-
-    void getPetrolList() {
+    void getPetrolList()
+    {
         Call<GetList> getList = mApiService.getPetrolList();
         getList.enqueue(new Callback<GetList>() {
             @Override
-            public void onResponse(Call<GetList> call, Response<GetList> response)
-            {
+            public void onResponse(Call<GetList> call, Response<GetList> response) {
                 try {
-                    Log.e("RESPONSE", "--" + response.body().getResults().get(0).getName());
-                    petrolBunkName =response.body().getResults().get(0).getName();
-                    petrolID =response.body().getResults().get(0).getId();
+                    //Log.e("RESPONSE", "--" + response.body().getResults().get(0).getName());
+                    petrolBunkName = response.body().getResults().get(0).getName();
+                    petrolID = response.body().getResults().get(0).getId();
                     setTheView(response.body().getResults().get(0).getIcon(), response.body().getResults().get(0).getName(), response.body().getResults().get(0).getVicinity());
 
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
 
                 }
             }
 
             @Override
-            public void onFailure(Call<GetList> call, Throwable t) {
+            public void onFailure(Call<GetList> call, Throwable t)
+            {
                 Log.e("RESPONSE", "--fail");
             }
         });
@@ -354,7 +381,7 @@ import java.util.List;
         text_1000.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                paymentPrice =1000;
+                paymentPrice = 1000.0;
                 text_1000.setBackground(getResources().getDrawable(
                         R.drawable.rect_select_sel_round));
 
@@ -369,7 +396,7 @@ import java.util.List;
         text_200.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                paymentPrice=200;
+                paymentPrice = 200.0;
                 text_200.setBackground(getResources().getDrawable(
                         R.drawable.rect_select_sel_round));
                 text_1000.setBackground(getResources().getDrawable(
@@ -383,7 +410,7 @@ import java.util.List;
         text_500.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                paymentPrice=500;
+                paymentPrice = 500.0;
                 text_500.setBackground(getResources().getDrawable(
                         R.drawable.rect_select_sel_round));
                 text_200.setBackground(getResources().getDrawable(
@@ -396,14 +423,23 @@ import java.util.List;
 
 
     }
+
+    void makeUnselect()
+    {
+        text_500.setBackground(getResources().getDrawable(
+                R.drawable.rect_select_round));
+        text_200.setBackground(getResources().getDrawable(
+                R.drawable.rect_select_round));
+        text_1000.setBackground(getResources().getDrawable(
+                R.drawable.rect_select_round));
+        setPadding();
+    }
 //
 
-    void setPadding()
-
-    {
-        text_1000.setPadding(0,13,0,13);
-        text_500.setPadding(0,13,0,13);
-        text_200.setPadding(0,13,0,13);
+    void setPadding() {
+        text_1000.setPadding(0, 13, 0, 13);
+        text_500.setPadding(0, 13, 0, 13);
+        text_200.setPadding(0, 13, 0, 13);
     }
 
     private void initAutoCompleteTextView() {
@@ -478,16 +514,18 @@ import java.util.List;
                 .callback(this)
                 .passwordType(PasswordDialog.PASSWORD_TYPE_TEXT)
                 .show();
-    }
-
-    @Override
-    public void onPasswordSucceeded() {
 
     }
 
     @Override
-    public boolean onPasswordCheck(String password) {
+    public void onPasswordSucceeded()
+    {
 
+    }
+
+    @Override
+    public boolean onPasswordCheck(String password)
+    {
         return password.equals("password");
 
     }
@@ -502,52 +540,103 @@ import java.util.List;
 
     }
 
-  void getBalance()
-  {
-      Call<Balance> balance = mApiService_.getBalance(user.getUserId());
-      balance.enqueue(new Callback<Balance>() {
-          @Override
-          public void onResponse(Call<Balance> call, Response<Balance> response) {
-             Log.e("USER BALANCE","bal--> "+response.body().getStatus());
-          }
+    void getBalance() {
+        Call<Balance> balance = mApiService_.getBalance(user.getUserId());
+        balance.enqueue(new Callback<Balance>() {
+            @Override
+            public void onResponse(Call<Balance> call, Response<Balance> response) {
+                Log.e("USER BALANCE", "bal--> " + response.body());
+            }
 
-          @Override
-          public void onFailure(Call<Balance> call, Throwable t) {
+            @Override
+            public void onFailure(Call<Balance> call, Throwable t) {
 
-          }
-      });
+            }
+        });
 
-  }
-
+    }
 
 
+    void setThePin() {
 
-
-
-
-    void doPayment(String price,String petrolID)
-    {
+//        {"userId":"3d5ba570-c512-42ad-98a0-901515181f51", "pin":"1234"}
         JsonObject json = new JsonObject();
         try {
-            json.addProperty("driverId",""+user.getUserId());
-            json.addProperty("amount",""+price);
-            json.addProperty("petrolBunkId",""+petrolID);
-        }
-        catch (Exception e)
-        {
+            json.addProperty("userId", "" + user.getUserId());
+            json.addProperty("pin", "1234");
+        } catch (Exception e) {
 
         }
 
-        Call<Payment> payment = mApiService_.doPayment(json);
-        payment.enqueue(new Callback<Payment>() {
+        Call<String> payment = mApiService_.updatePin(json);
+        payment.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<Payment> call, Response<Payment> response) {
+            public void onResponse(Call<String> call, Response<String> response) {
+                Toast.makeText(getApplicationContext(),"--"+response.body(),Toast.LENGTH_LONG).show();
+            }
 
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+
+    void validatePin()
+    {
+
+        JsonObject json = new JsonObject();
+        try {
+            json.addProperty("userId", "" + user.getUserId());
+            json.addProperty("pin", "1234");
+        } catch (Exception e) {
+
+        }
+
+        Call<String> payment = mApiService_.validatePin(json);
+        payment.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Toast.makeText(getApplicationContext(),"--"+response.body(),Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+
+    void doPayment(String price, String petrolID) {
+        JsonObject json = new JsonObject();
+        try {
+            json.addProperty("driverId", "" + user.getUserId());
+            json.addProperty("amount", "" + price);
+            json.addProperty("petrolBunkId", "" + petrolID);
+        } catch (Exception e) {
+
+        }
+
+        Call<Payment> payment = mApiService_.doPayment(json,user.getUserId());
+        payment.enqueue(new Callback<Payment>()
+        {
+            @Override
+            public void onResponse(Call<Payment> call, Response<Payment> response)
+            {
+
+                Log.e("MAINACTIVITY","VALUES"+response.body());
+                showSuccessScreen();
             }
 
             @Override
             public void onFailure(Call<Payment> call, Throwable t) {
-
+             Toast.makeText(getApplicationContext(),"Please try again!",Toast.LENGTH_LONG).show();
             }
         });
 
