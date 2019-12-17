@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 
 import butterknife.BindView;
@@ -21,6 +22,7 @@ import packag.nnk.com.userfuelapp.about_us.SuccessScreen;
 import packag.nnk.com.userfuelapp.base.ApiUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
 import packag.nnk.com.userfuelapp.base.CommonClass;
+import packag.nnk.com.userfuelapp.fragment_view.PinVerification;
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
 import packag.nnk.com.userfuelapp.model.Balance;
 import packag.nnk.com.userfuelapp.model.Payment;
@@ -177,6 +179,8 @@ public class MainActivity extends BaseActivity implements
                 try {
                     Log.e("EDIT","editable"+ Double.parseDouble(other_money.getText().toString()));
                     paymentPrice = Double.parseDouble(other_money.getText().toString());
+
+
                 }
                 catch (Exception e)
                 {
@@ -217,7 +221,10 @@ public class MainActivity extends BaseActivity implements
                 }
                 else
                 {
-                    showAlertBox("Hi you want to pay "+paymentPrice+" Rs. " +"to "+petrolBunkName +" .");
+//                    showAlertBox("Hi you want to pay "+paymentPrice+" Rs. " +"to "+petrolBunkName +" .");
+                    FragmentManager manager = getSupportFragmentManager();
+                    PinVerification alertDialogFragment = new PinVerification();
+                    alertDialogFragment.show(manager, "fragment_edit_name");
                 }
 
             }
@@ -571,31 +578,6 @@ public class MainActivity extends BaseActivity implements
     }
 
 
-    void validatePin()
-    {
-
-        JsonObject json = new JsonObject();
-        try {
-            json.addProperty("userId", "" + user.getUserId());
-            json.addProperty("pin", "1234");
-        } catch (Exception e) {
-
-        }
-
-        Call<String> payment = mApiService_.validatePin(json);
-        payment.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Toast.makeText(getApplicationContext(),"--"+response.body(),Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
-
-    }
 
 
     void doPayment(String price, String petrolID) {

@@ -46,7 +46,7 @@ public interface ApiInterface
 
 
     @POST(CommonClass.VALIDATE_PIN)
-    Call<String> validatePin(@Body JsonObject json);
+    Call<JsonObject> validatePin(@Body JsonObject json);
 
 
     @POST(CommonClass.DRIVER_PAYMENT+"{userId}")
