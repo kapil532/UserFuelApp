@@ -12,17 +12,18 @@ import androidx.fragment.app.Fragment;
 
 import packag.nnk.com.userfuelapp.R;
 
-public class ThirdFragment extends Fragment {
+public class PinVerification extends Fragment {
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Context context)
+    {
         super.onAttach(context);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.third_fragment, container, false);
+        return inflater.inflate(R.layout.pin_verification_fragment, container, false);
     }
 }
 

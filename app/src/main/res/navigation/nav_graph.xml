@@ -17,9 +17,9 @@
         tools:layout="@layout/second_fragment" />
     <fragment
         android:id="@+id/thirdFragment"
-        android:name="packag.nnk.com.userfuelapp.fragment_view.ThirdFragment"
+        android:name="packag.nnk.com.userfuelapp.fragment_view.PinVerification"
         android:label="Third Fragment"
-        tools:layout="@layout/third_fragment" />
+        tools:layout="@layout/pin_verification_fragment" />
     <fragment
         android:id="@+id/defaultFragment"
         android:name="packag.nnk.com.userfuelapp.fragment_view.DefaultFragment"

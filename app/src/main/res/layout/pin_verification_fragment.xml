@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+      <packag.nnk.com.userfuelapp.ui.OtpEdittextClass
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:maxLength="4"
+          android:ems="10"
+          android:layout_marginRight="15dp"
+          android:layout_marginLeft="15dp"
+          android:layout_centerHorizontal="true"
+          android:id="@+id/pin_verification"
+          />
+
+    <Button
+        android:id="@+id/verify_pin"
+        style="@style/wrap_button_style"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/pin_verification"
+        android:background="@drawable/light_button_background"
+        android:text="VERIFY" />
+
+</RelativeLayout>

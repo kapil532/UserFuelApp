@@ -84,6 +84,21 @@
 
     </style>
 
+    <style
+        name="wrap_button_style">
+
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">43dp</item>
+        <item name="android:paddingLeft">40dp</item>
+        <item name="android:paddingRight">40dp</item>
+        <item name="android:textColor">@color/white_color</item>
+        <item name="android:background">@drawable/button_shape</item>
+        <item name="android:layout_marginStart">@dimen/dimen_10dp</item>
+        <item name="android:layout_marginEnd">@dimen/dimen_10dp</item>
+        <item name="android:textSize">@dimen/all_buttons_text_size_16sp</item>
+
+    </style>
+
         <style name="TextLabel">
 
             <!-- Hint color and label color in FALSE state -->
