@@ -24,6 +24,7 @@ import packag.nnk.com.userfuelapp.base.BaseActivity;
 import packag.nnk.com.userfuelapp.base.CommonClass;
 import packag.nnk.com.userfuelapp.fragment_view.PinVerification;
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
+import packag.nnk.com.userfuelapp.interfaces.GetMessage;
 import packag.nnk.com.userfuelapp.model.Balance;
 import packag.nnk.com.userfuelapp.model.Payment;
 import packag.nnk.com.userfuelapp.model.RangeTransaction;
@@ -168,23 +169,19 @@ public class MainActivity extends BaseActivity implements
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
-            {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 makeUnselect();
             }
 
             @Override
-            public void afterTextChanged(Editable editable)
-            {
+            public void afterTextChanged(Editable editable) {
                 try {
-                    Log.e("EDIT","editable"+ Double.parseDouble(other_money.getText().toString()));
+                    Log.e("EDIT", "editable" + Double.parseDouble(other_money.getText().toString()));
                     paymentPrice = Double.parseDouble(other_money.getText().toString());
 
 
-                }
-                catch (Exception e)
-                {
-                    paymentPrice=0.0;
+                } catch (Exception e) {
+                    paymentPrice = 0.0;
                 }
 
             }
@@ -214,17 +211,22 @@ public class MainActivity extends BaseActivity implements
             public void onClick(View view) {
 
 
-               // callDilouge();
-              if(paymentPrice == 0)
-                {
-                  Toast.makeText(MainActivity.this,"Please select payment amount",Toast.LENGTH_LONG).show();
-                }
-                else
-                {
+                // callDilouge();
+                if (paymentPrice == 0) {
+                    Toast.makeText(MainActivity.this, "Please select payment amount", Toast.LENGTH_LONG).show();
+                } else {
 //                    showAlertBox("Hi you want to pay "+paymentPrice+" Rs. " +"to "+petrolBunkName +" .");
                     FragmentManager manager = getSupportFragmentManager();
                     PinVerification alertDialogFragment = new PinVerification();
+
                     alertDialogFragment.show(manager, "fragment_edit_name");
+                   PinVerification.getMessage =new GetMessage() {
+                       @Override
+                       public void getSuccessMessage(String s) {
+                           doPayment(""+paymentPrice,"19f55b6f-dbf9-4c4e-91cb-db5e828d3669");
+                       }
+                   };
+
                 }
 
             }
@@ -252,7 +254,7 @@ public class MainActivity extends BaseActivity implements
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
-                        doPayment("200",petrolID);
+                        doPayment("200", petrolID);
 
                     }
                 });
@@ -270,8 +272,7 @@ public class MainActivity extends BaseActivity implements
     }
 
 
-    void getPetrolList()
-    {
+    void getPetrolList() {
         Call<GetList> getList = mApiService.getPetrolList();
         getList.enqueue(new Callback<GetList>() {
             @Override
@@ -288,8 +289,7 @@ public class MainActivity extends BaseActivity implements
             }
 
             @Override
-            public void onFailure(Call<GetList> call, Throwable t)
-            {
+            public void onFailure(Call<GetList> call, Throwable t) {
                 Log.e("RESPONSE", "--fail");
             }
         });
@@ -431,8 +431,7 @@ public class MainActivity extends BaseActivity implements
 
     }
 
-    void makeUnselect()
-    {
+    void makeUnselect() {
         text_500.setBackground(getResources().getDrawable(
                 R.drawable.rect_select_round));
         text_200.setBackground(getResources().getDrawable(
@@ -525,14 +524,12 @@ public class MainActivity extends BaseActivity implements
     }
 
     @Override
-    public void onPasswordSucceeded()
-    {
+    public void onPasswordSucceeded() {
 
     }
 
     @Override
-    public boolean onPasswordCheck(String password)
-    {
+    public boolean onPasswordCheck(String password) {
         return password.equals("password");
 
     }
@@ -546,8 +543,6 @@ public class MainActivity extends BaseActivity implements
     public void onClick(View view) {
 
     }
-
-
 
 
     void setThePin() {
@@ -565,7 +560,7 @@ public class MainActivity extends BaseActivity implements
         payment.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Toast.makeText(getApplicationContext(),"--"+response.body(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "--" + response.body(), Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -578,8 +573,6 @@ public class MainActivity extends BaseActivity implements
     }
 
 
-
-
     void doPayment(String price, String petrolID) {
         JsonObject json = new JsonObject();
         try {
@@ -590,20 +583,35 @@ public class MainActivity extends BaseActivity implements
 
         }
 
-        Call<Payment> payment = mApiService_.doPayment(json,user.getUserId());
-        payment.enqueue(new Callback<Payment>()
-        {
+        Call<Payment> payment = mApiService_.doPayment(json, user.getUserId());
+        payment.enqueue(new Callback<Payment>() {
             @Override
-            public void onResponse(Call<Payment> call, Response<Payment> response)
-            {
+            public void onResponse(Call<Payment> call, Response<Payment> response) {
 
-                Log.e("MAINACTIVITY","VALUES"+response.body());
-                showSuccessScreen();
+
+               try {
+                   Log.e("MAINACTIVITY", "VALUES" + response.body());
+                   Payment payment=  response.body();
+                   if(payment.getStatus().equalsIgnoreCase("success"))
+                   {
+                       showSuccessScreen();
+                   }
+                   else
+                   {
+                       Toast.makeText(getApplicationContext(), "Please try again!", Toast.LENGTH_LONG).show();
+                   }
+               }
+               catch (Exception e)
+               {
+                   Toast.makeText(getApplicationContext(), "Please try again!", Toast.LENGTH_LONG).show();
+               }
+
+
             }
 
             @Override
             public void onFailure(Call<Payment> call, Throwable t) {
-             Toast.makeText(getApplicationContext(),"Please try again!",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Please try again!", Toast.LENGTH_LONG).show();
             }
         });
 

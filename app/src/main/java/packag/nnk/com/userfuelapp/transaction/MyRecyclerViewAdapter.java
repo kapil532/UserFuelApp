@@ -12,6 +12,10 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import packag.nnk.com.userfuelapp.R;
@@ -39,14 +43,14 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     }
 
     @Override
-    public void onBindViewHolder(CustomViewHolder customViewHolder, int i)
-    {
+    public void onBindViewHolder(CustomViewHolder customViewHolder, int i) {
         final RangeTransaction feedItem = feedItemList.get(i);
 
         customViewHolder.title.setText(Html.fromHtml(feedItem.getPetrolBunkDetail().getPetrolBunkName()));
-        customViewHolder.time.setText(Html.fromHtml(feedItem.getPaymentDate()));
+        customViewHolder.time.setText(Html.fromHtml(dateFromat(feedItem.getPaymentDate())));
         customViewHolder.address.setText(Html.fromHtml(feedItem.getPetrolBunkDetail().getPetrolBunkAddress()));
-        customViewHolder.rupees.setText(Html.fromHtml("Paid Amount : "+feedItem.getAmount()));
+        customViewHolder.rupees.setText(Html.fromHtml("Paid Amount : " + mContext.getResources().getString(R.string.symbol_rs)
+                + " " + feedItem.getAmount()));
 
     }
 
@@ -80,5 +84,18 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
+    }
+
+    String dateFromat(String date) {
+        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat output = new SimpleDateFormat("hh:mm dd/MM/yyyy");
+
+        Date d = null;
+        try {
+            d = input.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return output.format(d);
     }
 }

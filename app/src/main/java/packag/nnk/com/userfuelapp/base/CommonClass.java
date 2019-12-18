@@ -33,7 +33,7 @@ public class CommonClass
     public static final String AUTH_REGISTER = "auth/register";
     public static final String VALIDATE_PIN = "user/validatePin";
     public static final String UPDATE_PROFILE = "user/updateProfile";
-    public static final String RANGE_TRANSACTION = "driver/rangeTransaction/";
+    public static final String RANGE_TRANSACTION = "driver/transaction/";
     public static final String DRIVER_PAYMENT = " driver/bunkPayment/";
 
 //    driver/bunkPayment/625ea288-c31c-4e21-ab5d-6d88af2a01fe

@@ -9,6 +9,20 @@ public class PetrolBunkDetail {
     @SerializedName("petrolBunkName")
     @Expose
     private String petrolBunkName;
+
+
+    @SerializedName("id")
+    @Expose
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @SerializedName("petrolBunkAddress")
     @Expose
     private String petrolBunkAddress;

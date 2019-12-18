@@ -61,16 +61,16 @@ public class TransactionActivity extends BaseActivity {
     void getRangeTransaction()
     {
         showProgressDialog();
-        Call<RangeTransaction> balance = getApiInterfaces.getRangeTransaction(user.getUserId());
-        balance.enqueue(new Callback<RangeTransaction>() {
+        Call<List<RangeTransaction>> balance = getApiInterfaces.getRangeTransaction(user.getUserId());
+        balance.enqueue(new Callback<List<RangeTransaction>>() {
             @Override
-            public void onResponse(Call<RangeTransaction> call, Response<RangeTransaction> response) {
-                Log.e("USER BALANCE","bal--> "+response.body());
+            public void onResponse(Call<List<RangeTransaction>> call, Response<List<RangeTransaction>> response) {
+                Log.e("USER BALANCE","bal-ssssss-> "+response.body());
 
-                RangeTransaction tran = response.body();
+                List<RangeTransaction> tran = response.body();
                 if(tran != null)
                 {
-                    feedsList_tran = (List<RangeTransaction>) response.body();
+                    feedsList_tran =  tran;
                     setAdapter();
                     no_text.setVisibility(View.GONE);
                 }
@@ -84,9 +84,11 @@ public class TransactionActivity extends BaseActivity {
             }
 
             @Override
-            public void onFailure(Call<RangeTransaction> call, Throwable t) {
+            public void onFailure(Call<List<RangeTransaction>> call, Throwable t) {
                 hideProgressDialog();
+
                 no_text.setVisibility(View.VISIBLE);
+                no_text.setText(""+t.getMessage());
             }
         });
 

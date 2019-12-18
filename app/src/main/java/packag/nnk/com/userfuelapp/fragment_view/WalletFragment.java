@@ -22,16 +22,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class WalletFragment extends Fragment
-{
+public class WalletFragment extends Fragment {
     private ApiInterface mApiService_;
     User user;
     TextView wallettext;
+
     @Override
-    public void onAttach(Context context)
-    {
+    public void onAttach(Context context) {
         super.onAttach(context);
-        user =   AppSharedPreUtils.getInstance(getContext()).getUserDetails();
+        user = AppSharedPreUtils.getInstance(getContext()).getUserDetails();
         mApiService_ = new ApiUtils().getApiInterfaces();
         getBalance();
     }
@@ -52,13 +51,11 @@ public class WalletFragment extends Fragment
             @Override
             public void onResponse(Call<Balance> call, Response<Balance> response) {
                 Log.e("USER BALANCE", "bal--> " + response.body());
-              try {
-                  wallettext.setText("Wallet balance : "+response.body().getData() +" "+getResources().getString(R.string.symbol_rs));
-              }
-             catch (Exception e)
-             {
+                try {
+                    wallettext.setText("Wallet balance : " + getResources().getString(R.string.symbol_rs) + " " + response.body().getData());
+                } catch (Exception e) {
 
-             }
+                }
 
             }
 
@@ -69,7 +66,6 @@ public class WalletFragment extends Fragment
         });
 
     }
-
 
 
 }

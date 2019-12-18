@@ -3,6 +3,8 @@ package packag.nnk.com.userfuelapp.interfaces;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 import packag.nnk.com.userfuelapp.base.CommonClass;
 import packag.nnk.com.userfuelapp.model.ApiError;
 import packag.nnk.com.userfuelapp.model.Balance;
@@ -37,8 +39,8 @@ public interface ApiInterface
     @GET(CommonClass.CHECK_BALANCE+"{userId}")
     Call<Balance> getBalance(@Path("userId") String userId);
 
-    @GET(CommonClass.RANGE_TRANSACTION+"{userId}")
-    Call<RangeTransaction> getRangeTransaction(@Path("userId") String userId);
+    @GET(CommonClass.RANGE_TRANSACTION+"{userId}"+"?days=10")
+    Call<List<RangeTransaction>> getRangeTransaction(@Path("userId") String userId);
 
 
     @POST(CommonClass.UPDATE_PROFILE)
