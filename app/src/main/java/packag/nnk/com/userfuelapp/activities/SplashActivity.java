@@ -84,6 +84,7 @@ public class SplashActivity extends BaseActivity implements Listener {
         } else {
             Toast.makeText(this, "No google play services enabled", Toast.LENGTH_SHORT).show();
         }
+        easyWayLocation = new EasyWayLocation(this, false,this);
     }
 
     @Override
@@ -103,6 +104,7 @@ public class SplashActivity extends BaseActivity implements Listener {
         loc.setLatitude(location.getLatitude());
         loc.setLongitude(location.getLongitude());
         AppSharedPreUtils.getInstance(getApplicationContext()).saveLocation(loc);
+
         openNextActivity();
 //      /  getLocationDetail.getAddress(location.getLatitude(), location.getLongitude(), "xyz");
     }
