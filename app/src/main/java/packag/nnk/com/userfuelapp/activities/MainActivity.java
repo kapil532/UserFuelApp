@@ -594,7 +594,12 @@ public class MainActivity extends BaseActivity implements
                    Payment payment=  response.body();
                    if(payment.getStatus().equalsIgnoreCase("success"))
                    {
-                       showSuccessScreen();
+//                       showSuccessScreen();
+                       Intent success = new Intent(getApplicationContext(), SuccessScreen.class);
+                       success.putExtra("petr_name",""+petrolBunkName);
+                       success.putExtra("petr_price",""+paymentPrice);
+                       startActivity(success);
+
                    }
                    else
                    {

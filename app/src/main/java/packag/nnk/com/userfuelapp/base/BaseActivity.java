@@ -296,6 +296,7 @@ public class BaseActivity extends AppCompatActivity
     protected void showSuccessScreen()
     {
         Intent success = new Intent(this, SuccessScreen.class);
+
         startActivity(success);
     }
 
