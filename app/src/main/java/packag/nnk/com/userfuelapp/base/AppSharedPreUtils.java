@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import packag.nnk.com.userfuelapp.model.Location;
 import packag.nnk.com.userfuelapp.model.OtpValidateRes;
 import packag.nnk.com.userfuelapp.model.User;
 
@@ -42,6 +43,24 @@ public class AppSharedPreUtils {
 
         return gson.fromJson(json, OtpValidateRes.class);
     }
+
+
+    public void saveLocation(Location dataModel){
+        Gson gson = new Gson();
+        String json = gson.toJson(dataModel);
+        editor.putString("OtpValidateRes", json);
+        editor.commit();
+    }
+
+    public Location getLocation(){
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("OtpValidateRes", "");
+        Log.e("SHARED", "OtpValidateRes Image -> " + json);
+
+
+        return gson.fromJson(json, Location.class);
+    }
+
 
 
     public void saveUserDetails(User dataModel){
