@@ -25,15 +25,24 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiInterface
 {
 
 
+    //Call @GET("json?location=12.91304959,77.6421376&radius=1500&type=gas_station&key=AIzaSyBDCa_MSc0rmkV-IDo4CiOZRywm8jvG_2c")
+
+//    @GET("json?location=12.91304959,77.6421376&radius=1500&type=gas_station&key=AIzaSyBDCa_MSc0rmkV-IDo4CiOZRywm8jvG_2c")
+//    Call<GetList> getPetrolList();
 
 
-    @GET("json?location=12.91304959,77.6421376&radius=1500&type=gas_station&key=AIzaSyBDCa_MSc0rmkV-IDo4CiOZRywm8jvG_2c")
-    Call<GetList> getPetrolList();
+    @GET("json")
+    Call<GetList> getPetrolList( @Query(value = "location" , encoded = true) String latLng,
+                                 @Query(value = "radius") String radius,
+                                 @Query(value = "type") String type,
+                                 @Query(value = "key") String key
+    );
 
 
     @GET(CommonClass.CHECK_BALANCE+"{userId}")

@@ -20,6 +20,7 @@ import packag.nnk.com.userfuelapp.about_us.AboutUsScreen;
 import packag.nnk.com.userfuelapp.about_us.CustomSupportScreenActivity;
 import packag.nnk.com.userfuelapp.about_us.SuccessScreen;
 import packag.nnk.com.userfuelapp.base.ApiUtils;
+import packag.nnk.com.userfuelapp.base.AppSharedPreUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
 import packag.nnk.com.userfuelapp.base.CommonClass;
 import packag.nnk.com.userfuelapp.base.ErrorUtils;
@@ -27,6 +28,7 @@ import packag.nnk.com.userfuelapp.fragment_view.PinVerification;
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
 import packag.nnk.com.userfuelapp.interfaces.GetMessage;
 import packag.nnk.com.userfuelapp.model.Balance;
+import packag.nnk.com.userfuelapp.model.Location;
 import packag.nnk.com.userfuelapp.model.Payment;
 import packag.nnk.com.userfuelapp.model.RangeTransaction;
 import packag.nnk.com.userfuelapp.model.UserDetails;
@@ -133,6 +135,7 @@ public class MainActivity extends BaseActivity implements
     String petrolBunkName = "";
     String petrolID = "";
 
+ Location loc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,7 +152,7 @@ public class MainActivity extends BaseActivity implements
 
         mApiService = new ApiUtils().getApiInterfacesForPetrolBunk();
         mApiService_ = new ApiUtils().getApiInterfaces();
-
+        loc=   AppSharedPreUtils.getInstance(getApplicationContext()).getLocation();
 
         //getBalance();
         setupNavigation();
@@ -276,9 +279,12 @@ public class MainActivity extends BaseActivity implements
         alert11.show();
     }
 
-
     void getPetrolList() {
-        Call<GetList> getList = mApiService.getPetrolList();
+        Call<GetList> getList = mApiService.getPetrolList(loc.getLatitude()+","+loc.getLongitude(),
+                "1500",
+                "gas_station",
+                "AIzaSyBDCa_MSc0rmkV-IDo4CiOZRywm8jvG_2c"
+        );
         getList.enqueue(new Callback<GetList>() {
             @Override
             public void onResponse(Call<GetList> call, Response<GetList> response) {
