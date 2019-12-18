@@ -12,6 +12,8 @@
     <string name="fingerprint_title">goFuels Authentication</string>
     <string name="fingerprint_message">Confirm fingerprint to continue</string>
 
+    <string name="booking_notificatoi">We\'ll notify you when you get payment credited or debited. </string>
+    <string name="promo_notificatoi">We\'ll let you know if petrol price down or increase.</string>
     <string name="password_title">Password</string>
     <string name="password_message">You need to enter your password because a new fingerprint was added</string>
     <string name="s">Switch</string>

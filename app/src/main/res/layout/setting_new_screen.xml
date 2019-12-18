@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top"
+        android:orientation="vertical">
+
+
+        <!-- <include
+             android:id="@+id/edit_profile"
+             layout="@layout/edit_account" />-->
+    </LinearLayout>
+    <!--<RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+        android:background="@color/app_bar_color"
+        android:orientation="horizontal"
+        android:translationZ="4dp"
+        >
+
+        <RelativeLayout
+            android:id="@+id/back_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_selector_back_button" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="16dp"
+                android:src="@drawable/ic_arrow_back_white_24px" />
+        </RelativeLayout>
+
+        <com.abhs.orion.fonts.LightTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/app_bar_title_left_padding"
+            android:layout_centerVertical="true"
+            android:text="Settings"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/app_bar_title_size"
+            android:textStyle="normal" />
+
+        <com.abhs.orion.fonts.NormalTextView
+            android:id="@+id/btnSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:text="DONE"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:paddingBottom="@dimen/app_bar_title_bottom_padding"
+            android:visibility="invisible"
+            android:textStyle="normal" />
+    </RelativeLayout>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/profile"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+            <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginLeft="16dp"
+                android:text="Receive Notifications"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/Switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textOff=""
+                android:text=""
+                android:layout_marginRight="20dp"
+                android:background="@android:color/transparent"
+                android:textColor="@color/colorPrimary"
+                android:textOn=""
+                android:textStyle="bold"
+                android:button="@null"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:weightSum="20">
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:orientation="vertical"
+                android:layout_weight="19">
+
+                <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+                    android:id="@+id/text_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Payment Notifications"
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="18sp" />
+
+                <packag.nnk.com.userfuelapp.ui.CustomTextView
+                    android:id="@+id/text_two"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/booking_notificatoi"
+                    android:textSize="12sp"
+                    android:textColor="@color/quantum_black_100"/>
+
+
+            </LinearLayout>
+
+
+
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:buttonTint="@color/quantum_black_100"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:weightSum="20">
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_weight="19"
+                android:orientation="vertical">
+
+                <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+                    android:id="@+id/text_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Promos and Discounts"
+                    android:textSize="18sp"
+                    android:textColor="@color/quantum_black_100"/>
+                <packag.nnk.com.userfuelapp.ui.CustomTextView
+                    android:id="@+id/text_four"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/promo_notificatoi"
+                    android:textSize="12sp"
+                    android:textColor="@color/quantum_black_100"/>
+
+
+            </LinearLayout>
+
+
+
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:layout_marginLeft="12dp"
+                android:buttonTint="@color/quantum_black_100"
+                android:layout_weight="2"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

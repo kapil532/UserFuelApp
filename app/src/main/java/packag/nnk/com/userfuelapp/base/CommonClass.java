@@ -1,6 +1,7 @@
 package packag.nnk.com.userfuelapp.base;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,6 +61,31 @@ public class CommonClass
             return null;
         }
         return json;
+    }
+
+
+
+    public static void saveGenericData(String data, String key, String prefrenceName, Context ctx) {
+        SharedPreferences pref = ctx.getSharedPreferences(prefrenceName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(key, data);
+        editor.commit();
+    }
+
+
+    public static String returnGenericData(String key, String prefrenceName, Context ctx) {
+        SharedPreferences pref = ctx.getSharedPreferences(prefrenceName, Context.MODE_PRIVATE);
+        return pref.getString(key, "");
+    }
+
+
+    public static void clearData(String key, String prefrenceName, Context ctx) {
+        SharedPreferences pref = ctx.getSharedPreferences(prefrenceName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.remove(key);
+        editor.clear();
+        editor.commit();
+
     }
 
 }
