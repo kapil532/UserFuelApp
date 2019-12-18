@@ -1,65 +1,55 @@
 package packag.nnk.com.userfuelapp.base;
 
+import android.util.Log;
+
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
 import packag.nnk.com.userfuelapp.model.ApiError;
+import packag.nnk.com.userfuelapp.model.FailedStatus;
+import packag.nnk.com.userfuelapp.model.OtpValidateRes;
 import retrofit2.Converter;
 import retrofit2.Response;
 
 public class ErrorUtils {
 
-   /*public static ApiError parseError(Response<?> response) {
-        Converter<ResponseBody, ApiError> converter =
-                ApiClient.class
-                        .responseBodyConverter(ApiError.class, new Annotation[0]);
+    //TO handle error
+    // if json like this {"status":"failed","message":"Not having sufficient balance"}
 
-        ApiError error;
+    public static FailedStatus getStatus(final Response<?> response)
+    {
 
+
+        BufferedReader reader = null;
+        StringBuilder sb = new StringBuilder();
         try {
-            error = converter.convert(response.errorBody());
-        } catch (IOException e) {
-            return new ApiError();
-        }
-
-        return error;
-    }*/
-
-
-    public static ApiError parseError(final Response<?> response) {
-        JSONObject bodyObj = null;
-        boolean success;
-        ArrayList messages = new ArrayList<>();
-
-        try {
-            String errorBody = response.errorBody().string();
-
-            if (errorBody != null) {
-                bodyObj = new JSONObject(errorBody);
-
-                success = bodyObj.getBoolean("success");
-                JSONArray errors = bodyObj.getJSONArray("errors");
-
-                for (int i = 0; i < errors.length(); i++) {
-                    messages.add(errors.get(i));
+            reader = new BufferedReader(new InputStreamReader(response.errorBody().byteStream()));
+            String line;
+            try {
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
                 }
-            } else {
-                success = false;
-                messages.add("Unable to parse error");
+            } catch (IOException ea) {
+                ea.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-
-            success = false;
-            messages.add("Unable to parse error");
+        } catch (Exception eaa) {
+            eaa.printStackTrace();
         }
+        String finallyError = sb.toString();
 
-        return new ApiError();
+        Gson gson = new Gson();
+
+        return gson.fromJson(finallyError, FailedStatus.class);
+
     }
 }

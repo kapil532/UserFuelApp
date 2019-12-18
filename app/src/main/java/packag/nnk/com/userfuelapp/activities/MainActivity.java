@@ -22,6 +22,7 @@ import packag.nnk.com.userfuelapp.about_us.SuccessScreen;
 import packag.nnk.com.userfuelapp.base.ApiUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
 import packag.nnk.com.userfuelapp.base.CommonClass;
+import packag.nnk.com.userfuelapp.base.ErrorUtils;
 import packag.nnk.com.userfuelapp.fragment_view.PinVerification;
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
 import packag.nnk.com.userfuelapp.interfaces.GetMessage;
@@ -69,6 +70,9 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 
@@ -608,7 +612,7 @@ public class MainActivity extends BaseActivity implements
                }
                catch (Exception e)
                {
-                   Toast.makeText(getApplicationContext(), "Please try again!", Toast.LENGTH_LONG).show();
+                   Toast.makeText(getApplicationContext(),  ErrorUtils.getStatus(response).getMessage(), Toast.LENGTH_LONG).show();
                }
 
 
