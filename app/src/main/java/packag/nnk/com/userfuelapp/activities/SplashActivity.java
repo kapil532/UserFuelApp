@@ -1,34 +1,20 @@
 package packag.nnk.com.userfuelapp.activities;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import packag.nnk.com.userfuelapp.R;
 import packag.nnk.com.userfuelapp.base.AppSharedPreUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
-import packag.nnk.com.userfuelapp.base.CommonClass;
-import packag.nnk.com.userfuelapp.model.OtpValidateRes;
 import packag.nnk.com.userfuelapp.model.User;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -36,24 +22,8 @@ import com.example.easywaylocation.EasyWayLocation;
 import com.example.easywaylocation.Listener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResponse;
-import com.google.android.gms.location.LocationSettingsStates;
-import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-
-import java.util.List;
-import java.util.Locale;
 
 public class SplashActivity extends BaseActivity implements Listener {
     private String TAG = SplashActivity.class.getSimpleName();
@@ -84,7 +54,8 @@ public class SplashActivity extends BaseActivity implements Listener {
         } else {
             Toast.makeText(this, "No google play services enabled", Toast.LENGTH_SHORT).show();
         }
-        easyWayLocation = new EasyWayLocation(this, false,this);
+        easyWayLocation = new EasyWayLocation(this, false, this);
+        easyWayLocation.startLocation();
     }
 
     @Override
@@ -103,8 +74,8 @@ public class SplashActivity extends BaseActivity implements Listener {
         packag.nnk.com.userfuelapp.model.Location loc = new packag.nnk.com.userfuelapp.model.Location();
         loc.setLatitude(location.getLatitude());
         loc.setLongitude(location.getLongitude());
-        AppSharedPreUtils.getInstance(getApplicationContext()).saveLocation(loc);
 
+        AppSharedPreUtils.getInstance(getApplicationContext()).saveLocation(loc);
         openNextActivity();
 //      /  getLocationDetail.getAddress(location.getLatitude(), location.getLongitude(), "xyz");
     }
@@ -128,13 +99,13 @@ public class SplashActivity extends BaseActivity implements Listener {
     @Override
     protected void onResume() {
         super.onResume();
-        easyWayLocation.startLocation();
+        //  easyWayLocation.startLocation();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        easyWayLocation.endUpdates();
+        // easyWayLocation.endUpdates();
 
     }
 
@@ -201,13 +172,18 @@ public class SplashActivity extends BaseActivity implements Listener {
     @Override
     protected void onStop() {
         super.onStop();
-        easyWayLocation.endUpdates();
+//        easyWayLocation.endUpdates();
 
 //        yourCountDownTimer.cancel();
     }
 
     void openNextActivity() {
-        easyWayLocation.endUpdates();
+
+        if (easyWayLocation.hasLocationEnabled()) {
+            easyWayLocation.endUpdates();
+            easyWayLocation = null;
+        }
+
         User user = AppSharedPreUtils.getInstance(getApplicationContext()).getUserDetails();
         if (user == null) {
             Intent loginActivity = new Intent(SplashActivity.this, LoginActivity.class);
