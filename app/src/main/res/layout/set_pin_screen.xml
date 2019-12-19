@@ -134,6 +134,5 @@
             android:background="@drawable/light_button_background"
             android:text="SET PIN" />
 
-
     </RelativeLayout>
 </ScrollView>
