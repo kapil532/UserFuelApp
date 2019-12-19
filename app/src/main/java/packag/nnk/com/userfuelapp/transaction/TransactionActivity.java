@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.victor.loading.book.BookLoading;
 
 import java.util.List;
 
@@ -36,6 +37,11 @@ public class TransactionActivity extends BaseActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
+
+    @BindView(R.id.bookloading)
+    BookLoading bookLoading;
+
+
     @BindView(R.id.no_text)
     TextView no_text;
 
@@ -60,7 +66,7 @@ public class TransactionActivity extends BaseActivity {
 
     void getRangeTransaction()
     {
-        showProgressDialog();
+       bookLoading.start();
         Call<List<RangeTransaction>> balance = getApiInterfaces.getRangeTransaction(user.getUserId());
         balance.enqueue(new Callback<List<RangeTransaction>>() {
             @Override
@@ -78,14 +84,18 @@ public class TransactionActivity extends BaseActivity {
                 {
                    no_text.setVisibility(View.VISIBLE);
                 }
-                hideProgressDialog();
+                if (bookLoading.isStart()) {
+                    bookLoading.stop();
+                }
 
 
             }
 
             @Override
             public void onFailure(Call<List<RangeTransaction>> call, Throwable t) {
-                hideProgressDialog();
+                if (bookLoading.isStart()) {
+                    bookLoading.stop();
+                }
 
                 no_text.setVisibility(View.VISIBLE);
                 no_text.setText(""+t.getMessage());
@@ -94,7 +104,13 @@ public class TransactionActivity extends BaseActivity {
 
     }
 
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (bookLoading.isStart()) {
+            bookLoading.stop();
+        }
+    }
 
     private void setupNavigation() {
 

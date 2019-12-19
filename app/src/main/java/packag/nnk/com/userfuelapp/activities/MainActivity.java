@@ -167,7 +167,7 @@ public class MainActivity extends BaseActivity implements
         placesClient = Places.createClient(this);
         initAutoCompleteTextView();
 
-        setThePin();
+
 
 
         other_money.addTextChangedListener(new TextWatcher() {
@@ -359,7 +359,7 @@ public class MainActivity extends BaseActivity implements
             case R.id.first:
                 // navController.navigate(R.id.firstFragment);
 
-                Intent about = new Intent(this, AboutUsScreen.class);
+                Intent about = new Intent(this, SetPinActivity.class);
                 startActivity(about);
                 break;
 
@@ -556,32 +556,7 @@ public class MainActivity extends BaseActivity implements
     }
 
 
-    void setThePin() {
 
-//        {"userId":"3d5ba570-c512-42ad-98a0-901515181f51", "pin":"1234"}
-        JsonObject json = new JsonObject();
-        try {
-            json.addProperty("userId", "" + user.getUserId());
-            json.addProperty("pin", "1234");
-        } catch (Exception e) {
-
-        }
-
-        Call<String> payment = mApiService_.updatePin(json);
-        payment.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Toast.makeText(getApplicationContext(), "--" + response.body(), Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
-
-
-    }
 
 
     void doPayment(String price, String petrolID) {

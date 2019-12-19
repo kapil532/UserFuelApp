@@ -42,7 +42,7 @@ dependencies {
     implementation "com.karumi:dexter:5.0.0"
     implementation 'com.github.yalantis:ucrop:2.2.2'
     //SMS Retreival
-
+    implementation 'com.victor:lib:1.0.4'
     implementation 'com.google.android.gms:play-services-base:17.1.0'
     implementation 'com.google.android.gms:play-services-identity:17.0.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
