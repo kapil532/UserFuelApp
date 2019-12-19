@@ -52,6 +52,7 @@
         <activity android:name=".about_us.SuccessScreen"></activity>
         <activity android:name=".about_us.AboutUsScreen"></activity>
         <activity android:name=".about_us.CustomSupportScreenActivity"></activity>
+        <activity android:name=".base.ImagePickerActivity"></activity>
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.SplashActivity">
             <intent-filter>
@@ -68,6 +69,25 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- cache directory file provider paths -->
+       <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider" />
+        </provider>
+
+
     </application>
 
 </manifest>

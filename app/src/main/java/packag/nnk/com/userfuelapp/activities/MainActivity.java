@@ -365,7 +365,7 @@ public class MainActivity extends BaseActivity implements
 
             case R.id.second:
                 // navController.navigate(R.id.secondFragment);
-                Intent su = new Intent(this, DummyActivity.class);
+                Intent su = new Intent(this, UserCreateActivity.class);
                 startActivity(su);
                 break;
 

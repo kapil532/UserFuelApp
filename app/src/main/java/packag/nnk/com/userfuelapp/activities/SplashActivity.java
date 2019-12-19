@@ -116,6 +116,7 @@ public class SplashActivity extends BaseActivity implements Listener {
 
 //            createLocationRequest();
             easyWayLocation = new EasyWayLocation(this, false, this);
+           // easyWayLocation.startLocation();
 
         } else {
             ActivityCompat.requestPermissions(this, myPer, PER_REQ_CODE);
@@ -162,6 +163,7 @@ public class SplashActivity extends BaseActivity implements Listener {
                     }
                     Log.d(TAG, "onRequestPermissionsResult: permission granted");
                     easyWayLocation = new EasyWayLocation(this, false, this);
+//                    easyWayLocation.startLocation();
                     // createLocationRequest();
                 }
             }

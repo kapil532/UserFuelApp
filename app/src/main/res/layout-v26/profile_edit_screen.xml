@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="@dimen/dimen_40dp"
     android:gravity="center"
+    android:fillViewport="true"
     android:orientation="vertical">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,58 +20,60 @@
         android:orientation="vertical">
 
 
+        <RelativeLayout
+            android:layout_width="90dp"
+            android:layout_height="wrap_content">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileIcon"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:src="@drawable/iconsman"
             app:civ_border_color="#FF000000"
             app:civ_border_width="2dp" />
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/icon_plus"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignBottom="@id/profileIcon"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_plus"
+                app:civ_border_color="#FF000000"
+                 />
+
+        </RelativeLayout>
+
         <EditText
             android:id="@+id/editText"
             style="@style/Widget.AppCompat.EditText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:autofillHints=""
             android:ems="10"
             android:hint="Name"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileIcon"
-            app:layout_constraintVertical_bias="0.054" />
+            />
 
         <EditText
             android:id="@+id/email_optional"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/email_id_optional"
             android:inputType="textEmailAddress"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText"
-            app:layout_constraintVertical_bias="0.054" />
+            />
 
         <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
             android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:gravity="center"
             android:text="*Please  remember pin after set, because on every transaction you required this pin."
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/editText3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/email_optional" />
+             />
 
         <packag.nnk.com.userfuelapp.ui.OtpEdittextClass
             android:id="@+id/editText3"
@@ -91,33 +93,21 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimen_10dp"
             android:text="*Please chhose you taxi service!"
             android:textSize="14sp"
 
-
             />
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="202dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/rect_select_round"
-            android:entries="@array/aggregator"
-            android:spinnerMode="dropdown"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText3"
-            app:layout_constraintVertical_bias="0.074" />
-
+        <com.isapanah.awesomespinner.AwesomeSpinner
+            android:id="@+id/my_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:spinnerDirection="ltr"
+            android:layout_marginTop="10dp"
+            app:spinnerHint="Select a category" />
 
         <TextView
             android:id="@+id/or_text"
@@ -138,17 +128,13 @@
 
         <EditText
             android:id="@+id/editText2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
             android:hint="Your Driver ID"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/or_text"
-            app:layout_constraintVertical_bias="0.189" />
+            />
 
         <Button
             android:id="@+id/submitDetails"
