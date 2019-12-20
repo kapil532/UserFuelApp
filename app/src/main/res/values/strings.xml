@@ -4,10 +4,12 @@
     <string name="go_fuels">goFuels</string>
     <string name="indian">Loading...</string>
     <string name="adresss">loading...</string>
-    <string name="two_rs">\u20B9 200</string>
-    <string name="two_rs1">\u20B9 500</string>
+    <string name="two_rs">\u20B9 100</string>
+    <string name="two_rs1">\u20B9 200</string>
     <string name="symbol_rs">\u20B9</string>
-    <string name="two_rs2">\u20B9 1000</string>
+    <string name="two_rs2">\u20B9 500</string>
+    <string name="two_rs3">\u20B9 800</string>
+    <string name="two_rs4">\u20B9 1000</string>
     <string name="help_string">Got a problem? We\'ll solve it fast. Please let us know below.</string>
     <string name="fingerprint_title">goFuels Authentication</string>
     <string name="fingerprint_message">Confirm fingerprint to continue</string>

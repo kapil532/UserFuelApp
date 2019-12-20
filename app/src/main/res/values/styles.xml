@@ -85,6 +85,21 @@
     </style>
 
     <style
+        name="history_button">
+
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">43dp</item>
+        <item name="android:textColor">@color/quantum_black_100</item>
+        <item name="android:background">@drawable/button_shape_gray</item>
+        <item name="android:layout_marginStart">@dimen/dimen_10dp</item>
+        <item name="android:layout_marginEnd">@dimen/dimen_10dp</item>
+        <item name="android:textSize">16sp</item>
+
+    </style>
+
+
+
+    <style
         name="wrap_button_style">
 
         <item name="android:layout_width">wrap_content</item>

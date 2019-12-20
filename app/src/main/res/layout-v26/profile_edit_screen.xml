@@ -72,6 +72,7 @@
             android:layout_marginTop="10dp"
             android:text="*Please  remember pin after set, because on every transaction you required this pin."
             android:textSize="14sp"
+            android:visibility="gone"
              />
 
         <packag.nnk.com.userfuelapp.ui.OtpEdittextClass
@@ -81,6 +82,7 @@
             android:layout_marginTop="10dp"
             android:autofillHints=""
             android:ems="10"
+            android:visibility="gone"
             android:hint="@string/set_pin"
             android:inputType="textPersonName|numberDecimal"
             android:maxLength="4"

@@ -119,6 +119,13 @@ public class MainActivity extends BaseActivity implements
     @BindView(R.id.text_1000)
     TextView text_1000;
 
+    @BindView(R.id.text_800)
+    TextView text_800;
+
+    @BindView(R.id.text_100)
+    TextView text_100;
+
+
     @BindView(R.id.other_money)
     EditText other_money;
 
@@ -376,6 +383,7 @@ public class MainActivity extends BaseActivity implements
                 //navController.navigate(R.id.thirdFragment);
                 break;
 
+
             case R.id.fourt:
                 //navController.navigate(R.id.thirdFragment);
 
@@ -407,6 +415,10 @@ public class MainActivity extends BaseActivity implements
                         R.drawable.rect_select_round));
                 text_500.setBackground(getResources().getDrawable(
                         R.drawable.rect_select_round));
+                text_800.setBackground(getResources().getDrawable(
+                        R.drawable.rect_select_round));
+                text_100.setBackground(getResources().getDrawable(
+                        R.drawable.rect_select_round));
                 setPadding();
             }
         });
@@ -420,6 +432,10 @@ public class MainActivity extends BaseActivity implements
                 text_1000.setBackground(getResources().getDrawable(
                         R.drawable.rect_select_round));
                 text_500.setBackground(getResources().getDrawable(
+                        R.drawable.rect_select_round));
+                text_800.setBackground(getResources().getDrawable(
+                        R.drawable.rect_select_round));
+                text_100.setBackground(getResources().getDrawable(
                         R.drawable.rect_select_round));
                 setPadding();
             }
@@ -435,9 +451,53 @@ public class MainActivity extends BaseActivity implements
                         R.drawable.rect_select_round));
                 text_1000.setBackground(getResources().getDrawable(
                         R.drawable.rect_select_round));
+                text_800.setBackground(getResources().getDrawable(
+                        R.drawable.rect_select_round));
+                text_100.setBackground(getResources().getDrawable(
+                        R.drawable.rect_select_round));
                 setPadding();
             }
         });
+
+
+        text_800.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                paymentPrice = 500.0;
+                text_800.setBackground(getResources().getDrawable(
+                        R.drawable.rect_select_sel_round));
+                text_200.setBackground(getResources().getDrawable(
+                        R.drawable.rect_select_round));
+                text_1000.setBackground(getResources().getDrawable(
+                        R.drawable.rect_select_round));
+                text_500.setBackground(getResources().getDrawable(
+                        R.drawable.rect_select_round));
+                text_100.setBackground(getResources().getDrawable(
+                        R.drawable.rect_select_round));
+                setPadding();
+            }
+        });
+
+        text_100.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                paymentPrice = 500.0;
+                text_100.setBackground(getResources().getDrawable(
+                        R.drawable.rect_select_sel_round));
+                text_200.setBackground(getResources().getDrawable(
+                        R.drawable.rect_select_round));
+                text_1000.setBackground(getResources().getDrawable(
+                        R.drawable.rect_select_round));
+                text_500.setBackground(getResources().getDrawable(
+                        R.drawable.rect_select_round));
+                text_800.setBackground(getResources().getDrawable(
+                        R.drawable.rect_select_round));
+                setPadding();
+            }
+        });
+
+
+
 
 
     }
@@ -457,6 +517,8 @@ public class MainActivity extends BaseActivity implements
         text_1000.setPadding(0, 13, 0, 13);
         text_500.setPadding(0, 13, 0, 13);
         text_200.setPadding(0, 13, 0, 13);
+        text_800.setPadding(0, 13, 0, 13);
+        text_100.setPadding(0, 13, 0, 13);
     }
 
     private void initAutoCompleteTextView() {

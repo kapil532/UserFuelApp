@@ -34,7 +34,7 @@
           android:layout_height="wrap_content"
           android:maxLength="4"
           android:ems="10"
-          android:inputType="number"
+          android:inputType="numberPassword"
           android:layout_below="@+id/test"
           android:layout_marginTop="8dp"
           android:layout_marginRight="15dp"

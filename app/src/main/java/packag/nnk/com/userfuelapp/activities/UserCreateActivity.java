@@ -146,7 +146,7 @@ public class UserCreateActivity extends BaseActivity {
         JsonObject json = new JsonObject();
         try {
             json.addProperty("email", "" + email);
-            json.addProperty("password", "" + pin);
+            json.addProperty("password", "" );
             json.addProperty("role", "driver");
             json.addProperty("driverAggregator", "" + driverAgra);
             json.addProperty("mobile", "" + number);
@@ -220,10 +220,10 @@ public class UserCreateActivity extends BaseActivity {
             return;
         }
 
-        if (pin.getText().toString().length() == 0) {
+      /*  if (pin.getText().toString().length() == 0) {
             makeToast("Please set pin");
             return;
-        }
+        }*/
         createUser(pin.getText().toString(), (String) spinner.getSelectedItem(), email_optional.getText().toString());
     }
 

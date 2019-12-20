@@ -1,5 +1,6 @@
 package packag.nnk.com.userfuelapp.about_us;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -8,9 +9,11 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import packag.nnk.com.userfuelapp.R;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
 import packag.nnk.com.userfuelapp.check_view.CheckView;
+import packag.nnk.com.userfuelapp.transaction.TransactionActivity;
 
 public class SuccessScreen extends BaseActivity {
 
@@ -24,6 +27,9 @@ public class SuccessScreen extends BaseActivity {
 
     @BindView(R.id.done)
     Button done;
+
+    @BindView(R.id.history)
+    Button history;
 
 
     String petr_name,petr_price;
@@ -61,6 +67,14 @@ public class SuccessScreen extends BaseActivity {
         }, 3000);*/
 
 
+    }
+
+    @OnClick(R.id.history)
+    void openHistoryPage()
+    {
+        Intent history = new Intent(getApplicationContext(), TransactionActivity.class);
+        startActivity(history);
+        finish();
     }
 
    Runnable my= new Runnable() {
