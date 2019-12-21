@@ -7,7 +7,9 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -44,6 +46,7 @@ import packag.nnk.com.userfuelapp.R;
 import packag.nnk.com.userfuelapp.base.ApiUtils;
 import packag.nnk.com.userfuelapp.base.AppSharedPreUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
+import packag.nnk.com.userfuelapp.base.ErrorUtils;
 import packag.nnk.com.userfuelapp.base.ImagePickerActivity;
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
 import packag.nnk.com.userfuelapp.model.ApiError;
@@ -74,7 +77,6 @@ public class UserCreateActivity extends BaseActivity {
 
     @BindView(R.id.profileIcon)
     CircleImageView profileIcon;
-
 
 
     @BindView(R.id.my_spinner)
@@ -141,11 +143,10 @@ public class UserCreateActivity extends BaseActivity {
     }
 
 
-    void setTheValues()
-    {
+    void setTheValues() {
 //        user
         name.setText(user.getUsername());
-        email_optional.setText(""+user.getEmail());
+        email_optional.setText("" + user.getEmail());
     }
 
     void createUser(String pin, String driverAgra, String email) {
@@ -153,11 +154,11 @@ public class UserCreateActivity extends BaseActivity {
         JsonObject json = new JsonObject();
         try {
             json.addProperty("email", "" + email);
-            json.addProperty("password", "" );
+            json.addProperty("password", "");
             json.addProperty("role", "driver");
             json.addProperty("driverAggregator", "" + driverAgra);
-            json.addProperty("mobile", "" + number);
-            json.addProperty("cabNumber", "" + number);
+            json.addProperty("mobile", "" + user.getMobile());
+            json.addProperty("cabNumber", "" + driverId.getText().toString());
         } catch (Exception e) {
 
         }
@@ -185,23 +186,8 @@ public class UserCreateActivity extends BaseActivity {
                     }
                 } catch (Exception e) {
 
-                    BufferedReader reader = null;
-                    StringBuilder sb = new StringBuilder();
-                    try {
-                        reader = new BufferedReader(new InputStreamReader(response.errorBody().byteStream()));
-                        String line;
-                        try {
-                            while ((line = reader.readLine()) != null) {
-                                sb.append(line);
-                            }
-                        } catch (IOException ea) {
-                            e.printStackTrace();
-                        }
-                    } catch (Exception eaa) {
-                        e.printStackTrace();
-                    }
-                    String finallyError = sb.toString();
-                    showMessage(finallyError);
+
+                    showMessage(ErrorUtils.getStatus(response).getMessage());
                 }
             }
 
@@ -216,10 +202,7 @@ public class UserCreateActivity extends BaseActivity {
     }
 
     void showMessage(String message) {
-        Gson gson = new GsonBuilder().create();
-        ApiError mverror = new ApiError();
-        mverror = gson.fromJson(message, ApiError.class);
-        Toast.makeText(getApplicationContext(), mverror.getError().toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),message, Toast.LENGTH_LONG).show();
     }
 
     void validateFields() {
@@ -227,21 +210,34 @@ public class UserCreateActivity extends BaseActivity {
             makeToast("Please enter name");
             return;
         }
+        if(email_optional.getText().toString().length()>0) {
+            if (isValidEmail(email_optional.getText().toString())) {
+                createUser(pin.getText().toString(), (String) spinner.getSelectedItem(), email_optional.getText().toString());
+            } else {
+                makeToast("Please check mail id!");
+                return;
+            }
+        }
 
+        if (driverId.getText().toString().length() == 0) {
+            makeToast("Please cab no.");
+            return;
+        }
       /*  if (pin.getText().toString().length() == 0) {
             makeToast("Please set pin");
             return;
         }*/
-        createUser(pin.getText().toString(), (String) spinner.getSelectedItem(), email_optional.getText().toString());
+
+    }
+
+    public static boolean isValidEmail(CharSequence target) {
+        return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
 
 
     void makeToast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
-
-
-
 
 
     private void loadProfile(String url) {
@@ -257,10 +253,6 @@ public class UserCreateActivity extends BaseActivity {
                 .into(profileIcon);
         profileIcon.setColorFilter(ContextCompat.getColor(this, android.R.color.transparent));
     }
-
-
-
-
 
 
     // my button click function
@@ -328,9 +320,8 @@ public class UserCreateActivity extends BaseActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
-    {
-        super.onActivityResult(resultCode,resultCode,data);
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(resultCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri uri = data.getParcelableExtra("path");
@@ -346,8 +337,6 @@ public class UserCreateActivity extends BaseActivity {
             }
         }
     }
-
-
 
 
 }

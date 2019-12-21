@@ -9,7 +9,7 @@ public class FailedStatus {
     @SerializedName("status")
     @Expose
     private String status;
-    @SerializedName("message")
+    @SerializedName("errors")
     @Expose
     private String message;
 
