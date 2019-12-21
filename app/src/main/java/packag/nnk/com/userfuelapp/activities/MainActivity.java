@@ -646,6 +646,7 @@ public class MainActivity extends BaseActivity implements
                        Intent success = new Intent(getApplicationContext(), SuccessScreen.class);
                        success.putExtra("petr_name",""+petrolBunkName);
                        success.putExtra("petr_price",""+paymentPrice);
+                       success.putExtra("petrolID",""+petrolID);
                        startActivity(success);
 
                    }

@@ -40,7 +40,7 @@ public class SuccessScreen extends BaseActivity {
 
     final Handler handler = new Handler();
     final Handler handler2 = new Handler();
-
+    String petrolID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +51,7 @@ public class SuccessScreen extends BaseActivity {
         if (bundle != null) {
             petr_name = bundle.getString("petr_name");
             petr_price = bundle.getString("petr_price");
+            petrolID = bundle.getString("petrolID");
         }
         String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         String currentTime = new SimpleDateFormat("HH:mm a", Locale.getDefault()).format(new Date());
@@ -58,6 +59,7 @@ public class SuccessScreen extends BaseActivity {
         p_name.setText("You have paid  \n\n " +
                 "Amount paid : "+getResources().getString(R.string.symbol_rs)+" "+petr_price+"\n" +
                 "  Bunk Name : "+petr_name +" !\n"+
+                "  Bunk Id : "+petrolID +" \n"+
                 "       Time : "+currentTime+"\n"+
                 "       Date : "+currentDate);
 
