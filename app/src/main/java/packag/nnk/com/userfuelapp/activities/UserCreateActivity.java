@@ -131,6 +131,12 @@ public class UserCreateActivity extends BaseActivity {
                 finish();
             }
         });
+
+        setFont(submitDetails);
+//        setFont(spinner);
+        setFont(name);
+        setFont(email_optional);
+        setFont(driverId);
         setTheValues();
     }
 
@@ -245,7 +251,7 @@ public class UserCreateActivity extends BaseActivity {
     }
 
     private void loadProfileDefault() {
-        Picasso.with(this).load(R.drawable.iconsman)
+        Picasso.with(this).load(R.drawable.icon_pro)
                 .into(profileIcon);
         profileIcon.setColorFilter(ContextCompat.getColor(this, android.R.color.transparent));
     }

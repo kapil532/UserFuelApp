@@ -18,8 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SetPinActivity extends BaseActivity
-{
+public class SetPinActivity extends BaseActivity {
 
     @BindView(R.id.editText3)
     EditText firstPin;
@@ -27,52 +26,43 @@ public class SetPinActivity extends BaseActivity
     @BindView(R.id.editText4)
     EditText secondPin;
 
-    @BindView(R.id.submitDetails)
-    Button submitDetails;
+    @BindView(R.id.submit_pin)
+    Button submit_pin;
     private ApiInterface mApiService_;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_pin_screen);
         ButterKnife.bind(this);
         mApiService_ = new ApiUtils().getApiInterfaces();
-
+        setFont(submit_pin);
 
     }
 
 
-
-
-    @OnClick(R.id.submitDetails)
+    @OnClick(R.id.submit_pin)
     void validateEdit()
     {
-        if(firstPin.getText().toString().length() == 4)
-        {
+        if (firstPin.getText().toString().length() == 4) {
 
-        }
-        else
-        {
-            Toast.makeText(getApplicationContext(),"Please set pin",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Please set pin", Toast.LENGTH_LONG).show();
             return;
         }
-        if(secondPin.getText().toString().length() == 4)
-        {
+        if (secondPin.getText().toString().length() == 4) {
 
-        }
-        else
-        {
-            Toast.makeText(getApplicationContext(),"Please confirm pin",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Please confirm pin", Toast.LENGTH_LONG).show();
             return;
         }
 
 
-        if(firstPin.getText().toString().equalsIgnoreCase(secondPin.getText().toString()))
-        {
+        if (firstPin.getText().toString().equalsIgnoreCase(secondPin.getText().toString())) {
             setThePin(firstPin.getText().toString());
-        }
-        else
-        {
-            Toast.makeText(getApplicationContext(),"Please check pin, pin mismatch!",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Please check pin, pin mismatch!", Toast.LENGTH_LONG).show();
             return;
         }
     }
@@ -82,7 +72,7 @@ public class SetPinActivity extends BaseActivity
         JsonObject json = new JsonObject();
         try {
             json.addProperty("userId", "" + user.getUserId());
-            json.addProperty("pin", ""+pin);
+            json.addProperty("pin", "" + pin);
         } catch (Exception e) {
 
         }
@@ -90,8 +80,7 @@ public class SetPinActivity extends BaseActivity
         Call<String> payment = mApiService_.updatePin(json);
         payment.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response)
-            {
+            public void onResponse(Call<String> call, Response<String> response) {
                 Toast.makeText(getApplicationContext(), "--" + response.body(), Toast.LENGTH_LONG).show();
 
 
