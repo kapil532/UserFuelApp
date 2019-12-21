@@ -38,8 +38,7 @@ public class TransactionActivity extends BaseActivity {
     RecyclerView mRecyclerView;
 
 
-    @BindView(R.id.bookloading)
-    BookLoading bookLoading;
+
 
 
     @BindView(R.id.no_text)
@@ -66,13 +65,14 @@ public class TransactionActivity extends BaseActivity {
 
     void getRangeTransaction()
     {
-       bookLoading.start();
+        showProgressDialog();
+
         Call<List<RangeTransaction>> balance = getApiInterfaces.getRangeTransaction(user.getUserId());
         balance.enqueue(new Callback<List<RangeTransaction>>() {
             @Override
             public void onResponse(Call<List<RangeTransaction>> call, Response<List<RangeTransaction>> response) {
                 Log.e("USER BALANCE","bal-ssssss-> "+response.body());
-
+hideProgressDialog();
                 List<RangeTransaction> tran = response.body();
                 if(tran != null)
                 {
@@ -84,18 +84,13 @@ public class TransactionActivity extends BaseActivity {
                 {
                    no_text.setVisibility(View.VISIBLE);
                 }
-                if (bookLoading.isStart()) {
-                    bookLoading.stop();
-                }
 
 
             }
 
             @Override
             public void onFailure(Call<List<RangeTransaction>> call, Throwable t) {
-                if (bookLoading.isStart()) {
-                    bookLoading.stop();
-                }
+                hideProgressDialog();
 
                 no_text.setVisibility(View.VISIBLE);
                 no_text.setText(""+t.getMessage());
@@ -107,9 +102,7 @@ public class TransactionActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (bookLoading.isStart()) {
-            bookLoading.stop();
-        }
+
     }
 
     private void setupNavigation() {
