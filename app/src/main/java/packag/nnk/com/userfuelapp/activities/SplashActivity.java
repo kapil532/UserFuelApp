@@ -206,7 +206,8 @@ public class SplashActivity extends BaseActivity implements Listener {
 
         User user = AppSharedPreUtils.getInstance(getApplicationContext()).getUserDetails();
 
-        if (user == null) {
+        if (user == null)
+        {
             Intent loginActivity = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(loginActivity);
             finish();
@@ -222,6 +223,7 @@ public class SplashActivity extends BaseActivity implements Listener {
             myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(myAct);
             finish();
+
         } else {
             Intent loginActivity = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(loginActivity);
