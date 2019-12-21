@@ -4,9 +4,13 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.text.Editable;
+import android.text.InputType;
+import android.text.SpannableStringBuilder;
+import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.view.ActionMode;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.appcompat.widget.AppCompatEditText;
 import packag.nnk.com.userfuelapp.R;
@@ -37,6 +41,8 @@ public class OtpEdittextClass extends AppCompatEditText
 
         private void init(Context context, AttributeSet attrs) {
             float multi = context.getResources().getDisplayMetrics().density;
+            setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+            setTransformationMethod(PasswordTransformationMethod.getInstance());
             mLineStroke = multi * mLineStroke;
             mLinesPaint = new Paint(getPaint());
             mLinesPaint.setStrokeWidth(mLineStroke);
@@ -83,10 +89,12 @@ public class OtpEdittextClass extends AppCompatEditText
 
             //Text Width
             Editable text = getText();
+//            Editable text =Editable.Factory.getInstance().newEditable("*");// new SpannableStringBuilder("*");
             int textLength = text.length();
             float[] textWidths = new float[textLength];
             getPaint().getTextWidths(getText(), 0, textLength, textWidths);
 
+            char ar[]= {'*','*','*','*'};
             for (int i = 0; i < mNumChars; i++) {
                 canvas.drawLine(startX, bottom, startX + mCharSize, bottom, mLinesPaint);
                 if (getText().length() > i) {

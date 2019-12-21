@@ -1,56 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="10dp"
-    app:cardElevation="10dp"
-    android:padding="15dp">
+    android:padding="15dp"
+    app:cardElevation="10dp">
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_margin="10dp"
-    android:layout_height="wrap_content">
-<packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
 
-    android:id="@+id/test"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textColor="@color/quantum_black_100"
-    android:textSize="16sp"
-    android:layout_centerHorizontal="true"
-    android:gravity="center"
-    android:text="please enter the pin. so that you can make transaction"
-    />
+        <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
 
-      <packag.nnk.com.userfuelapp.ui.OtpEdittextClass
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:maxLength="4"
-          android:ems="10"
-          android:inputType="numberPassword"
-          android:layout_below="@+id/test"
-          android:layout_marginTop="8dp"
-          android:layout_marginRight="15dp"
-          android:layout_marginLeft="15dp"
-          android:layout_centerHorizontal="true"
-          android:id="@+id/pin_verification"
-          />
+            android:id="@+id/test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="please enter the pin. so that you can make transaction"
+            android:textColor="@color/quantum_black_100"
+            android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/verify_pin"
-        style="@style/wrap_button_style"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/pin_verification"
-        android:background="@drawable/light_button_background"
-        android:text="VERIFY" />
 
-</RelativeLayout>
+
+        <packag.nnk.com.userfuelapp.ui.OtpEdittextClass
+            android:id="@+id/et_otp"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:cursorVisible="false"
+            android:digits="1234567890"
+            android:inputType="number"
+            android:layout_below="@+id/test"
+            android:maxLength="4"
+            android:textIsSelectable="false"
+            android:textSize="16sp"/>
+
+<!--
+        <com.goodiebag.pinview.Pinview
+            android:id="@+id/pinview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/test"
+            app:inputType="number"
+            app:pinWidth="40dp"
+            app:pinHeight="40dp"
+            android:focusable="true"
+            app:pinLength="4"
+            app:cursorVisible="false"
+            app:hint="0"
+            app:password="true"/>-->
+
+        <LinearLayout
+            android:id="@+id/layout_otp"
+            android:layout_width="match_parent"
+            android:layout_height="90sp"
+            android:layout_below="@+id/test"
+            android:gravity="center"
+                    android:visibility="gone"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editTextone"
+                android:layout_width="@dimen/dm_40sp"
+                android:layout_height="@dimen/dm_42sp"
+                android:inputType="numberPassword"
+                android:maxLength="1"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:nextFocusRight="@+id/editText_two">
+
+                <requestFocus />
+            </EditText>
+
+            <EditText
+                android:id="@+id/editTexttwo"
+                android:layout_width="@dimen/dm_40sp"
+                android:layout_height="@dimen/dm_42sp"
+                android:inputType="numberPassword"
+                android:maxLength="1" />
+
+            <EditText
+                android:id="@+id/editTextthree"
+                android:layout_width="@dimen/dm_40sp"
+                android:layout_height="@dimen/dm_42sp"
+                android:inputType="numberPassword"
+                android:maxLength="1" />
+
+            <EditText
+                android:id="@+id/editTextfour"
+                android:layout_width="@dimen/dm_40sp"
+                android:layout_height="@dimen/dm_42sp"
+                android:inputType="numberPassword"
+                android:maxLength="1" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/pin_verification"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/test"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:focusable="true"
+            android:visibility="gone"
+            android:inputType="numberPassword"
+            android:itemBackground="@color/quantum_grey200"
+            android:maxLength="4"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/verify_pin"
+            style="@style/wrap_button_style"
+            android:layout_below="@+id/et_otp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/light_button_background"
+            android:text="VERIFY" />
+
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

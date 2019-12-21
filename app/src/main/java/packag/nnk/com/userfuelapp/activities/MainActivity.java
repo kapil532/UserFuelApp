@@ -10,11 +10,11 @@ import androidx.navigation.NavController;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.aflak.libraries.callback.FingerprintDialogSecureCallback;
+/*import me.aflak.libraries.callback.FingerprintDialogSecureCallback;
 import me.aflak.libraries.callback.PasswordCallback;
 import me.aflak.libraries.dialog.FingerprintDialog;
 import me.aflak.libraries.dialog.PasswordDialog;
-import me.aflak.libraries.utils.FingerprintToken;
+import me.aflak.libraries.utils.FingerprintToken;*/
 import packag.nnk.com.userfuelapp.R;
 import packag.nnk.com.userfuelapp.about_us.AboutUsScreen;
 import packag.nnk.com.userfuelapp.about_us.CustomSupportScreenActivity;
@@ -81,9 +81,9 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity implements
         NavigationView.OnNavigationItemSelectedListener,
-        View.OnClickListener,
-        FingerprintDialogSecureCallback,
-        PasswordCallback {
+        View.OnClickListener
+       /* FingerprintDialogSecureCallback,
+        PasswordCallback*/ {
     private String TAG = MainActivity.class.getSimpleName();
     private ApiInterface mApiService;
     private ApiInterface mApiService_;
@@ -249,7 +249,7 @@ public class MainActivity extends BaseActivity implements
 
     }
 
-    void callDilouge() {
+  /*  void callDilouge() {
         if (FingerprintDialog.isAvailable(this)) {
             FingerprintDialog.initialize(this)
                     .title(R.string.fingerprint_title)
@@ -257,7 +257,7 @@ public class MainActivity extends BaseActivity implements
                     .callback(this, "password")
                     .show();
         }
-    }
+    }*/
 
     void showAlertBox(String message) {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
@@ -575,7 +575,7 @@ public class MainActivity extends BaseActivity implements
         }
     };
 
-    @Override
+ /*   @Override
     public void onAuthenticationSucceeded() {
 
     }
@@ -610,7 +610,7 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void onPasswordCancel() {
 
-    }
+    }*/
 
     @Override
     public void onClick(View view) {

@@ -33,6 +33,7 @@
         android:textColor="@color/colorAccent"
         android:textSize="20sp"
         android:text="@string/Skip"
+        android:lineSpacingExtra="@dimen/dimen_10dp"
         android:layout_margin="12dp"
         android:layout_centerHorizontal="true"
         android:gravity="center"

@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -48,7 +52,14 @@ public class SuccessScreen extends BaseActivity {
             petr_name = bundle.getString("petr_name");
             petr_price = bundle.getString("petr_price");
         }
-        p_name.setText("You have paid "+getResources().getString(R.string.symbol_rs)+" "+petr_price+" at "+petr_name +" !");
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        String currentTime = new SimpleDateFormat("HH:mm a", Locale.getDefault()).format(new Date());
+
+        p_name.setText("You have paid  \n\n " +
+                "Amount paid : "+getResources().getString(R.string.symbol_rs)+" "+petr_price+"\n" +
+                "  Bunk Name : "+petr_name +" !\n"+
+                "       Time : "+currentTime+"\n"+
+                "       Date : "+currentDate);
 
         handler.postDelayed(my,400);
         done.setOnClickListener(new View.OnClickListener() {
