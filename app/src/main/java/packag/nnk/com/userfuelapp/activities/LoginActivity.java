@@ -68,7 +68,7 @@ public class LoginActivity extends BaseActivity {
             lang = extras.getString("lang");
         }
 
-
+setFont(getOtpButton329);
         getOtpButton329.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

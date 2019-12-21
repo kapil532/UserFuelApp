@@ -142,7 +142,7 @@ public class MainActivity extends BaseActivity implements
     String petrolBunkName = "";
     String petrolID = "";
 
- Location loc;
+    Location loc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,7 +159,7 @@ public class MainActivity extends BaseActivity implements
 
         mApiService = new ApiUtils().getApiInterfacesForPetrolBunk();
         mApiService_ = new ApiUtils().getApiInterfaces();
-        loc=   AppSharedPreUtils.getInstance(getApplicationContext()).getLocation();
+        loc = AppSharedPreUtils.getInstance(getApplicationContext()).getLocation();
 
         //getBalance();
         setupNavigation();
@@ -175,8 +175,7 @@ public class MainActivity extends BaseActivity implements
         initAutoCompleteTextView();
 
 
-
-
+        setFont(other_money);
         other_money.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -210,6 +209,7 @@ public class MainActivity extends BaseActivity implements
         toolbar = findViewById(R.id.toolbar);
         ImageView menu = findViewById(R.id.menu);
         TextView title = findViewById(R.id.textHeader);
+        setFont(title);
         title.setText(getResources().getString(R.string.go_fuels));
         drawerLayout = findViewById(R.id.drawer_layout);
         menu.setOnClickListener(new View.OnClickListener() {
@@ -220,7 +220,7 @@ public class MainActivity extends BaseActivity implements
         });
         navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
-
+        setFont(submit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -235,12 +235,12 @@ public class MainActivity extends BaseActivity implements
                     PinVerification alertDialogFragment = new PinVerification();
 
                     alertDialogFragment.show(manager, "fragment_edit_name");
-                   PinVerification.getMessage =new GetMessage() {
-                       @Override
-                       public void getSuccessMessage(String s) {
-                           doPayment(""+paymentPrice,"19f55b6f-dbf9-4c4e-91cb-db5e828d3669");
-                       }
-                   };
+                    PinVerification.getMessage = new GetMessage() {
+                        @Override
+                        public void getSuccessMessage(String s) {
+                            doPayment("" + paymentPrice, "19f55b6f-dbf9-4c4e-91cb-db5e828d3669");
+                        }
+                    };
 
                 }
 
@@ -287,7 +287,7 @@ public class MainActivity extends BaseActivity implements
     }
 
     void getPetrolList() {
-        Call<GetList> getList = mApiService.getPetrolList(loc.getLatitude()+","+loc.getLongitude(),
+        Call<GetList> getList = mApiService.getPetrolList(loc.getLatitude() + "," + loc.getLongitude(),
                 "1500",
                 "gas_station",
                 "AIzaSyBDCa_MSc0rmkV-IDo4CiOZRywm8jvG_2c"
@@ -497,9 +497,6 @@ public class MainActivity extends BaseActivity implements
         });
 
 
-
-
-
     }
 
     void makeUnselect() {
@@ -524,6 +521,7 @@ public class MainActivity extends BaseActivity implements
     private void initAutoCompleteTextView() {
 
         autoCompleteTextView = findViewById(R.id.auto);
+        setFont(autoCompleteTextView);
         autoCompleteTextView.setThreshold(1);
         autoCompleteTextView.setOnItemClickListener(autocompleteClickListener);
         adapter = new AutoCompleteAdapter(this, placesClient);
@@ -618,9 +616,6 @@ public class MainActivity extends BaseActivity implements
     }
 
 
-
-
-
     void doPayment(String price, String petrolID) {
         JsonObject json = new JsonObject();
         try {
@@ -637,28 +632,23 @@ public class MainActivity extends BaseActivity implements
             public void onResponse(Call<Payment> call, Response<Payment> response) {
 
 
-               try {
-                   Log.e("MAINACTIVITY", "VALUES" + response.body());
-                   Payment payment=  response.body();
-                   if(payment.getStatus().equalsIgnoreCase("success"))
-                   {
+                try {
+                    Log.e("MAINACTIVITY", "VALUES" + response.body());
+                    Payment payment = response.body();
+                    if (payment.getStatus().equalsIgnoreCase("success")) {
 //                       showSuccessScreen();
-                       Intent success = new Intent(getApplicationContext(), SuccessScreen.class);
-                       success.putExtra("petr_name",""+petrolBunkName);
-                       success.putExtra("petr_price",""+paymentPrice);
-                       success.putExtra("petrolID",""+petrolID);
-                       startActivity(success);
+                        Intent success = new Intent(getApplicationContext(), SuccessScreen.class);
+                        success.putExtra("petr_name", "" + petrolBunkName);
+                        success.putExtra("petr_price", "" + paymentPrice);
+                        success.putExtra("petrolID", "" + petrolID);
+                        startActivity(success);
 
-                   }
-                   else
-                   {
-                       Toast.makeText(getApplicationContext(), "Please try again!", Toast.LENGTH_LONG).show();
-                   }
-               }
-               catch (Exception e)
-               {
-                   Toast.makeText(getApplicationContext(),  ErrorUtils.getStatus(response).getMessage(), Toast.LENGTH_LONG).show();
-               }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Please try again!", Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), ErrorUtils.getStatus(response).getMessage(), Toast.LENGTH_LONG).show();
+                }
 
 
             }
@@ -689,7 +679,7 @@ public class MainActivity extends BaseActivity implements
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }

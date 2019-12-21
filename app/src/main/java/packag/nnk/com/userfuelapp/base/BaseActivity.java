@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -305,5 +306,12 @@ public class BaseActivity extends AppCompatActivity
     public void printLogs(String TAG, String message)
     {
         Log.e(TAG, message);
+    }
+
+
+  protected   void setFont(TextView tc)
+    {
+        Typeface tf = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/GOTHAM-ROUNDED-BOO.OTF");
+        tc.setTypeface(tf);
     }
 }

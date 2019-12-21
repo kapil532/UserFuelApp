@@ -64,6 +64,8 @@ public class SuccessScreen extends BaseActivity {
                 "       Date : "+currentDate);
 
         handler.postDelayed(my,400);
+        setFont(done);
+        setFont(history);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
