@@ -73,11 +73,23 @@ public class TransactionActivity extends BaseActivity {
                 hideProgressDialog();
 
                History tran = response.body();
-                if (tran != null) {
-                    feedsList_tran = tran.getHistory();
-                    setAdapter();
-                    no_text.setVisibility(View.GONE);
-                } else {
+                if (tran != null)
+                {
+                    if(tran.getHistory().size()>0)
+                    {
+                        feedsList_tran = tran.getHistory();
+                        setAdapter();
+                        no_text.setVisibility(View.GONE);
+                    }
+                    else
+                    {
+                        no_text.setVisibility(View.VISIBLE);
+                    }
+
+
+                }
+                else
+                    {
                     no_text.setVisibility(View.VISIBLE);
                 }
 

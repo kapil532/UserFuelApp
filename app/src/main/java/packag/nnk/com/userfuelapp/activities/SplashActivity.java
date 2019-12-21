@@ -179,7 +179,8 @@ public class SplashActivity extends BaseActivity implements Listener {
 //        yourCountDownTimer.cancel();
     }
 
-    void openNextActivity() {
+    void openNextActivity()
+    {
 
         if (easyWayLocation.hasLocationEnabled()) {
             easyWayLocation.endUpdates();
@@ -193,6 +194,7 @@ public class SplashActivity extends BaseActivity implements Listener {
             startActivity(loginActivity);
             finish();
         }
+        else
         if( user.getRole().equalsIgnoreCase("guest"))
         {
             Intent myAct = new Intent(getApplicationContext(), UserCreateActivity.class);

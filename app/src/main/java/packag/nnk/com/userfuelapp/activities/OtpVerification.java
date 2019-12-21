@@ -66,6 +66,7 @@ public class OtpVerification extends BaseActivity {
                 getOtp(number);
             }
         });
+        setFont(signUpButtonn329);
         signUpButtonn329.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,7 +114,7 @@ public class OtpVerification extends BaseActivity {
                            finish();
                        }
 
-                     if(!userVal.getIsPinAvailable())
+                    else if(!userVal.getIsPinAvailable())
                        {
                            Intent myAct = new Intent(getApplicationContext(), SetPinActivity.class);
                            myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
