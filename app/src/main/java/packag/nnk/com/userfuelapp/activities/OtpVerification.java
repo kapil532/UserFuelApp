@@ -17,6 +17,7 @@ import packag.nnk.com.userfuelapp.R;
 import packag.nnk.com.userfuelapp.base.ApiUtils;
 import packag.nnk.com.userfuelapp.base.AppSharedPreUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
+import packag.nnk.com.userfuelapp.base.ErrorUtils;
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
 import packag.nnk.com.userfuelapp.model.OtpRes;
 import packag.nnk.com.userfuelapp.model.User;
@@ -25,6 +26,7 @@ import packag.nnk.com.userfuelapp.ui.OtpEdittextClass;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Headers;
 
 public class OtpVerification extends BaseActivity {
 
@@ -93,24 +95,48 @@ public class OtpVerification extends BaseActivity {
             public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
                 hideProgressDialog();
                // Log.e("VALIDATION", "RESPONSE" + response.body());
-                AppSharedPreUtils.getInstance(getApplicationContext()).saveUserDetails(response.body().getUser());
+                try {
+                      String header= response.headers().get("Authorization");
 
-                User userVal = response.body().getUser();
-                if(userVal != null)
-                {
+                    AppSharedPreUtils.getInstance(getApplicationContext()).saveUserDetails(response.body().getUser());
+                    AppSharedPreUtils.getInstance(getApplicationContext()).saveStringValues("TOKEN",header);
+                    User userVal = response.body().getUser();
+                    if (userVal != null) {
 
 
-                    Intent myAct = new Intent(getApplicationContext(), UserCreateActivity.class);
-                    myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    myAct.putExtra("number", "" + number);
-                    startActivity(myAct);
-                    finish();
+                       if( userVal.getRole().equalsIgnoreCase("guest"))
+                       {
+                           Intent myAct = new Intent(getApplicationContext(), UserCreateActivity.class);
+                           myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                           myAct.putExtra("number", "" + number);
+                           startActivity(myAct);
+                           finish();
+                       }
+
+                     if(!userVal.getIsPinAvailable())
+                       {
+                           Intent myAct = new Intent(getApplicationContext(), SetPinActivity.class);
+                           myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                           startActivity(myAct);
+                           finish();
+                       }
+                      else
+                      {
+                          Intent myAct = new Intent(getApplicationContext(), MainActivity.class);
+                          myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                          startActivity(myAct);
+                          finish();
+                      }
+
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Please try again!", Toast.LENGTH_LONG).show();
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    Toast.makeText(getApplicationContext(),"Please try again!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), ErrorUtils.getStatus(response).getMessage(), Toast.LENGTH_LONG).show();
                 }
-
 
             }
 

@@ -8,6 +8,7 @@ import java.util.List;
 import packag.nnk.com.userfuelapp.base.CommonClass;
 import packag.nnk.com.userfuelapp.model.ApiError;
 import packag.nnk.com.userfuelapp.model.Balance;
+import packag.nnk.com.userfuelapp.model.History;
 import packag.nnk.com.userfuelapp.model.OtpRes;
 import packag.nnk.com.userfuelapp.model.OtpValidateRes;
 import packag.nnk.com.userfuelapp.model.Payment;
@@ -23,6 +24,8 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -48,8 +51,9 @@ public interface ApiInterface
     @GET(CommonClass.CHECK_BALANCE+"{userId}")
     Call<Balance> getBalance(@Path("userId") String userId);
 
+
     @GET(CommonClass.RANGE_TRANSACTION+"{userId}"+"?days=10")
-    Call<List<RangeTransaction>> getRangeTransaction(@Path("userId") String userId);
+    Call<History> getRangeTransaction(@Path("userId") String userId);
 
 
     @POST(CommonClass.UPDATE_PROFILE)

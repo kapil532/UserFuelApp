@@ -36,6 +36,7 @@
         android:resource="@color/colorAccent" />
 
     <application
+        android:name=".base.BaseApplicationClass"
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"

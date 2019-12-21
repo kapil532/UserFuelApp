@@ -9,9 +9,9 @@ public class Balance {
     @SerializedName("status")
     @Expose
     private String status;
-    @SerializedName("data")
+    @SerializedName("balance")
     @Expose
-    private String data;
+    private String balance;
 
     public String getStatus() {
         return status;
@@ -22,11 +22,11 @@ public class Balance {
     }
 
     public String getData() {
-        return data;
+        return balance;
     }
 
     public void setData(String data) {
-        this.data = data;
+        this.balance = data;
     }
 
 }

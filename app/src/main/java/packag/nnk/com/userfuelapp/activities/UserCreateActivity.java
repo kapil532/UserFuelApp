@@ -141,10 +141,11 @@ public class UserCreateActivity extends BaseActivity {
     }
 
 
-    void setTheValues() {
+    void setTheValues()
+    {
 //        user
         name.setText(user.getUsername());
-        email_optional.setText(user.getEmail());
+        email_optional.setText(""+user.getEmail());
     }
 
     void createUser(String pin, String driverAgra, String email) {

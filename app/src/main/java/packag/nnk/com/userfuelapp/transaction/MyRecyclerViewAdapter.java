@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 import packag.nnk.com.userfuelapp.R;
+import packag.nnk.com.userfuelapp.model.History_;
 import packag.nnk.com.userfuelapp.model.RangeTransaction;
 
 /**
@@ -28,11 +29,11 @@ import packag.nnk.com.userfuelapp.model.RangeTransaction;
  */
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.CustomViewHolder> {
-    private List<RangeTransaction> feedItemList;
+    private List<History_> feedItemList;
     private Context mContext;
     private OnItemClickListener onItemClickListener;
 
-    public MyRecyclerViewAdapter(Context context, List<RangeTransaction> feedItemList) {
+    public MyRecyclerViewAdapter(Context context, List<History_> feedItemList) {
         this.feedItemList = feedItemList;
         this.mContext = context;
     }
@@ -46,7 +47,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(CustomViewHolder customViewHolder, int i) {
-        final RangeTransaction feedItem = feedItemList.get(i);
+        final History_ feedItem = feedItemList.get(i);
 
         customViewHolder.title.setText(Html.fromHtml(feedItem.getPetrolBunkDetail().getPetrolBunkName()));
         customViewHolder.time.setText("Time : "+Html.fromHtml(dateFromat(feedItem.getPaymentDate())));

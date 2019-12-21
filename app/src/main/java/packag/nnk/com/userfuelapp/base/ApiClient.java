@@ -1,7 +1,11 @@
 package packag.nnk.com.userfuelapp.base;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
@@ -16,29 +20,39 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import packag.nnk.com.userfuelapp.BuildConfig;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ApiClient
-{
-    public   Retrofit retrofit;
+public class ApiClient {
+    public Retrofit retrofit;
 
-    public  Retrofit getApiClient(String BaseUrl)
-    {
+    public Retrofit getApiClient(String BaseUrl) {
+
+//        Log.e("HEADER--",AppSharedPreUtils.getInstance(BaseApplicationClass.getAppContext()).getStringValues("TOKEN"));
         OkHttpClient.Builder okhttpBuilder = new OkHttpClient.Builder();
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         okhttpBuilder.addInterceptor(httpLoggingInterceptor);
+        okhttpBuilder.addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request request = chain.request();
+                Request.Builder newRequest = request.newBuilder().header("Authorization", AppSharedPreUtils.getInstance(BaseApplicationClass.getAppContext()).getStringValues("TOKEN"));
+                return chain.proceed(newRequest.build());
+            }
+        });
         okhttpBuilder.connectTimeout(13, TimeUnit.SECONDS);
         okhttpBuilder.writeTimeout(13, TimeUnit.SECONDS);
         okhttpBuilder.readTimeout(16, TimeUnit.SECONDS);
 
 
-        if (retrofit == null)
-        {
+        if (retrofit == null) {
 
             retrofit = new Retrofit.Builder()
                     .baseUrl(BaseUrl)

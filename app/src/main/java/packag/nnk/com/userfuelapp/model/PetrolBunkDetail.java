@@ -6,29 +6,21 @@ import com.google.gson.annotations.SerializedName;
 
 public class PetrolBunkDetail {
 
-    @SerializedName("petrolBunkName")
-    @Expose
-    private String petrolBunkName;
-
-
     @SerializedName("id")
     @Expose
     private String id;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
+    @SerializedName("petrolBunkName")
+    @Expose
+    private String petrolBunkName;
     @SerializedName("petrolBunkAddress")
     @Expose
     private String petrolBunkAddress;
-    @SerializedName("petrolBunkLatLang")
+    @SerializedName("latitude")
     @Expose
-    private String petrolBunkLatLang;
+    private String latitude;
+    @SerializedName("longitude")
+    @Expose
+    private String longitude;
     @SerializedName("compoundCode")
     @Expose
     private String compoundCode;
@@ -38,6 +30,14 @@ public class PetrolBunkDetail {
     @SerializedName("iconId")
     @Expose
     private String iconId;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getPetrolBunkName() {
         return petrolBunkName;
@@ -55,12 +55,20 @@ public class PetrolBunkDetail {
         this.petrolBunkAddress = petrolBunkAddress;
     }
 
-    public String getPetrolBunkLatLang() {
-        return petrolBunkLatLang;
+    public String getLatitude() {
+        return latitude;
     }
 
-    public void setPetrolBunkLatLang(String petrolBunkLatLang) {
-        this.petrolBunkLatLang = petrolBunkLatLang;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
     public String getCompoundCode() {

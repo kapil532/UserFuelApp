@@ -1,5 +1,6 @@
 package packag.nnk.com.userfuelapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -81,15 +82,19 @@ public class SetPinActivity extends BaseActivity {
         payment.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Toast.makeText(getApplicationContext(), "--" + response.body(), Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getApplicationContext(), "--" + response.body(), Toast.LENGTH_LONG).show();
 
+                Intent myAct = new Intent(getApplicationContext(), MainActivity.class);
+                myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(myAct);
+                finish();
 
                 finish();
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(), "Please try again!", Toast.LENGTH_LONG).show();
             }
         });
 

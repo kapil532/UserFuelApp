@@ -22,6 +22,8 @@ import packag.nnk.com.userfuelapp.base.ApiUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
 import packag.nnk.com.userfuelapp.base.CommonClass;
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
+import packag.nnk.com.userfuelapp.model.History;
+import packag.nnk.com.userfuelapp.model.History_;
 import packag.nnk.com.userfuelapp.model.RangeTransaction;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +33,7 @@ public class TransactionActivity extends BaseActivity {
     private static final String TAG = "RecyclerViewExample";
 
     private List<Transaction> feedsList;
-    private List<RangeTransaction> feedsList_tran;
+    private List<History_> feedsList_tran;
     private MyRecyclerViewAdapter adapter;
 
     @BindView(R.id.recycler_view)
@@ -63,15 +65,16 @@ public class TransactionActivity extends BaseActivity {
     void getRangeTransaction() {
         showProgressDialog();
 
-        Call<List<RangeTransaction>> balance = getApiInterfaces.getRangeTransaction(user.getUserId());
-        balance.enqueue(new Callback<List<RangeTransaction>>() {
+        Call<History> balance = getApiInterfaces.getRangeTransaction(user.getUserId());
+        balance.enqueue(new Callback<History>() {
             @Override
-            public void onResponse(Call<List<RangeTransaction>> call, Response<List<RangeTransaction>> response) {
+            public void onResponse(Call<History> call, Response<History> response) {
                 Log.e("USER BALANCE", "bal-ssssss-> " + response.body());
                 hideProgressDialog();
-                List<RangeTransaction> tran = response.body();
+
+               History tran = response.body();
                 if (tran != null) {
-                    feedsList_tran = tran;
+                    feedsList_tran = tran.getHistory();
                     setAdapter();
                     no_text.setVisibility(View.GONE);
                 } else {
@@ -82,7 +85,7 @@ public class TransactionActivity extends BaseActivity {
             }
 
             @Override
-            public void onFailure(Call<List<RangeTransaction>> call, Throwable t) {
+            public void onFailure(Call<History> call, Throwable t) {
                 hideProgressDialog();
 
                 no_text.setVisibility(View.VISIBLE);

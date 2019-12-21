@@ -6,42 +6,103 @@ import com.google.gson.annotations.SerializedName;
 
 public class User {
 
+    @SerializedName("userId")
+    @Expose
+    private String userId;
+    @SerializedName("username")
+    @Expose
+    private String username;
+    @SerializedName("email")
+    @Expose
+    private Object email;
+    @SerializedName("countryCode")
+    @Expose
+    private String countryCode;
+    @SerializedName("mobile")
+    @Expose
+    private String mobile;
+    @SerializedName("role")
+    @Expose
+    private String role;
+    @SerializedName("driverAggregator")
+    @Expose
+    private Object driverAggregator;
+    @SerializedName("active")
+    @Expose
+    private Integer active;
     @SerializedName("createdAt")
     @Expose
     private String createdAt;
     @SerializedName("updatedAt")
     @Expose
     private String updatedAt;
-    @SerializedName("userId")
+    @SerializedName("isPinAvailable")
     @Expose
-    private String userId;
-    @SerializedName("pin")
-    @Expose
-    private String pin;
-    @SerializedName("countryCode")
-    @Expose
-    private String countryCode;
-    @SerializedName("active")
-    @Expose
-    private Integer active;
-    @SerializedName("version")
-    @Expose
-    private Integer version;
-    @SerializedName("email")
-    @Expose
-    private String email;
-    @SerializedName("role")
-    @Expose
-    private String role;
-    @SerializedName("username")
-    @Expose
-    private String username;
-    @SerializedName("mobile")
-    @Expose
-    private Object mobile;
-    @SerializedName("driverAggregator")
-    @Expose
-    private String driverAggregator;
+    private Boolean isPinAvailable;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Object getEmail() {
+        return email;
+    }
+
+    public void setEmail(Object email) {
+        this.email = email;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Object getDriverAggregator() {
+        return driverAggregator;
+    }
+
+    public void setDriverAggregator(Object driverAggregator) {
+        this.driverAggregator = driverAggregator;
+    }
+
+    public Integer getActive() {
+        return active;
+    }
+
+    public void setActive(Integer active) {
+        this.active = active;
+    }
 
     public String getCreatedAt() {
         return createdAt;
@@ -59,84 +120,12 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
-    public String getUserId() {
-        return userId;
+    public Boolean getIsPinAvailable() {
+        return isPinAvailable;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getPin() {
-        return pin;
-    }
-
-    public void setPin(String pin) {
-        this.pin = pin;
-    }
-
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
-    }
-
-    public Integer getActive() {
-        return active;
-    }
-
-    public void setActive(Integer active) {
-        this.active = active;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Object getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(Object mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getDriverAggregator() {
-        return driverAggregator;
-    }
-
-    public void setDriverAggregator(String driverAggregator) {
-        this.driverAggregator = driverAggregator;
+    public void setIsPinAvailable(Boolean isPinAvailable) {
+        this.isPinAvailable = isPinAvailable;
     }
 
 }
