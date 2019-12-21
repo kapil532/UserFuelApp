@@ -38,9 +38,6 @@ public class TransactionActivity extends BaseActivity {
     RecyclerView mRecyclerView;
 
 
-
-
-
     @BindView(R.id.no_text)
     TextView no_text;
 
@@ -57,32 +54,28 @@ public class TransactionActivity extends BaseActivity {
 
         getApiInterfaces = new ApiUtils().getApiInterfaces();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-     //   feedsList_tran = (List<RangeTransaction>) readJsonData();
+        //   feedsList_tran = (List<RangeTransaction>) readJsonData();
         getRangeTransaction();
 
         setupNavigation();
     }
 
-    void getRangeTransaction()
-    {
+    void getRangeTransaction() {
         showProgressDialog();
 
         Call<List<RangeTransaction>> balance = getApiInterfaces.getRangeTransaction(user.getUserId());
         balance.enqueue(new Callback<List<RangeTransaction>>() {
             @Override
             public void onResponse(Call<List<RangeTransaction>> call, Response<List<RangeTransaction>> response) {
-                Log.e("USER BALANCE","bal-ssssss-> "+response.body());
-hideProgressDialog();
+                Log.e("USER BALANCE", "bal-ssssss-> " + response.body());
+                hideProgressDialog();
                 List<RangeTransaction> tran = response.body();
-                if(tran != null)
-                {
-                    feedsList_tran =  tran;
+                if (tran != null) {
+                    feedsList_tran = tran;
                     setAdapter();
                     no_text.setVisibility(View.GONE);
-                }
-                else
-                {
-                   no_text.setVisibility(View.VISIBLE);
+                } else {
+                    no_text.setVisibility(View.VISIBLE);
                 }
 
 
@@ -93,7 +86,7 @@ hideProgressDialog();
                 hideProgressDialog();
 
                 no_text.setVisibility(View.VISIBLE);
-                no_text.setText(""+t.getMessage());
+                no_text.setText("" + t.getMessage());
             }
         });
 

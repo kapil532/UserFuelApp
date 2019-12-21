@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,6 +51,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         customViewHolder.title.setText(Html.fromHtml(feedItem.getPetrolBunkDetail().getPetrolBunkName()));
         customViewHolder.time.setText(Html.fromHtml(dateFromat(feedItem.getPaymentDate())));
         customViewHolder.address.setText(Html.fromHtml(feedItem.getPetrolBunkDetail().getPetrolBunkAddress()));
+        NumberFormat format = new DecimalFormat("0.#");
         customViewHolder.rupees.setText(Html.fromHtml("Paid Amount : " + mContext.getResources().getString(R.string.symbol_rs)
                 + " " + feedItem.getAmount()));
 
