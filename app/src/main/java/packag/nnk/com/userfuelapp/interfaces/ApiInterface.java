@@ -57,7 +57,7 @@ public interface ApiInterface
 
 
     @POST(CommonClass.UPDATE_PROFILE)
-    Call<String> updatePin(@Body JsonObject json);
+    Call<UserDetails> updatePin(@Body JsonObject json);
 
 
     @POST(CommonClass.VALIDATE_PIN)

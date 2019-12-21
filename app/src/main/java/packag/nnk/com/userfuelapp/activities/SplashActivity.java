@@ -55,7 +55,7 @@ public class SplashActivity extends BaseActivity implements Listener {
         } else {
             Toast.makeText(this, "No google play services enabled", Toast.LENGTH_SHORT).show();
         }
-        easyWayLocation = new EasyWayLocation(this, false,this);
+        easyWayLocation = new EasyWayLocation(this, false, this);
         if (permissionIsGranted()) {
             doLocationWork();
         } else {
@@ -76,6 +76,7 @@ public class SplashActivity extends BaseActivity implements Listener {
     private void doLocationWork() {
         easyWayLocation.startLocation();
     }
+
     @Override
     public void locationOn() {
         easyWayLocation.startLocation();
@@ -133,7 +134,7 @@ public class SplashActivity extends BaseActivity implements Listener {
         if (ContextCompat.checkSelfPermission(this, FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             Log.e(TAG, "3");
 
-            easyWayLocation.startLocation();
+           // easyWayLocation.startLocation();
 
         } else {
             ActivityCompat.requestPermissions(this, myPer, PER_REQ_CODE);
@@ -196,8 +197,7 @@ public class SplashActivity extends BaseActivity implements Listener {
 //        yourCountDownTimer.cancel();
     }
 
-    void openNextActivity()
-    {
+    void openNextActivity() {
 
         if (easyWayLocation.hasLocationEnabled()) {
             easyWayLocation.endUpdates();
@@ -205,23 +205,24 @@ public class SplashActivity extends BaseActivity implements Listener {
         }
 
         User user = AppSharedPreUtils.getInstance(getApplicationContext()).getUserDetails();
-        if (user == null)
-        {
+
+        if (user == null) {
             Intent loginActivity = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(loginActivity);
             finish();
-        }
-        else
-        if( user.getRole().equalsIgnoreCase("guest"))
-        {
+        } else if (user.getRole().equalsIgnoreCase("guest")) {
             Intent myAct = new Intent(getApplicationContext(), UserCreateActivity.class);
             myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             myAct.putExtra("number", "" + user.getMobile());
             startActivity(myAct);
             finish();
-        }
-
-        else {
+        } else if (!user.getIsPinAvailable())
+        {
+            Intent myAct = new Intent(getApplicationContext(), SetPinActivity.class);
+            myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(myAct);
+            finish();
+        } else {
             Intent loginActivity = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(loginActivity);
             finish();

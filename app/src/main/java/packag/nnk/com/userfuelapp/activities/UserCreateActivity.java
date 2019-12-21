@@ -157,6 +157,7 @@ public class UserCreateActivity extends BaseActivity {
             json.addProperty("role", "driver");
             json.addProperty("driverAggregator", "" + driverAgra);
             json.addProperty("mobile", "" + number);
+            json.addProperty("cabNumber", "" + number);
         } catch (Exception e) {
 
         }
@@ -175,7 +176,7 @@ public class UserCreateActivity extends BaseActivity {
                             .getInstance(getApplicationContext()).saveUserDetails(response.body().getUser());
                     User user = response.body().getUser();
                     if (user != null) {
-                        Intent myAct = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent myAct = new Intent(getApplicationContext(), SetPinActivity.class);
                         myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(myAct);
                         finish();

@@ -8,13 +8,20 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import packag.nnk.com.userfuelapp.R;
 import packag.nnk.com.userfuelapp.base.ApiUtils;
+import packag.nnk.com.userfuelapp.base.AppSharedPreUtils;
 import packag.nnk.com.userfuelapp.base.BaseActivity;
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
+import packag.nnk.com.userfuelapp.model.User;
+import packag.nnk.com.userfuelapp.model.UserDetails;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,8 +51,7 @@ public class SetPinActivity extends BaseActivity {
 
 
     @OnClick(R.id.submit_pin)
-    void validateEdit()
-    {
+    void validateEdit() {
         if (firstPin.getText().toString().length() == 4) {
 
         } else {
@@ -69,7 +75,7 @@ public class SetPinActivity extends BaseActivity {
     }
 
     void setThePin(String pin) {
-
+        showProgressDialog();
         JsonObject json = new JsonObject();
         try {
             json.addProperty("userId", "" + user.getUserId());
@@ -78,26 +84,63 @@ public class SetPinActivity extends BaseActivity {
 
         }
 
-        Call<String> payment = mApiService_.updatePin(json);
-        payment.enqueue(new Callback<String>() {
+        Call<UserDetails> payment = mApiService_.updatePin(json);
+        payment.enqueue(new Callback<UserDetails>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-              //  Toast.makeText(getApplicationContext(), "--" + response.body(), Toast.LENGTH_LONG).show();
+            public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
 
-                Intent myAct = new Intent(getApplicationContext(), MainActivity.class);
-                myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(myAct);
-                finish();
+                hideProgressDialog();
 
-                finish();
+
+                try {
+
+
+                    AppSharedPreUtils
+                            .getInstance(getApplicationContext()).saveUserDetails(response.body().getUser());
+                    User user = response.body().getUser();
+                    if (user != null) {
+                        Intent myAct = new Intent(getApplicationContext(), MainActivity.class);
+                        myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(myAct);
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Please try again!", Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+
+                    BufferedReader reader = null;
+                    StringBuilder sb = new StringBuilder();
+                    try {
+                        reader = new BufferedReader(new InputStreamReader(response.errorBody().byteStream()));
+                        String line;
+                        try {
+                            while ((line = reader.readLine()) != null) {
+                                sb.append(line);
+                            }
+                        } catch (IOException ea) {
+                            e.printStackTrace();
+                        }
+                    } catch (Exception eaa) {
+                        e.printStackTrace();
+                    }
+                    String finallyError = sb.toString();
+                    makeToast(finallyError);
+                }
+
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Please try again!", Toast.LENGTH_LONG).show();
+            public void onFailure(Call<UserDetails> call, Throwable t) {
+                hideProgressDialog();
+                Toast.makeText(getApplicationContext(), t.getMessage() + "Please try again!", Toast.LENGTH_LONG).show();
             }
         });
 
 
     }
+
+    void makeToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+    }
+
 }

@@ -21,6 +21,9 @@ public class User {
     @SerializedName("mobile")
     @Expose
     private String mobile;
+    @SerializedName("cabNumber")
+    @Expose
+    private Object cabNumber;
     @SerializedName("role")
     @Expose
     private String role;
@@ -33,9 +36,9 @@ public class User {
     @SerializedName("createdAt")
     @Expose
     private String createdAt;
-    @SerializedName("updatedAt")
+    @SerializedName("version")
     @Expose
-    private String updatedAt;
+    private Integer version;
     @SerializedName("isPinAvailable")
     @Expose
     private Boolean isPinAvailable;
@@ -80,6 +83,14 @@ public class User {
         this.mobile = mobile;
     }
 
+    public Object getCabNumber() {
+        return cabNumber;
+    }
+
+    public void setCabNumber(Object cabNumber) {
+        this.cabNumber = cabNumber;
+    }
+
     public String getRole() {
         return role;
     }
@@ -112,12 +123,12 @@ public class User {
         this.createdAt = createdAt;
     }
 
-    public String getUpdatedAt() {
-        return updatedAt;
+    public Integer getVersion() {
+        return version;
     }
 
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     public Boolean getIsPinAvailable() {
