@@ -4,16 +4,15 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.text.Editable;
-import android.text.InputType;
-import android.text.SpannableStringBuilder;
 import android.util.AttributeSet;
 import android.view.ActionMode;
 import android.view.View;
 
 import androidx.appcompat.widget.AppCompatEditText;
+
 import packag.nnk.com.userfuelapp.R;
 
-public class OtpEdittextClass extends AppCompatEditText
+public class OtpEdittextClassWithPass extends AppCompatEditText
 {
         private float mSpace = 24; //24 dp by default, space between the lines
         private float mNumChars = 4;
@@ -23,22 +22,24 @@ public class OtpEdittextClass extends AppCompatEditText
         private Paint mLinesPaint;
         private OnClickListener mClickListener;
 
-        public OtpEdittextClass(Context context) {
+        public OtpEdittextClassWithPass(Context context) {
             super(context);
         }
 
-        public OtpEdittextClass(Context context, AttributeSet attrs) {
+        public OtpEdittextClassWithPass(Context context, AttributeSet attrs) {
             super(context, attrs);
             init(context, attrs);
         }
 
-        public OtpEdittextClass(Context context, AttributeSet attrs, int defStyleAttr) {
+        public OtpEdittextClassWithPass(Context context, AttributeSet attrs, int defStyleAttr) {
             super(context, attrs, defStyleAttr);
             init(context, attrs);
         }
 
         private void init(Context context, AttributeSet attrs) {
             float multi = context.getResources().getDisplayMetrics().density;
+//            setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+//            setTransformationMethod(PasswordTransformationMethod.getInstance());
             mLineStroke = multi * mLineStroke;
             mLinesPaint = new Paint(getPaint());
             mLinesPaint.setStrokeWidth(mLineStroke);
@@ -82,19 +83,21 @@ public class OtpEdittextClass extends AppCompatEditText
 
             int startX = getPaddingLeft();
             int bottom = getHeight() - getPaddingBottom();
-
+            String ar[]= {"*","*","**","***","****"};
             //Text Width
             Editable text = getText();
-//            Editable text =Editable.Factory.getInstance().newEditable("*");// new SpannableStringBuilder("*");
+//            Log.d("TEXTT","TES"+text.toString());
+            Editable text1 =Editable.Factory.getInstance().newEditable(ar[text.length()]);// new SpannableStringBuilder("*");
             int textLength = text.length();
             float[] textWidths = new float[textLength];
             getPaint().getTextWidths(getText(), 0, textLength, textWidths);
+
 
             for (int i = 0; i < mNumChars; i++) {
                 canvas.drawLine(startX, bottom, startX + mCharSize, bottom, mLinesPaint);
                 if (getText().length() > i) {
                     float middle = startX + mCharSize / 2;
-                    canvas.drawText(text, i, i + 1, middle - textWidths[0] / 2, bottom - mLineSpacing, getPaint());
+                    canvas.drawText(text1, i, i + 1, middle - textWidths[0] / 2, bottom - mLineSpacing, getPaint());
                 }
                 if (mSpace < 0) {
                     startX += mCharSize * 2;

@@ -2,6 +2,7 @@ package packag.nnk.com.userfuelapp.fragment_view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,6 +16,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -64,16 +66,22 @@ public class PinVerification extends DialogFragment implements TextWatcher
 //        getActivity().getWindow().setSoftInputMode(
 ////            WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
     }
-
+    protected   void setFont(TextView tc)
+    {
+        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/GOTHAM-ROUNDED-BOO.OTF");
+        tc.setTypeface(tf);
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.pin_verification_fragment, container, false);
+
         et_otp= view.findViewById(R.id.et_otp);
 
         button = view.findViewById(R.id.verify_pin);
-
+        setFont(et_otp);
+        setFont(button);
         et_otp.setTransformationMethod(PasswordTransformationMethod.getInstance());
         // pin = (Pinview) view.findViewById(R.id.pinview);
 //        pin.setInputType(Pinview.InputType.NUMBER);
