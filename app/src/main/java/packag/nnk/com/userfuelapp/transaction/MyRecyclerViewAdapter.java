@@ -49,7 +49,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         final RangeTransaction feedItem = feedItemList.get(i);
 
         customViewHolder.title.setText(Html.fromHtml(feedItem.getPetrolBunkDetail().getPetrolBunkName()));
-        customViewHolder.time.setText(Html.fromHtml(dateFromat(feedItem.getPaymentDate())));
+        customViewHolder.time.setText("Time : "+Html.fromHtml(dateFromat(feedItem.getPaymentDate())));
         customViewHolder.address.setText(Html.fromHtml(feedItem.getPetrolBunkDetail().getPetrolBunkAddress()));
         NumberFormat format = new DecimalFormat("0.#");
         customViewHolder.rupees.setText(Html.fromHtml("Paid Amount : " + mContext.getResources().getString(R.string.symbol_rs)

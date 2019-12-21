@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/thumbnail"
             android:layout_width="55dp"
             android:layout_height="55dp"
@@ -32,13 +32,13 @@
             android:maxLines="3"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textColor="#444"
-            android:textSize="18dp"
+            android:textSize="20dp"
             android:layout_marginTop="2dp"
             android:text="Indion oil Corporation Lim"
             android:textStyle="bold"/>
 
 
-        <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+        <packag.nnk.com.userfuelapp.ui.CustomTextView
             android:id="@+id/address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             android:textSize="16dp"
             android:textStyle="bold"/>
 
-        <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+        <packag.nnk.com.userfuelapp.ui.CustomTextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             android:textSize="16dp"
           />
 
-        <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+        <packag.nnk.com.userfuelapp.ui.CustomTextView
             android:id="@+id/rupees"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

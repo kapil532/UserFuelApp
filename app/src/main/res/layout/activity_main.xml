@@ -22,7 +22,7 @@
 
             <include layout="@layout/petrol_bunk_single_list" />
 
-            <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+            <packag.nnk.com.userfuelapp.ui.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
