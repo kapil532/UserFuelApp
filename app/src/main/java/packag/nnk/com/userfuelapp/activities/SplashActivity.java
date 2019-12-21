@@ -41,6 +41,7 @@ public class SplashActivity extends BaseActivity implements Listener {
 
 
     EasyWayLocation easyWayLocation;
+
     private Double lati, longi;
 
     @Override
@@ -54,12 +55,30 @@ public class SplashActivity extends BaseActivity implements Listener {
         } else {
             Toast.makeText(this, "No google play services enabled", Toast.LENGTH_SHORT).show();
         }
-        easyWayLocation = new EasyWayLocation(this, false, this);
-        easyWayLocation.startLocation();
+        easyWayLocation = new EasyWayLocation(this, false,this);
+        if (permissionIsGranted()) {
+            doLocationWork();
+        } else {
+            // Permission not granted, ask for it
+            getLocationPermission();
+        }
+
     }
 
+    public boolean permissionIsGranted() {
+
+        int permissionState = ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+
+        return permissionState == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void doLocationWork() {
+        easyWayLocation.startLocation();
+    }
     @Override
     public void locationOn() {
+        easyWayLocation.startLocation();
         Toast.makeText(this, "Location ON", Toast.LENGTH_SHORT).show();
     }
 
@@ -114,9 +133,7 @@ public class SplashActivity extends BaseActivity implements Listener {
         if (ContextCompat.checkSelfPermission(this, FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             Log.e(TAG, "3");
 
-//            createLocationRequest();
-            easyWayLocation = new EasyWayLocation(this, false, this);
-           // easyWayLocation.startLocation();
+            easyWayLocation.startLocation();
 
         } else {
             ActivityCompat.requestPermissions(this, myPer, PER_REQ_CODE);
@@ -162,8 +179,8 @@ public class SplashActivity extends BaseActivity implements Listener {
                         }
                     }
                     Log.d(TAG, "onRequestPermissionsResult: permission granted");
-                    easyWayLocation = new EasyWayLocation(this, false, this);
-//                    easyWayLocation.startLocation();
+//                    easyWayLocation = new EasyWayLocation(this, false, this);
+                    easyWayLocation.startLocation();
                     // createLocationRequest();
                 }
             }

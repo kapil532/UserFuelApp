@@ -86,7 +86,6 @@ public class TransactionActivity extends BaseActivity {
                         no_text.setVisibility(View.VISIBLE);
                     }
 
-
                 }
                 else
                     {
