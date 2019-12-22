@@ -34,6 +34,7 @@ public class CommonClass
     public static final String AUTH_REGISTER = "auth/register";
     public static final String VALIDATE_PIN = "user/validatePin";
     public static final String UPDATE_PROFILE = "user/updateProfile";
+    public static final String FIREBASE_TOKEN = "user/updateProfile";
     public static final String RANGE_TRANSACTION = "driver/transaction/";
     public static final String DRIVER_PAYMENT = " driver/bunkPayment/";
 

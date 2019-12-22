@@ -463,7 +463,7 @@ public class MainActivity extends BaseActivity implements
         text_800.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                paymentPrice = 500.0;
+                paymentPrice = 800.0;
                 text_800.setBackground(getResources().getDrawable(
                         R.drawable.rect_select_sel_round));
                 text_200.setBackground(getResources().getDrawable(
@@ -481,7 +481,7 @@ public class MainActivity extends BaseActivity implements
         text_100.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                paymentPrice = 500.0;
+                paymentPrice = 100.0;
                 text_100.setBackground(getResources().getDrawable(
                         R.drawable.rect_select_sel_round));
                 text_200.setBackground(getResources().getDrawable(
@@ -684,5 +684,47 @@ public class MainActivity extends BaseActivity implements
         }, 2000);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(AppSharedPreUtils.getInstance(getApplicationContext()).getStringValues("FIREBASE_KEY").length()>10)
+        {
+          sendFirebaseTokenToServer();
+        }
+    }
+
+    void sendFirebaseTokenToServer()
+    {
+        JsonObject json = new JsonObject();
+        try {
+            Log.e("USERID","----"+user.getUserId());
+            json.addProperty("userId", "" + user.getUserId());
+            json.addProperty("firebaseToken", "" + AppSharedPreUtils.getInstance(getApplicationContext()).getStringValues("FIREBASE_KEY"));
+        } catch (Exception e)
+        {
+
+        }
+
+        Call<UserDetails> tokenUpdate = mApiService_.updateToken(json);
+        tokenUpdate.enqueue(new Callback<UserDetails>() {
+            @Override
+            public void onResponse(Call<UserDetails> call, Response<UserDetails> response)
+            {
+
+                        if(response.isSuccessful())
+                        {
+//                            Log.e("USERDETAILS","USERDETAI"+response.message());
+
+                            AppSharedPreUtils.getInstance(getApplicationContext()).removeValues("FIREBASE_KEY");
+                        }
+            }
+
+            @Override
+            public void onFailure(Call<UserDetails> call, Throwable t) {
+
+            }
+        });
+    }
 }
 
