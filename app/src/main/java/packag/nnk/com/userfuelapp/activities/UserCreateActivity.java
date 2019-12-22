@@ -179,6 +179,8 @@ public class UserCreateActivity extends BaseActivity {
                             .getInstance(getApplicationContext()).saveUserDetails(response.body().getUser());
                     User user = response.body().getUser();
                     if (user != null) {
+
+                        Toast.makeText(getApplicationContext(), "Details updated!", Toast.LENGTH_LONG).show();
                         Intent myAct = new Intent(getApplicationContext(), SetPinActivity.class);
                         myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(myAct);

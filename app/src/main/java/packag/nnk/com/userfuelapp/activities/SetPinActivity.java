@@ -99,6 +99,7 @@ public class SetPinActivity extends BaseActivity {
                             .getInstance(getApplicationContext()).saveUserDetails(response.body().getUser());
                     User user = response.body().getUser();
                     if (user != null) {
+                        Toast.makeText(getApplicationContext(), "Your secret pin set successfully!", Toast.LENGTH_LONG).show();
                         Intent myAct = new Intent(getApplicationContext(), MainActivity.class);
                         myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(myAct);
