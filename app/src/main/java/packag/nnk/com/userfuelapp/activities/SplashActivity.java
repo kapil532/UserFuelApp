@@ -42,7 +42,7 @@ public class SplashActivity extends BaseActivity implements Listener {
 
     EasyWayLocation easyWayLocation;
 
-    private Double lati, longi;
+    private Double lati = 0.0, longi = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,9 @@ public class SplashActivity extends BaseActivity implements Listener {
         } else {
             Toast.makeText(this, "No google play services enabled", Toast.LENGTH_SHORT).show();
         }
-        easyWayLocation = new EasyWayLocation(this, false, this);
+//        easyWayLocation = new EasyWayLocation(this, false, this);
+//        easyWayLocation.startLocation();
+        openLocation();
         if (permissionIsGranted()) {
             doLocationWork();
         } else {
@@ -74,12 +76,23 @@ public class SplashActivity extends BaseActivity implements Listener {
     }
 
     private void doLocationWork() {
-        easyWayLocation.startLocation();
+        lati = easyWayLocation.getLatitude();
+        longi = easyWayLocation.getLongitude();
+        Log.e("LOC", "LOC" + lati);
+        if (lati != 0.0) {
+            packag.nnk.com.userfuelapp.model.Location loc = new packag.nnk.com.userfuelapp.model.Location();
+            loc.setLatitude(easyWayLocation.getLatitude());
+            loc.setLongitude(easyWayLocation.getLongitude());
+            openNextActivity();
+        }
+//        easyWayLocation.startLocation();
     }
 
     @Override
     public void locationOn() {
-        easyWayLocation.startLocation();
+        // easyWayLocation.startLocation();
+
+      //  doLocationWork();
         Toast.makeText(this, "Location ON", Toast.LENGTH_SHORT).show();
     }
 
@@ -119,6 +132,7 @@ public class SplashActivity extends BaseActivity implements Listener {
     @Override
     protected void onResume() {
         super.onResume();
+
         //  easyWayLocation.startLocation();
     }
 
@@ -134,7 +148,7 @@ public class SplashActivity extends BaseActivity implements Listener {
         if (ContextCompat.checkSelfPermission(this, FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             Log.e(TAG, "3");
 
-           // easyWayLocation.startLocation();
+            // easyWayLocation.startLocation();
 
         } else {
             ActivityCompat.requestPermissions(this, myPer, PER_REQ_CODE);
@@ -181,13 +195,31 @@ public class SplashActivity extends BaseActivity implements Listener {
                     }
                     Log.d(TAG, "onRequestPermissionsResult: permission granted");
 //                    easyWayLocation = new EasyWayLocation(this, false, this);
-                    easyWayLocation.startLocation();
+//                    easyWayLocation.startLocation();
                     // createLocationRequest();
+
+                  //  doLocationWork();
+                    openLocation();
                 }
             }
         }
     }
 
+
+  void openLocation()
+  {
+      if(easyWayLocation == null)
+      {
+          easyWayLocation = new EasyWayLocation(this, false, this);
+                    easyWayLocation.startLocation();
+      }
+      else
+
+      if(easyWayLocation.hasLocationEnabled())
+      {
+          easyWayLocation.startLocation();
+      }
+  }
 
     @Override
     protected void onStop() {
@@ -199,40 +231,41 @@ public class SplashActivity extends BaseActivity implements Listener {
 
     void openNextActivity() {
 
-        if (easyWayLocation.hasLocationEnabled()) {
-            easyWayLocation.endUpdates();
-            easyWayLocation = null;
-        }
+        if (easyWayLocation != null) {
+            if (easyWayLocation.hasLocationEnabled()) {
+                easyWayLocation.endUpdates();
+                easyWayLocation = null;
+            }
 
-        User user = AppSharedPreUtils.getInstance(getApplicationContext()).getUserDetails();
+            User user = AppSharedPreUtils.getInstance(getApplicationContext()).getUserDetails();
 
-        try {
+            try {
 
-            if (user == null) {
-                Intent loginActivity = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(loginActivity);
-                finish();
-            } else if (user.getRole().equalsIgnoreCase("guest")) {
-                Intent myAct = new Intent(getApplicationContext(), UserCreateActivity.class);
-                myAct.putExtra("number", "" + user.getMobile());
-                startActivity(myAct);
-                finish();
-            } else if (!user.getIsPinAvailable()) {
-                Intent myAct = new Intent(getApplicationContext(), SetPinActivity.class);
-                startActivity(myAct);
-                finish();
+                if (user == null) {
+                    Intent loginActivity = new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(loginActivity);
+                    finish();
+                } else if (user.getRole().equalsIgnoreCase("guest")) {
+                    Intent myAct = new Intent(getApplicationContext(), UserCreateActivity.class);
+                    myAct.putExtra("number", "" + user.getMobile());
+                    startActivity(myAct);
+                    finish();
+                } else if (!user.getIsPinAvailable()) {
+                    Intent myAct = new Intent(getApplicationContext(), SetPinActivity.class);
+                    startActivity(myAct);
+                    finish();
 
-            } else {
+                } else {
+                    Intent loginActivity = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(loginActivity);
+                    finish();
+                }
+            } catch (Exception e) {
                 Intent loginActivity = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(loginActivity);
                 finish();
             }
-        }
-        catch (Exception e)
-        {
-            Intent loginActivity = new Intent(SplashActivity.this, MainActivity.class);
-            startActivity(loginActivity);
-            finish();
+
         }
     }
 

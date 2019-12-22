@@ -67,7 +67,7 @@ public interface ApiInterface
     @POST(CommonClass.DRIVER_PAYMENT+"{userId}")
     Call<Payment> doPayment(@Body JsonObject json,@Path("userId") String userId);
 
-    @POST(CommonClass.AUTH_REGISTER)
+    @POST(CommonClass.UPDATE_PROFILE)
     Call<UserDetails> createUser(@Body JsonObject json);
 
 

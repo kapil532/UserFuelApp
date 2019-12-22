@@ -154,7 +154,9 @@ public class UserCreateActivity extends BaseActivity {
         JsonObject json = new JsonObject();
         try {
             json.addProperty("email", "" + email);
-            json.addProperty("password", "");
+//            json.addProperty("password", "");
+            json.addProperty("username", ""+name.getText().toString());
+            json.addProperty("userId", "" + user.getUserId());
             json.addProperty("role", "driver");
             json.addProperty("driverAggregator", "" + driverAgra);
             json.addProperty("mobile", "" + user.getMobile());

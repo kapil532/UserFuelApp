@@ -47,6 +47,7 @@ public class ErrorUtils {
         }
         String finallyError = sb.toString();
 
+        Log.e("EOOROR","ERROR"+finallyError);
         Gson gson = new Gson();
 
         return gson.fromJson(finallyError, FailedStatus.class);
