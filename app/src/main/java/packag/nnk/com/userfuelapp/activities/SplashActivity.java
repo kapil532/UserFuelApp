@@ -206,25 +206,30 @@ public class SplashActivity extends BaseActivity implements Listener {
 
         User user = AppSharedPreUtils.getInstance(getApplicationContext()).getUserDetails();
 
-        if (user == null)
-        {
-            Intent loginActivity = new Intent(SplashActivity.this, LoginActivity.class);
-            startActivity(loginActivity);
-            finish();
-        } else if (user.getRole().equalsIgnoreCase("guest")) {
-            Intent myAct = new Intent(getApplicationContext(), UserCreateActivity.class);
-            myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            myAct.putExtra("number", "" + user.getMobile());
-            startActivity(myAct);
-            finish();
-        } else if (!user.getIsPinAvailable())
-        {
-            Intent myAct = new Intent(getApplicationContext(), SetPinActivity.class);
-            myAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(myAct);
-            finish();
+        try {
 
-        } else {
+            if (user == null) {
+                Intent loginActivity = new Intent(SplashActivity.this, LoginActivity.class);
+                startActivity(loginActivity);
+                finish();
+            } else if (user.getRole().equalsIgnoreCase("guest")) {
+                Intent myAct = new Intent(getApplicationContext(), UserCreateActivity.class);
+                myAct.putExtra("number", "" + user.getMobile());
+                startActivity(myAct);
+                finish();
+            } else if (!user.getIsPinAvailable()) {
+                Intent myAct = new Intent(getApplicationContext(), SetPinActivity.class);
+                startActivity(myAct);
+                finish();
+
+            } else {
+                Intent loginActivity = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(loginActivity);
+                finish();
+            }
+        }
+        catch (Exception e)
+        {
             Intent loginActivity = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(loginActivity);
             finish();
