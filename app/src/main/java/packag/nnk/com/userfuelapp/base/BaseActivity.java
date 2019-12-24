@@ -38,7 +38,7 @@ public class BaseActivity extends AppCompatActivity
     private Dialog dialog;
     private AnimationDrawable animationDrawable;
    public User user;
-
+protected String URL_IMAGE;
 
 
     @Override
@@ -47,7 +47,8 @@ public class BaseActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
          user =   AppSharedPreUtils.getInstance(getApplicationContext()).getUserDetails();
-
+         if(user != null)
+             URL_IMAGE ="https://firebasestorage.googleapis.com/v0/b/gofueluser.appspot.com/o/images%2F"+user.getUserId()+".png?alt=media&token=19cffa0e-d0d2-4562-8ee6-75c9207c263f";
     }
 
     public SpannableString getSpannableString(Context context, String text)

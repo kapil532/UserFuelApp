@@ -186,7 +186,7 @@ public class UserCreateActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-        loadProfile("https://firebasestorage.googleapis.com/v0/b/gofueluser.appspot.com/o/images%2Fd4a5ac43-f09c-43b0-ba8f-193eb9495104.png?alt=media&token=19cffa0e-d0d2-4562-8ee6-75c9207c263f");
+        loadProfile(URL_IMAGE);
     }
 
     void setTheValues() {
@@ -307,9 +307,11 @@ public class UserCreateActivity extends BaseActivity {
     private void loadProfile(String url) {
         Log.d("USER", "Image cache path: " + url);
 
-        Picasso.with(this).load(url)
-                .into(profileIcon);
-        profileIcon.setColorFilter(ContextCompat.getColor(this, android.R.color.transparent));
+        Picasso.with(this).load(url).
+                placeholder(R.drawable.iconfinder_je).
+                error(R.drawable.iconfinder_je).skipMemoryCache().
+                into(profileIcon);
+
     }
 
     private void loadProfileDefault() {

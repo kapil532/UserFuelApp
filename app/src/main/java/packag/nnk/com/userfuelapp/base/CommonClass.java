@@ -40,6 +40,7 @@ public class CommonClass
     public static final String UPLOAD_IMAGE = "upload-image/";
     public static final String DRIVER_IMAGE = "driver/image/";
 
+
 //    driver/bunkPayment/625ea288-c31c-4e21-ab5d-6d88af2a01fe
 
 //    api/driver/rangeTransaction/627a72e0-baf4-4eb2-9d07-afd15c30717e/30

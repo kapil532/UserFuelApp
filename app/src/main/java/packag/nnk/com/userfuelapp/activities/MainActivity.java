@@ -152,6 +152,10 @@ public class MainActivity extends BaseActivity implements
         View hView = navigationView.getHeaderView(0);
         TextView nav_user = (TextView) hView.findViewById(R.id.appCompatTextView);
         ImageView appCompatImageView = (ImageView) hView.findViewById(R.id.appCompatImageView);
+        Picasso.with(this).load(URL_IMAGE).
+                placeholder(R.mipmap.ic_launcher).
+                error(R.mipmap.ic_launcher).skipMemoryCache().
+                into(appCompatImageView);
         nav_user.setText(user.getUsername());
         appCompatImageView.setOnClickListener(new View.OnClickListener() {
             @Override
