@@ -81,9 +81,6 @@ public interface ApiInterface {
     @POST(CommonClass.GET_OTP)
     Call<OtpRes> getOtp(@Body JsonObject json);
 
-    @POST(CommonClass.RANGE_TRANSACTION)
-    Call<TransactionPojo> getTransactionList(@Body JsonObject json);
-
 
     @POST(CommonClass.VALIDATE_OTP)
     Call<UserDetails> otpValidate(@Body JsonObject json);

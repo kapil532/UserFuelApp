@@ -113,7 +113,7 @@ public class SuccessScreen extends BaseActivity {
     @OnClick(R.id.supportLayout)
     void openSupport()
     {
-        Intent history = new Intent(getApplicationContext(), TransactionActivity.class);
+        Intent history = new Intent(getApplicationContext(), CustomSupportScreenActivity.class);
         startActivity(history);
         finish();
     }

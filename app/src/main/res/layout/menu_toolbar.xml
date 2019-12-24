@@ -9,16 +9,17 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark" >
     <ImageView
         android:id="@+id/menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_menu_icon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_iconfinder_list"
         />
 
-    <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+    <packag.nnk.com.userfuelapp.ui.CustomTextView
         android:id="@+id/textHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="header"
+        android:textColor="@color/white_color"
         android:layout_marginLeft="40dp"
-        android:textSize="24sp"/>
+        android:textSize="22sp"/>
 </androidx.appcompat.widget.Toolbar>

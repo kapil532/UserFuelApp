@@ -174,7 +174,19 @@ public class UserCreateActivity extends BaseActivity {
         name.setText(user.getUsername());
         email_optional.setText("" + user.getEmail());
         driverId.setText(""+user.getCabNumber());
-      spinner.setSpinnerHint(""+user.getDriverAggregator());
+        if(user.getDriverAggregator().toString().equalsIgnoreCase("ola"))
+        {
+            spinner.setSelection(0);
+        }
+        else if(user.getDriverAggregator().toString().equalsIgnoreCase("uber"))
+        {
+            spinner.setSelection(1);
+        }
+        else
+        {
+            spinner.setSelection(2);
+        }
+
     }
 
     void createUser(String pin, String driverAgra, String email) {
