@@ -73,9 +73,6 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 
@@ -154,7 +151,15 @@ public class MainActivity extends BaseActivity implements
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
         View hView = navigationView.getHeaderView(0);
         TextView nav_user = (TextView) hView.findViewById(R.id.appCompatTextView);
+        ImageView appCompatImageView = (ImageView) hView.findViewById(R.id.appCompatImageView);
         nav_user.setText(user.getUsername());
+        appCompatImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent  userAct = new Intent(getApplicationContext(),UserCreateActivity.class);
+                startActivity(userAct);
+            }
+        });
 
 
         mApiService = new ApiUtils().getApiInterfacesForPetrolBunk();

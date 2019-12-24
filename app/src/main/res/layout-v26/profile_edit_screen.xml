@@ -25,6 +25,7 @@
 
             <RelativeLayout
                 android:layout_width="90dp"
+                android:id="@+id/round"
                 android:layout_centerInParent="true"
                 android:layout_height="wrap_content">
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -46,6 +47,18 @@
                     />
 
             </RelativeLayout>
+
+            <packag.nnk.com.userfuelapp.ui.CustomTextView
+                android:layout_width="match_parent"
+                android:id="@+id/mobile"
+                android:textColor="@color/white_color"
+                android:textSize="15sp"
+                android:text="8095128426"
+                android:layout_below="@+id/round"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"/>
 
         </RelativeLayout>
 

@@ -82,6 +82,11 @@ public class UserCreateActivity extends BaseActivity {
     @BindView(R.id.skip)
     TextView skip;
 
+    @BindView(R.id.mobile)
+    TextView mobile;
+
+
+
     @BindView(R.id.profileIcon)
     CircleImageView profileIcon;
 
@@ -107,6 +112,8 @@ public class UserCreateActivity extends BaseActivity {
         if (extras != null) {
             number = extras.getString("number");
         }
+
+        mobile.setText("Mobile No. +91-"+user.getMobile());
 
         loadProfileDefault();
         List<String> categories = new ArrayList<String>();
@@ -154,6 +161,8 @@ public class UserCreateActivity extends BaseActivity {
 //        user
         name.setText(user.getUsername());
         email_optional.setText("" + user.getEmail());
+        driverId.setText(""+user.getCabNumber());
+      spinner.setSpinnerHint(""+user.getDriverAggregator());
     }
 
     void createUser(String pin, String driverAgra, String email) {
