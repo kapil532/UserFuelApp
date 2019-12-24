@@ -35,12 +35,6 @@ import retrofit2.http.Query;
 public interface ApiInterface {
 
 
-    //Call @GET("json?location=12.91304959,77.6421376&radius=1500&type=gas_station&key=AIzaSyBDCa_MSc0rmkV-IDo4CiOZRywm8jvG_2c")
-
-//    @GET("json?location=12.91304959,77.6421376&radius=1500&type=gas_station&key=AIzaSyBDCa_MSc0rmkV-IDo4CiOZRywm8jvG_2c")
-//    Call<GetList> getPetrolList();
-
-
     @GET("json")
     Call<GetList> getPetrolList(@Query(value = "location", encoded = true) String latLng,
                                 @Query(value = "radius") String radius,

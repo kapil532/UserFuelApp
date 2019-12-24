@@ -617,6 +617,7 @@ public class MainActivity extends BaseActivity implements
 
 
     void doPayment(String price, String petrolID) {
+        showProgressDialog();
         JsonObject json = new JsonObject();
         try {
             json.addProperty("driverId", "" + user.getUserId());
@@ -631,7 +632,7 @@ public class MainActivity extends BaseActivity implements
             @Override
             public void onResponse(Call<Payment> call, Response<Payment> response) {
 
-
+                hideProgressDialog();
                 try {
                     Log.e("MAINACTIVITY", "VALUES" + response.body());
                     Payment payment = response.body();
@@ -655,6 +656,7 @@ public class MainActivity extends BaseActivity implements
 
             @Override
             public void onFailure(Call<Payment> call, Throwable t) {
+                hideProgressDialog();
                 Toast.makeText(getApplicationContext(), "Please try again!", Toast.LENGTH_LONG).show();
             }
         });
@@ -688,36 +690,31 @@ public class MainActivity extends BaseActivity implements
     protected void onResume() {
         super.onResume();
 
-        if(AppSharedPreUtils.getInstance(getApplicationContext()).getStringValues("FIREBASE_KEY").length()>10)
-        {
-          sendFirebaseTokenToServer();
+        if (AppSharedPreUtils.getInstance(getApplicationContext()).getStringValues("FIREBASE_KEY").length() > 10) {
+            sendFirebaseTokenToServer();
         }
     }
 
-    void sendFirebaseTokenToServer()
-    {
+    void sendFirebaseTokenToServer() {
         JsonObject json = new JsonObject();
         try {
-            Log.e("USERID","----"+user.getUserId());
+            Log.e("USERID", "----" + user.getUserId());
             json.addProperty("userId", "" + user.getUserId());
             json.addProperty("firebaseToken", "" + AppSharedPreUtils.getInstance(getApplicationContext()).getStringValues("FIREBASE_KEY"));
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
 
         }
 
         Call<UserDetails> tokenUpdate = mApiService_.updateToken(json);
         tokenUpdate.enqueue(new Callback<UserDetails>() {
             @Override
-            public void onResponse(Call<UserDetails> call, Response<UserDetails> response)
-            {
+            public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
 
-                        if(response.isSuccessful())
-                        {
+                if (response.isSuccessful()) {
 //                            Log.e("USERDETAILS","USERDETAI"+response.message());
 
-                            AppSharedPreUtils.getInstance(getApplicationContext()).removeValues("FIREBASE_KEY");
-                        }
+                    AppSharedPreUtils.getInstance(getApplicationContext()).removeValues("FIREBASE_KEY");
+                }
             }
 
             @Override

@@ -5,27 +5,198 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/top"
+        android:layout_height="160dp"
+        android:background="@color/colorPrimary">
 
-    <packag.nnk.com.userfuelapp.check_view.CheckView
-        android:id="@+id/checkbox"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
-        app:checkView_strokeColor="@color/polyLine_2to4_color"
-        app:checkView_strokeWidth="@dimen/dimen_10dp" />
 
-    <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
-        android:id="@+id/success_text"
-        android:layout_width="wrap_content"
+        <packag.nnk.com.userfuelapp.check_view.CheckView
+            android:id="@+id/checkbox"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            app:checkView_strokeColor="@color/polyLine_2to4_color"
+            app:checkView_strokeWidth="7dp" />
+
+
+        <packag.nnk.com.userfuelapp.ui.CustomTextView
+            android:id="@+id/success_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/checkbox"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="Transaction Successful"
+            android:textColor="@color/white_color"
+            android:textSize="20sp" />
+
+        <packag.nnk.com.userfuelapp.ui.CustomTextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/success_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="Date Time"
+            android:textColor="@color/white_color"
+            android:textSize="16sp" />
+
+
+
+
+    </RelativeLayout>
+
+ <androidx.cardview.widget.CardView
+     android:id="@+id/transaction_card"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_below="@+id/top"
+     android:elevation="10dp"
+     app:cardElevation="10dp"
+     >
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="vertical"
+         android:layout_margin="16dp"
+         >
+
+         <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textSize="18sp"
+             android:textColor="@color/quantum_black_100"
+             android:text="Transaction ID"
+
+             />
+
+         <packag.nnk.com.userfuelapp.ui.CustomTextView
+             android:layout_width="wrap_content"
+             android:id="@+id/transaction_id"
+             android:layout_height="wrap_content"
+             android:textSize="18sp"
+             android:layout_marginTop="10dp"
+             android:textColor="@color/quantum_black_100"
+             android:text="Transaction ID"
+
+             />
+
+     </LinearLayout>
+
+
+
+ </androidx.cardview.widget.CardView>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/paid_card"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/checkbox"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:text="Payment done successfully!!"
-        android:textColor="@color/quantum_black_100"
-        android:textSize="22sp" />
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/transaction_card"
+        android:elevation="10dp"
+        app:cardElevation="10dp"
+        >
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="16dp"
+            >
+
+            <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/quantum_black_100"
+                android:text="Paid to"
+
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:orientation="horizontal">
+            <packag.nnk.com.userfuelapp.ui.CustomTextView
+                android:layout_width="0dp"
+                android:id="@+id/bunkName"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_weight="2"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/quantum_black_100"
+                android:text="Bunk Name"
+
+                />
+
+
+                <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/paidAmount"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:gravity="right"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/quantum_black_100"
+                    android:text="80"
+
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/supportLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/paid_card"
+        android:elevation="10dp"
+        app:cardElevation="10dp"
+        android:layout_marginTop="16dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_suppor">
+
+            </ImageView>
+            <packag.nnk.com.userfuelapp.ui.CustomTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_weight="2"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/quantum_black_100"
+                android:text="Contact goFuel Support"
+
+                />
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
     <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
         android:id="@+id/p_name"
         android:layout_width="wrap_content"
@@ -33,11 +204,12 @@
         android:textColor="@color/colorAccent"
         android:textSize="20sp"
         android:text="@string/Skip"
+        android:visibility="gone"
         android:lineSpacingExtra="@dimen/dimen_10dp"
         android:layout_margin="12dp"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:layout_below="@+id/success_text"/>
+        android:layout_below="@+id/top"/>
 
 
 
