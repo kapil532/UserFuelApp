@@ -16,6 +16,8 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.easywaylocation.EasyWayLocation;
@@ -43,6 +45,7 @@ public class SplashActivity extends BaseActivity implements Listener {
     EasyWayLocation easyWayLocation;
 
     private Double lati = 0.0, longi = 0.0;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,7 @@ public class SplashActivity extends BaseActivity implements Listener {
             // Permission not granted, ask for it
             getLocationPermission();
         }
-
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
     public boolean permissionIsGranted() {
@@ -92,7 +95,7 @@ public class SplashActivity extends BaseActivity implements Listener {
     public void locationOn() {
         // easyWayLocation.startLocation();
 
-      //  doLocationWork();
+        //  doLocationWork();
         Toast.makeText(this, "Location ON", Toast.LENGTH_SHORT).show();
     }
 
@@ -198,7 +201,7 @@ public class SplashActivity extends BaseActivity implements Listener {
 //                    easyWayLocation.startLocation();
                     // createLocationRequest();
 
-                  //  doLocationWork();
+                    //  doLocationWork();
                     openLocation();
                 }
             }
@@ -206,24 +209,19 @@ public class SplashActivity extends BaseActivity implements Listener {
     }
 
 
-  void openLocation()
-  {
-      if(easyWayLocation == null)
-      {
-          easyWayLocation = new EasyWayLocation(this, false, this);
-                    easyWayLocation.startLocation();
-      }
-      else
-
-      if(easyWayLocation.hasLocationEnabled())
-      {
-          easyWayLocation.startLocation();
-      }
-  }
+    void openLocation() {
+        if (easyWayLocation == null) {
+            easyWayLocation = new EasyWayLocation(this, false, this);
+            easyWayLocation.startLocation();
+        } else if (easyWayLocation.hasLocationEnabled()) {
+            easyWayLocation.startLocation();
+        }
+    }
 
     @Override
     protected void onStop() {
         super.onStop();
+        progressBar.setVisibility(View.GONE);
 //        easyWayLocation.endUpdates();
 
 //        yourCountDownTimer.cancel();
