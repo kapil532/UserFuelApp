@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -86,6 +87,10 @@ public class UserCreateActivity extends BaseActivity {
     TextView mobile;
 
 
+    @BindView(R.id.back)
+    ImageView back;
+
+
 
     @BindView(R.id.profileIcon)
     CircleImageView profileIcon;
@@ -154,6 +159,13 @@ public class UserCreateActivity extends BaseActivity {
         setFont(email_optional);
         setFont(driverId);
         setTheValues();
+    }
+
+
+    @OnClick(R.id.back)
+    void finsihActivity()
+    {
+        finish();
     }
 
 
@@ -269,7 +281,7 @@ public class UserCreateActivity extends BaseActivity {
     }
 
     private void loadProfileDefault() {
-        Picasso.with(this).load(R.drawable.icon_pro)
+        Picasso.with(this).load(R.drawable.iconfinder_je)
                 .into(profileIcon);
         profileIcon.setColorFilter(ContextCompat.getColor(this, android.R.color.transparent));
     }
