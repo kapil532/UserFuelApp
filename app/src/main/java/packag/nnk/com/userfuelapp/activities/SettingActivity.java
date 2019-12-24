@@ -70,7 +70,7 @@ import packag.nnk.com.userfuelapp.base.CommonClass;
         context= getApplicationContext();
         setupNavigation();
         initializeSw();
-
+        getVersion();
 
     }
      private String VersionName;

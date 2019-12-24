@@ -2,8 +2,11 @@ package packag.nnk.com.userfuelapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
@@ -46,6 +49,28 @@ public class SetPinActivity extends BaseActivity {
         ButterKnife.bind(this);
         mApiService_ = new ApiUtils().getApiInterfaces();
         setFont(submit_pin);
+
+        firstPin.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                    //do what you want on the press of 'done'
+                    secondPin.setFocusable(true);
+                }
+                return false;
+            }
+
+        });
+
+
+        secondPin.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                    //do what you want on the press of 'done'
+                    validateEdit();
+                }
+                return false;
+            }
+        });
 
     }
 

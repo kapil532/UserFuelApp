@@ -371,7 +371,7 @@ public class MainActivity extends BaseActivity implements
             case R.id.first:
                 // navController.navigate(R.id.firstFragment);
 
-                Intent about = new Intent(this, AboutUsScreen.class);
+                Intent about = new Intent(this, SetPinActivity.class);
                 startActivity(about);
                 break;
 
