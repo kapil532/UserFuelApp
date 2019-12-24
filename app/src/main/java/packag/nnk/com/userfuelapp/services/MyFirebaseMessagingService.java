@@ -17,6 +17,7 @@ import androidx.core.app.NotificationCompat;
 
 import packag.nnk.com.userfuelapp.R;
 import packag.nnk.com.userfuelapp.base.AppSharedPreUtils;
+import packag.nnk.com.userfuelapp.base.CommonClass;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private String TAG = MyFirebaseMessagingService.class.getSimpleName();
@@ -29,9 +30,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 //        {amount=200.0, message=Amount debited}
         Log.e("REMOTE MESSAGE", "----" + remoteMessage.getData());
-        showNotification("goFuels", "Hi your goFuel wallet " + remoteMessage.getData().get("message") + " " + getResources().getString(R.string.symbol_rs)
-                + " " + remoteMessage.getData().get("amount") + ".");
+//        Log.e("REMOTE CHE", "----" +  CommonClass.returnGenericData("checkBox2_NOTIFICATION_CHECKED","checkBox2_NOTIFICATION_CHECKED_PRE",this));
+//        Log.e("REMOTE NOTI", "----" +CommonClass.returnGenericData("NOTIFICATION_CHECKED","NOTIFICATION_CHECKED_PRE",this));
 
+        if(CommonClass.returnGenericData("NOTIFICATION_CHECKED","NOTIFICATION_CHECKED_PRE",this).equalsIgnoreCase("true"))
+        {
+            if(  CommonClass.returnGenericData("checkBox2_NOTIFICATION_CHECKED","checkBox2_NOTIFICATION_CHECKED_PRE",this).equalsIgnoreCase("true"))
+            {
+                showNotification("goFuels", "Hi your goFuel wallet " + remoteMessage.getData().get("message") + " " + getResources().getString(R.string.symbol_rs)
+                        + " " + remoteMessage.getData().get("amount") + ".");
+            }
+
+        }
     }
 
     @Override
