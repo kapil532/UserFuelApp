@@ -91,13 +91,6 @@ public class SuccessScreen extends BaseActivity {
         paidAmount.setText(getResources().getString(R.string.symbol_rs)+" "+petr_price);
 
 
-       /* p_name.setText("You have paid  \n\n " +
-                "Amount paid : "+getResources().getString(R.string.symbol_rs)+" "+petr_price+"\n" +
-                "  Bunk Name : "+petr_name +" !\n"+
-                "  Bunk Id : "+petrolID +" \n"+
-                "       Time : "+currentTime+"\n"+
-                "       Date : "+currentDate);*/
-
         handler.postDelayed(my,400);
         setFont(done);
         setFont(history);

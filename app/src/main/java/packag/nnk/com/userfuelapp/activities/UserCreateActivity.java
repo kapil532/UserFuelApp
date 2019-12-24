@@ -2,6 +2,7 @@ package packag.nnk.com.userfuelapp.activities;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -20,9 +21,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -105,13 +113,19 @@ public class UserCreateActivity extends BaseActivity {
 
     String number;
     public static final int REQUEST_IMAGE = 100;
-
+    FirebaseStorage storage;
+    StorageReference storageReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_edit_screen);
         ButterKnife.bind(this);
         mApiService_ = new ApiUtils().getApiInterfaces();
+
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -168,6 +182,12 @@ public class UserCreateActivity extends BaseActivity {
         finish();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        loadProfile("https://firebasestorage.googleapis.com/v0/b/gofueluser.appspot.com/o/images%2Fd4a5ac43-f09c-43b0-ba8f-193eb9495104.png?alt=media&token=19cffa0e-d0d2-4562-8ee6-75c9207c263f");
+    }
 
     void setTheValues() {
 //        user
@@ -362,22 +382,28 @@ public class UserCreateActivity extends BaseActivity {
         intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_Y, 1);
         startActivityForResult(intent, REQUEST_IMAGE);
     }
-
+    private Uri filePath;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(resultCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE) {
             if (resultCode == Activity.RESULT_OK) {
-                Uri uri = data.getParcelableExtra("path");
-                String filePath = getRealPathFromURIPath(uri, UserCreateActivity.this);
+
+
+                //filePath = data.getData();
+                filePath = data.getParcelableExtra("path");
+
+               /* String filePath = getRealPathFromURIPath(uri, UserCreateActivity.this);
                 File file = new File(filePath);
-                uploadMultiFile(file);
+                uploadMultiFile(file);*/
+                uploadImage();
+
                 try {
                     // You can update this bitmap to your server
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), filePath);
 
                     // loading profile image from local cache
-                    loadProfile(uri.toString());
+                    loadProfile(filePath.toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -452,6 +478,42 @@ public class UserCreateActivity extends BaseActivity {
             }
         });
 
+    }
+
+
+    private void uploadImage() {
+
+        if(filePath != null)
+        {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+
+            StorageReference ref = storageReference.child("images/"+ user.getUserId()+".png");
+            ref.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "Uploaded", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                    .getTotalByteCount());
+                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                        }
+                    });
+        }
     }
 
 }

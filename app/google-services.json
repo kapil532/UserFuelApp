@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "933071264562-2k08qag0karert527p1prhs3ftl33bsv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "packag.nnk.com.userfuelapp",
+            "certificate_hash": "0030db196be5b7efe684e848e685c8958447a7d5"
+          }
+        },
+        {
           "client_id": "933071264562-24bm007hs3834f7bba11f71o33g0lst1.apps.googleusercontent.com",
           "client_type": 3
         }
