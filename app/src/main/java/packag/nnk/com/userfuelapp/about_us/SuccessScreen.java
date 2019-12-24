@@ -82,8 +82,8 @@ public class SuccessScreen extends BaseActivity {
             petr_price = bundle.getString("petr_price");
             petrolID = bundle.getString("petrolID");
         }
-        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-        String currentTime = new SimpleDateFormat("HH:mm a", Locale.getDefault()).format(new Date());
+        String currentDate = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault()).format(new Date());
+        String currentTime = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
 
         time.setText(currentTime +" on "+currentDate);
         transaction_id.setText(petrolID);
