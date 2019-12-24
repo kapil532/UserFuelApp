@@ -1,7 +1,9 @@
 package packag.nnk.com.userfuelapp.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -48,6 +50,9 @@ import packag.nnk.com.userfuelapp.base.CommonClass;
     @BindView(R.id.checkBox3)
     CheckBox checkBox3;
 
+    @BindView(R.id.version)
+    TextView version;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +67,33 @@ import packag.nnk.com.userfuelapp.base.CommonClass;
                 showAlertBox("Do you want to logout!");
             }
         });*/
+        context= getApplicationContext();
         setupNavigation();
         initializeSw();
+
+
+    }
+     private String VersionName;
+     private String VersionCode;
+
+     Context context;
+
+    void getVersion()
+    {
+        try
+        {
+
+            VersionName = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
+
+            /*I find usefull to convert vervion code into String, so it's ready for TextViev/server side checks*/
+            version.setText("version : v"+VersionName);
+
+            VersionCode = Integer.toString(context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode);
+        } catch (PackageManager.NameNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     private void setupNavigation() {

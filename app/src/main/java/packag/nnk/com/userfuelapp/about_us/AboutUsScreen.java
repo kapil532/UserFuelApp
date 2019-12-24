@@ -22,7 +22,7 @@ public class AboutUsScreen extends BaseActivity {
     private TextView title;
     WebView webView;
 //    CircleProgressBar bar;
-    public static String url="https://www.gudy.in";
+    public static String url="https://www.driver.gudy.in/";
     public static String title_text="";
     TextView help;
     @Override

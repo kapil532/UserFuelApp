@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 
@@ -54,7 +55,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     int iUniqueId = (int) (System.currentTimeMillis() & 0xfffffff);
 
     void showNotification(String title, String description) {
-
+        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder drivingNotifBldr = new NotificationCompat.Builder(getApplicationContext(), "Message")
                 .setContentTitle(title)
                 .setContentText(description)
@@ -62,6 +63,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.gofuels))
                 .setSmallIcon(R.drawable.ic_about)
+                .setSound(soundUri)
                 .setAutoCancel(true);
 
         android.app.NotificationManager notificationManager = (android.app.NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
