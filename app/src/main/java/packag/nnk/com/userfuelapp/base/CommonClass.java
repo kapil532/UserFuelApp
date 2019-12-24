@@ -36,7 +36,9 @@ public class CommonClass
     public static final String UPDATE_PROFILE = "user/updateProfile";
     public static final String FIREBASE_TOKEN = "user/updateProfile";
     public static final String RANGE_TRANSACTION = "driver/transaction/";
-    public static final String DRIVER_PAYMENT = " driver/bunkPayment/";
+    public static final String DRIVER_PAYMENT = "driver/bunkPayment/";
+    public static final String UPLOAD_IMAGE = "upload-image/";
+    public static final String DRIVER_IMAGE = "driver/image/";
 
 //    driver/bunkPayment/625ea288-c31c-4e21-ab5d-6d88af2a01fe
 

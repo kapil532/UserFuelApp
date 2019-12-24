@@ -3,6 +3,7 @@ package packag.nnk.com.userfuelapp.activities;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -42,6 +44,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import packag.nnk.com.userfuelapp.R;
 import packag.nnk.com.userfuelapp.base.ApiUtils;
 import packag.nnk.com.userfuelapp.base.AppSharedPreUtils;
@@ -329,6 +336,9 @@ public class UserCreateActivity extends BaseActivity {
         if (requestCode == REQUEST_IMAGE) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri uri = data.getParcelableExtra("path");
+                String filePath = getRealPathFromURIPath(uri, UserCreateActivity.this);
+                File file = new File(filePath);
+                uploadMultiFile(file);
                 try {
                     // You can update this bitmap to your server
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
@@ -342,6 +352,74 @@ public class UserCreateActivity extends BaseActivity {
         }
     }
 
+
+    private void uploadMultiFile(File file) {
+
+
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+
+//        builder.addFormDataPart("user_name", "Robert");
+//        builder.addFormDataPart("email", "mobile.apps.pro.vn@gmail.com");
+
+        builder.addFormDataPart("profileImage", file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file));
+
+
+        MultipartBody requestBody = builder.build();
+        Call<ResponseBody> call = mApiService_.uploadImage(requestBody,user.getUserId());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                Toast.makeText(getApplicationContext(), "Success " + response.message(), Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getApplicationContext(), "Success " + response.body().toString(), Toast.LENGTH_LONG).show();
+
+                getProfileImage();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("", "Error " + t.getMessage());
+            }
+        });
+
+
+    }
+
+
+    private String getRealPathFromURIPath(Uri contentURI, Activity activity) {
+        Cursor cursor = activity.getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) {
+            return contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            return cursor.getString(idx);
+        }
+    }
+
+
+
+    void getProfileImage()
+    {
+        Call<ResponseBody> response = mApiService_.getDriverImage(user.getUserId());
+        response.enqueue(new Callback<ResponseBody>()
+        {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response)
+            {
+              //  Toast.makeText(getApplicationContext(), "Success " + response.message(), Toast.LENGTH_LONG).show();
+
+                Log.e("IMAGE GET","GET--->"+response.message());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
+    }
 
 }
 

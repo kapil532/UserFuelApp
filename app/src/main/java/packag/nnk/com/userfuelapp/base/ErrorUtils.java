@@ -1,8 +1,10 @@
 package packag.nnk.com.userfuelapp.base;
 
+import android.content.Intent;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,6 +16,7 @@ import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
+import packag.nnk.com.userfuelapp.activities.LoginActivity;
 import packag.nnk.com.userfuelapp.interfaces.ApiInterface;
 import packag.nnk.com.userfuelapp.model.ApiError;
 import packag.nnk.com.userfuelapp.model.FailedStatus;
@@ -48,6 +51,25 @@ public class ErrorUtils {
         String finallyError = sb.toString();
 
         Log.e("EOOROR","ERROR"+finallyError);
+
+        try
+        {
+            JSONObject json = new JSONObject(finallyError);
+            String message =json.getString("error");
+            if(message.equalsIgnoreCase("Your token has expired."))
+            {
+                AppSharedPreUtils.getInstance(BaseApplicationClass.getAppContext()).clearAll();
+                Intent login = new Intent(BaseApplicationClass.getAppContext(), LoginActivity.class);
+                BaseApplicationClass.getAppContext().startActivity(login);
+            }
+
+        }
+        catch (Exception e)
+        {
+
+        }
+
+
         Gson gson = new Gson();
 
         return gson.fromJson(finallyError, FailedStatus.class);

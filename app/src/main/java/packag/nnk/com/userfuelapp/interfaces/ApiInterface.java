@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import packag.nnk.com.userfuelapp.base.CommonClass;
 import packag.nnk.com.userfuelapp.model.ApiError;
 import packag.nnk.com.userfuelapp.model.Balance;
@@ -57,6 +59,14 @@ public interface ApiInterface {
 
     @POST(CommonClass.UPDATE_PROFILE)
     Call<UserDetails> updatePin(@Body JsonObject json);
+
+
+    @POST(CommonClass.UPLOAD_IMAGE+"{userId}")
+    Call<ResponseBody> uploadImage(@Body RequestBody json, @Path("userId") String userId);
+
+
+    @GET(CommonClass.DRIVER_IMAGE + "{userId}")
+    Call<ResponseBody> getDriverImage(@Path("userId") String userId);
 
 
     @POST(CommonClass.FIREBASE_TOKEN)
