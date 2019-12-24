@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="If above petrol bunk is not coorect one please search below and make a payment."
+                android:text="If above petrol bunk is not payment one please search below and make a payment."
                 android:textColor="@color/quantum_black_100"
                 android:textSize="16sp" />
 

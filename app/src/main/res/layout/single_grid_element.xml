@@ -19,7 +19,7 @@
         android:orientation="horizontal"
         android:weightSum="3">
 
-    <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+    <packag.nnk.com.userfuelapp.ui.CustomTextView
         android:layout_width="wrap_content"
         android:id="@+id/text_100"
         android:textSize="20sp"
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"/>
 
 
-    <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+    <packag.nnk.com.userfuelapp.ui.CustomTextView
         android:layout_width="wrap_content"
         android:id="@+id/text_200"
         android:textSize="20sp"
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"/>
 
 
-        <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+        <packag.nnk.com.userfuelapp.ui.CustomTextView
             android:layout_width="wrap_content"
             android:id="@+id/text_500"
             android:textSize="20sp"
@@ -69,7 +69,7 @@
         android:gravity="center"
         android:weightSum="5">
 
-        <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+        <packag.nnk.com.userfuelapp.ui.CustomTextView
             android:layout_width="wrap_content"
             android:id="@+id/text_800"
             android:textSize="20sp"
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"/>
 
 
-        <packag.nnk.com.userfuelapp.ui.CustomMediumFontTextView
+        <packag.nnk.com.userfuelapp.ui.CustomTextView
             android:layout_width="wrap_content"
             android:id="@+id/text_1000"
             android:textSize="20sp"
